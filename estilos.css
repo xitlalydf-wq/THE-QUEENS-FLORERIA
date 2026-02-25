@@ -28,7 +28,7 @@ body{
   opacity:.9;
 }
 
-/* Variaciones para que no se vean iguales */
+
 .petal::after{
   content:"";
   position:absolute;
@@ -38,7 +38,7 @@ body{
   transform: rotate(-12deg);
 }
 
-/* Posiciones (ajústalas a gusto) */
+
 .p1 { top:10%; left:8%;  transform: rotate(20deg) scale(1.1); }
 .p2 { top:22%; left:18%; transform: rotate(-15deg) scale(.8); opacity:.7; }
 .p3 { top:8%;  left:55%; transform: rotate(35deg) scale(1.2); }
@@ -50,8 +50,45 @@ body{
 .p9 { top:85%; left:65%; transform: rotate(30deg) scale(1.25); opacity:.65; }
 .p10{ top:40%; left:45%; transform: rotate(-10deg) scale(.95); }
 
-/* IMPORTANTE: tu card del login debe estar encima */
+
 .login-card, .contenedor-login, .card-login {
   position:relative;
   z-index:1;
 }
+
+.parent {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 8px;
+}
+    
+.div1 {
+    grid-column: span 2 / span 2;
+    grid-row: span 2 / span 2;
+}
+
+.div2 {
+    grid-column: span 2 / span 2;
+    grid-row: span 2 / span 2;
+    grid-column-start: 3;
+}
+
+.div3 {
+    grid-column: span 2 / span 2;
+    grid-row: span 2 / span 2;
+    grid-row-start: 3;
+}
+
+.div4 {
+    grid-column: span 2 / span 2;
+    grid-row: span 2 / span 2;
+    grid-column-start: 3;
+    grid-row-start: 3;
+}
+
+.div5 {
+    grid-column: span 4 / span 4;
+    grid-row-start: 5;
+}
+        
