@@ -1,0 +1,57 @@
+/* Fondo general (tu gradiente lo puedes dejar como lo tienes) */
+body{
+  margin:0;
+  min-height:100vh;
+  background: linear-gradient(135deg, #ffb3c7, #ffd0bf);
+  overflow:hidden;
+  position:relative;
+}
+
+/* Capa de pétalos */
+.petals{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+}
+
+/* Un pétalo (forma + brillo suave) */
+.petal{
+  position:absolute;
+  width:18px;
+  height:30px;
+  border-radius: 100% 100% 100% 100%;
+  background: rgba(255,255,255,.35);
+  box-shadow: 0 10px 25px rgba(255, 160, 190, .25);
+  filter: blur(.1px);
+  transform: rotate(25deg);
+  opacity:.9;
+}
+
+/* Variaciones para que no se vean iguales */
+.petal::after{
+  content:"";
+  position:absolute;
+  inset:3px;
+  border-radius:inherit;
+  background: rgba(255,255,255,.25);
+  transform: rotate(-12deg);
+}
+
+/* Posiciones (ajústalas a gusto) */
+.p1 { top:10%; left:8%;  transform: rotate(20deg) scale(1.1); }
+.p2 { top:22%; left:18%; transform: rotate(-15deg) scale(.8); opacity:.7; }
+.p3 { top:8%;  left:55%; transform: rotate(35deg) scale(1.2); }
+.p4 { top:35%; left:75%; transform: rotate(-28deg) scale(.9); }
+.p5 { top:60%; left:10%; transform: rotate(18deg) scale(1.4); opacity:.6; }
+.p6 { top:70%; left:35%; transform: rotate(-40deg) scale(.75); }
+.p7 { top:55%; left:80%; transform: rotate(10deg) scale(1.05); }
+.p8 { top:15%; left:88%; transform: rotate(-20deg) scale(.85); }
+.p9 { top:85%; left:65%; transform: rotate(30deg) scale(1.25); opacity:.65; }
+.p10{ top:40%; left:45%; transform: rotate(-10deg) scale(.95); }
+
+/* IMPORTANTE: tu card del login debe estar encima */
+.login-card, .contenedor-login, .card-login {
+  position:relative;
+  z-index:1;
+}

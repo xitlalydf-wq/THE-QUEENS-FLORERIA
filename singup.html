@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crear Cuenta</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:Arial, Helvetica, sans-serif;
+    overflow:hidden;
+    background: linear-gradient(120deg,#ff9a9e,#fad0c4);
+    position: relative;
+}
+
+/* 🌷 Capa de tulipanes */
+#tulips-layer{
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* 🌷 Tulipán */
+.tulip{
+    position:absolute;
+    top:-15vh;
+    width: 26px;
+    height: 46px;
+    opacity: var(--op, .9);
+    will-change: transform;
+    animation: tulipFall var(--dur, 10s) linear var(--del, 0s) infinite;
+    filter: drop-shadow(0 10px 12px rgba(0,0,0,.10));
+    transform: rotate(var(--rot, 0deg)) scale(var(--sc, 1));
+}
+
+.tulip::before{
+    content:"";
+    position:absolute;
+    left:50%;
+    top:0;
+    width:18px;
+    height:18px;
+    transform: translateX(-50%);
+    border-radius: 12px 12px 14px 14px;
+    background: linear-gradient(145deg, var(--c1, #ff4d8d), var(--c2, #ffb3d9));
+    box-shadow: inset 0 -3px 6px rgba(255,255,255,.35);
+}
+
+.tulip::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      radial-gradient(14px 16px at 38% 22%, rgba(255,255,255,.22) 0 35%, transparent 36%),
+      radial-gradient(14px 16px at 62% 22%, rgba(255,255,255,.14) 0 35%, transparent 36%),
+      radial-gradient(2px 18px at 50% 76%, var(--stem, #3aa35c) 0 98%, transparent 99%),
+      radial-gradient(10px 8px at 42% 80%, rgba(58,163,92,.75) 0 55%, transparent 56%),
+      radial-gradient(10px 8px at 58% 80%, rgba(58,163,92,.55) 0 55%, transparent 56%);
+}
+
+@keyframes tulipFall{
+    0%{
+        transform: translate3d(0,0,0) rotate(var(--rot,0deg)) scale(var(--sc,1));
+    }
+    50%{
+        transform: translate3d(var(--drift, 0px), 55vh, 0) rotate(calc(var(--rot,0deg) + 120deg)) scale(var(--sc,1));
+    }
+    100%{
+        transform: translate3d(calc(var(--drift, 0px) * -1), 115vh, 0) rotate(calc(var(--rot,0deg) + 260deg)) scale(var(--sc,1));
+        opacity: 0;
+    }
+}
+
+/* Card glass */
+.card{
+    width:360px;
+    padding:40px;
+    border-radius:20px;
+    backdrop-filter: blur(15px);
+    background: rgba(255,255,255,0.15);
+    box-shadow:0 8px 32px rgba(0,0,0,0.3);
+    text-align:center;
+    color:white;
+    z-index:10;
+    position: relative;
+    animation: aparecer 1s ease;
+}
+
+@keyframes aparecer{
+    from{ opacity:0; transform:translateY(40px); }
+    to{ opacity:1; transform:translateY(0); }
+}
+
+.card h2{ margin-bottom:18px; }
+
+.inputBox{ margin:12px 0; }
+
+.inputBox input{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    outline:none;
+}
+
+.row2{
+    display:flex;
+    gap:10px;
+}
+.row2 .inputBox{ flex:1; }
+
+/* Botones */
+.btn{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    transition:.3s;
+    font-weight:bold;
+}
+
+.btn-primary{
+    background:#72be5f;
+    color:white;
+}
+
+.btn-primary:hover{
+    transform:scale(1.03);
+    background:#65a755;
+}
+
+.btn-ghost{
+    background: rgba(255,255,255,0.18);
+    color:white;
+    margin-top:10px;
+}
+
+.btn-ghost:hover{
+    background: rgba(255,255,255,0.28);
+    transform:scale(1.02);
+}
+
+.small{
+    margin-top:14px;
+    font-size:14px;
+}
+.small a{
+    color:white;
+    text-decoration: underline;
+}
+</style>
+</head>
+
+<body>
+
+<div id="tulips-layer" aria-hidden="true"></div>
+
+<script>
+(() => {
+  const layer = document.getElementById("tulips-layer");
+  const TULIP_COUNT = 22;
+
+  const colors = [
+    { c1: "#ff4d8d", c2: "#ffb3d9" },
+    { c1: "#ff5a3c", c2: "#ffd1c7" },
+    { c1: "#b04cff", c2: "#e2c6ff" },
+    { c1: "#ff2f6f", c2: "#ff9fc2" },
+    { c1: "#ffb400", c2: "#ffe3a6" }
+  ];
+
+  const rand = (min, max) => Math.random() * (max - min) + min;
+
+  function createTulip(){
+    const t = document.createElement("span");
+    t.className = "tulip";
+    t.style.left = `${rand(0, 100)}vw`;
+    t.style.setProperty("--dur", `${rand(7, 15)}s`);
+    t.style.setProperty("--del", `${rand(0, 6)}s`);
+    t.style.setProperty("--drift", `${rand(-80, 80)}px`);
+    t.style.setProperty("--rot", `${rand(-30, 30)}deg`);
+    t.style.setProperty("--sc", `${rand(0.7, 1.3)}`);
+    t.style.setProperty("--op", `${rand(0.45, 0.95)}`);
+
+    const pick = colors[Math.floor(Math.random() * colors.length)];
+    t.style.setProperty("--c1", pick.c1);
+    t.style.setProperty("--c2", pick.c2);
+    t.style.setProperty("--stem", Math.random() > 0.5 ? "#2f9e57" : "#3aa35c");
+
+    layer.appendChild(t);
+  }
+
+  for(let i=0; i<TULIP_COUNT; i++) createTulip();
+})();
+</script>
+
+<div class="card">
+  <h2>Crear Cuenta</h2>
+
+  <!-- Nombre (solo uno) -->
+  <div class="inputBox">
+    <input type="text" placeholder="Nombre">
+  </div>
+
+  <!-- Correo (igual que estaba) -->
+  <div class="inputBox">
+    <input type="email" placeholder="Correo">
+  </div>
+
+  <!-- Contraseña -->
+  <div class="inputBox">
+    <input type="password" placeholder="Contraseña">
+  </div>
+
+  <!-- Confirmar contraseña -->
+  <div class="inputBox">
+    <input type="password" placeholder="Confirmar contraseña">
+  </div>
+
+  <!-- Botón -->
+  <div class="inputBox">
+    <button class="btn btn-primary" type="button">Crear cuenta</button>
+  </div>
+
+  <div class="small">
+    ¿Ya tienes cuenta? <a href="index.html">Inicia sesión</a>
+  </div>
+</div>
+
+</body>
+</html>
