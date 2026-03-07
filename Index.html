@@ -16,6 +16,11 @@ body{
     overflow:hidden;
     background: linear-gradient(120deg,#ff9a9e,#fad0c4);
     position: relative;
+    transition: opacity 0.5s;
+}
+
+.fade-out{
+    opacity: 0;
 }
 
 /* 🌷 Capa de tulipanes */
@@ -207,9 +212,17 @@ body{
 
     <div class="group">
         <a href="#">Olvidaste contraseña?</a>
-        <a href="singup.html">Crear Cuenta</a>
+        <a href="signup.html">Crear Cuenta</a>
     </div>
 </div>
+<script>
 
+document.getElementById("btn").onclick = function(){
+     document.body.classList.add("fade-out");
+
+    setTimeout(()=>{
+    window.location.href = "inicio.html";}, 500);
+}
+</script>
 </body>
 </html>
