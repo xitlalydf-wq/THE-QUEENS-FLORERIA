@@ -3,17 +3,78 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/about.css">
-    <title>Ramos</title>
+    <title>Carrito de Compras</title>
+    <link rel="stylesheet" href="/public/CSS/pago.css">
 </head>
 
 <body>
-    <div class="container">
-        <h1>Ramos</h1>
-        <p>Discover our exquisite collection of ramos that bring beauty and elegance to any occasion. Our ramos are carefully crafted with a variety of fresh flowers, vibrant colors, and unique arrangements to suit your style and preferences. Whether you're looking for a romantic bouquet, a cheerful arrangement for a celebration, or a sophisticated centerpiece for an event, our ramos are designed to make a lasting impression. Explore our selection and find the perfect ramos to express your emotions and brighten someone's day.</p>
-    </div>
+
+     <!-- NAV -->
+  <header class="topbar">
+    <div class="brand">THE QUEENS</div>
+
+    <nav class="menu">
+      <a href="/inicio.html">INICIO</a>
+      <a href="/productos/ramos.html">RAMOS</a>
+      <a href="/productos/decorativos.html">DECORATIVOS</a>
+      <a href="/productos/accesorios.html">ACCESORIOS</a>
+      <a href="/about.html">SOBRE NOSOTROS</a>
+      <a href="/contacto.html">CONTACTO</a>
+    </nav>
+
+    <div class="icons">
+  <a href="#">
+    <img src="/images/buscar.png" alt="Buscar">
+  </a>
+
+  <a href="#">
+    <img src="/images/usuario.png" alt="Usuario">
+  </a>
+
+  <a href="/Compras/carrito.html">
+    <img src="/images/carrito.png" alt="Carrito">
+  </a>
+</div>
+    </header>
+    
+        <main>
+            <section class="cart-overview">
+                <h2>Resumen del Carrito</h2>
+                <p>Aquí puedes revisar los productos que has agregado a tu carrito de compras. Asegúrate de verificar los detalles de cada producto antes de proceder al pago.</p>
+                <p>Si deseas eliminar algún producto o modificar la cantidad, puedes hacerlo desde esta página. Una vez que estés listo para finalizar tu compra, haz clic en el botón de pago para completar tu transacción.</p>
+            </section>
+            <section class="cart-items">
+                <h2>Productos en tu Carrito</h2>
+                <ul>
+                    <li>
+                        <div class="item-image
+                        "><img src="/images/producto1.jpg" alt="Producto 1"></div>
+                        <div class="item-details">
+                            <h3>Producto 1</h3>
+                            <p>Cantidad: 2</p>
+                            <p>Precio: $20.00</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-image"><img src="/images/producto2.jpg" alt="Producto 2"></div>
+                        <div class="item-details">
+                            <h3>Producto 2</h3>
+                            <p>Cantidad: 1</p>
+                            <p>Precio: $15.00</p>
+                        </div>
+                    </li>
+                </ul>
+            </section>
+            <section class="cart-summary">
+                <h2>Resumen de la Compra</h2>
+                <p>Total: $55.00</p>
+                <a href="/Compras/Pagos.html">
+                    <button class="checkout-button">Proceder al Pago </button>
+                    </a>
+            </section>
+            </section>
+        </main>
 </body>
 
 </html>
