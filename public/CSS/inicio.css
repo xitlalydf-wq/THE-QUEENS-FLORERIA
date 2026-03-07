@@ -6,6 +6,8 @@ body{
   background:#f6f3f1;
   color:#a86b7a;
   
+  opacity: 0;
+    animation: aparecer 0.5s forwards;
 }
 
 .topbar{
