@@ -49,35 +49,51 @@
                 <p>Aquí puedes revisar los productos que has agregado a tu carrito de compras. Asegúrate de verificar los detalles de cada producto antes de proceder al pago.</p>
                 <p>Si deseas eliminar algún producto o modificar la cantidad, puedes hacerlo desde esta página. Una vez que estés listo para finalizar tu compra, haz clic en el botón de pago para completar tu transacción.</p>
             </section>
+            
             <section class="cart-items">
                 <h2>Productos en tu Carrito</h2>
-                <ul>
-                    <li>
-                        <div class="item-image
-                        "><img src="/images/producto1.jpg" alt="Producto 1"></div>
-                        <div class="item-details">
-                            <h3>Producto 1</h3>
-                            <p>Cantidad: 2</p>
-                            <p>Precio: $20.00</p>
+                
+                <div class="item-card">
+                    <div class="item-image">
+                        <img src="/images/producto1.jpg" alt="Producto 1">
+                    </div>
+                    <div class="item-details">
+                        <h3>Producto 1</h3>
+                        <p>Precio unitario: $10.00</p>
+                        <div class="quantity-controls">
+                            <button class="decrease">-</button>
+                            <span class="quantity">2</span>
+                            <button class="increase">+</button>
                         </div>
-                    </li>
-                    <li>
-                        <div class="item-image"><img src="/images/producto2.jpg" alt="Producto 2"></div>
-                        <div class="item-details">
-                            <h3>Producto 2</h3>
-                            <p>Cantidad: 1</p>
-                            <p>Precio: $15.00</p>
+                        <p class="item-total">Subtotal: $20.00</p>
+                        <button class="remove-btn">Eliminar</button>
+                    </div>
+                </div>
+                
+                <div class="item-card">
+                    <div class="item-image">
+                        <img src="/images/producto2.jpg" alt="Producto 2">
+                    </div>
+                    <div class="item-details">
+                        <h3>Producto 2</h3>
+                        <p>Precio unitario: $15.00</p>
+                        <div class="quantity-controls">
+                            <button class="decrease">-</button>
+                            <span class="quantity">1</span>
+                            <button class="increase">+</button>
                         </div>
-                    </li>
-                </ul>
+                        <p class="item-total">Subtotal: $15.00</p>
+                        <button class="remove-btn">Eliminar</button>
+                    </div>
+                </div>
             </section>
+            
             <section class="cart-summary">
                 <h2>Resumen de la Compra</h2>
-                <p>Total: $55.00</p>
+                <p>Total: $35.00</p>
                 <a href="/Compras/Pagos.html">
-                    <button class="checkout-button">Proceder al Pago </button>
-                    </a>
-            </section>
+                    <button class="checkout-button">Proceder al Pago</button>
+                </a>
             </section>
         </main>
 
@@ -90,6 +106,61 @@ document.addEventListener('DOMContentLoaded', function() {
       menu.classList.toggle('open');
       btn.classList.toggle('active');
     });
+  }
+
+  // Funcionalidad del carrito
+  const decreaseBtns = document.querySelectorAll('.decrease');
+  const increaseBtns = document.querySelectorAll('.increase');
+  const removeBtns = document.querySelectorAll('.remove-btn');
+
+  decreaseBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const quantitySpan = this.nextElementSibling;
+      let quantity = parseInt(quantitySpan.textContent);
+      if (quantity > 1) {
+        quantity--;
+        quantitySpan.textContent = quantity;
+        updateItemTotal(this);
+        updateCartTotal();
+      }
+    });
+  });
+
+  increaseBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const quantitySpan = this.previousElementSibling;
+      let quantity = parseInt(quantitySpan.textContent);
+      quantity++;
+      quantitySpan.textContent = quantity;
+      updateItemTotal(this);
+      updateCartTotal();
+    });
+  });
+
+  removeBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      this.closest('.item-card').remove();
+      updateCartTotal();
+    });
+  });
+
+  function updateItemTotal(button) {
+    const itemCard = button.closest('.item-card');
+    const priceText = itemCard.querySelector('.item-details p').textContent;
+    const price = parseFloat(priceText.replace('Precio unitario: $', ''));
+    const quantity = parseInt(itemCard.querySelector('.quantity').textContent);
+    const total = price * quantity;
+    itemCard.querySelector('.item-total').textContent = `Subtotal: $${total.toFixed(2)}`;
+  }
+
+  function updateCartTotal() {
+    const itemTotals = document.querySelectorAll('.item-total');
+    let total = 0;
+    itemTotals.forEach(item => {
+      const subtotal = parseFloat(item.textContent.replace('Subtotal: $', ''));
+      total += subtotal;
+    });
+    document.querySelector('.cart-summary p').textContent = `Total: $${total.toFixed(2)}`;
   }
 });
 </script>
