@@ -13,6 +13,11 @@
   <!-- NAV -->
   <header class="topbar">
     <div class="brand">THE QUEENS</div>
+    <button class="hamburger" aria-label="Abrir menú">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
     <nav class="menu">
       <a href="/inicio.html">INICIO</a>
@@ -38,13 +43,23 @@
 </div>
 
   </header>
-
-<body>
     <div class="container">
         <h1>Ramos</h1>
         <p>Discover our exquisite collection of ramos that bring beauty and elegance to any occasion. Our ramos are carefully crafted with a variety of fresh flowers, vibrant colors, and unique arrangements to suit your style and preferences. Whether you're looking for a romantic bouquet, a cheerful arrangement for a celebration, or a sophisticated centerpiece for an event, our ramos are designed to make a lasting impression. Explore our selection and find the perfect ramos to express your emotions and brighten someone's day.</p>
     </div>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const btn = document.querySelector('.hamburger');
+  const menu = document.querySelector('.menu');
+  if (btn && menu) {
+    btn.addEventListener('click', function() {
+      menu.classList.toggle('open');
+      btn.classList.toggle('active');
+    });
+  }
+});
+</script>
 </body>
 
 </html>

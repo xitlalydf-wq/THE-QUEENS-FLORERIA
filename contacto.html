@@ -12,6 +12,11 @@
   <!-- NAV -->
   <header class="topbar">
     <div class="brand">THE QUEENS</div>
+    <button class="hamburger" aria-label="Abrir menú">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
     <nav class="menu">
       <a href="/inicio.html">INICIO</a>
@@ -37,7 +42,6 @@
 </div>
 
   </header>
-<body>
     <div class="container">
         <h1>Contacto</h1>
         <p>Si tienes alguna pregunta, comentario o necesitas asistencia, no dudes en ponerte en contacto con nosotros. Estamos aquí para ayudarte y asegurarnos de que tengas la mejor experiencia de compra posible.</p>
@@ -48,5 +52,17 @@
             </li>
         </ul>
     </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const btn = document.querySelector('.hamburger');
+  const menu = document.querySelector('.menu');
+  if (btn && menu) {
+    btn.addEventListener('click', function() {
+      menu.classList.toggle('open');
+      btn.classList.toggle('active');
+    });
+  }
+});
+</script>
 </body>
 </html>

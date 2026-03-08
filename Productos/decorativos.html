@@ -13,6 +13,11 @@
   <!-- NAV -->
   <header class="topbar">
     <div class="brand">THE QUEENS</div>
+    <button class="hamburger" aria-label="Abrir menú">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
     <nav class="menu">
       <a href="/inicio.html">INICIO</a>
@@ -38,12 +43,23 @@
 </div>
 
   </header>
-<body>
     <div class="container">
         <h1>Decorativos</h1>
         <p>Our collection includes stylish aesthetics. Whether you're looking for the perfect or a unique gift for a loved one,
         are designed to elevate your look and make a statement. Explore our selection and find the perfect gift to express your individuality.</p>
     </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const btn = document.querySelector('.hamburger');
+  const menu = document.querySelector('.menu');
+  if (btn && menu) {
+    btn.addEventListener('click', function() {
+      menu.classList.toggle('open');
+      btn.classList.toggle('active');
+    });
+  }
+});
+</script>
 </body>
 
 </html>

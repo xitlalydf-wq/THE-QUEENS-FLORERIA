@@ -13,6 +13,11 @@
      <!-- NAV -->
   <header class="topbar">
     <div class="brand">THE QUEENS</div>
+    <button class="hamburger" aria-label="Abrir menú">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
     <nav class="menu">
       <a href="/inicio.html">INICIO</a>
@@ -75,6 +80,19 @@
             </section>
             </section>
         </main>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const btn = document.querySelector('.hamburger');
+  const menu = document.querySelector('.menu');
+  if (btn && menu) {
+    btn.addEventListener('click', function() {
+      menu.classList.toggle('open');
+      btn.classList.toggle('active');
+    });
+  }
+});
+</script>
 </body>
 
 </html>

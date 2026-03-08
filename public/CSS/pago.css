@@ -7,16 +7,19 @@ body{
   background: linear-gradient(135deg, #ffb3c7, #ffd0bf);
   overflow:auto;
     position:relative;
+  /* espacio al tope para que el contenido no quede bajo la cabecera */
+  padding-top:70px;
 }
 
 .topbar{
-  position:absolute;
+  position:fixed; /* ahora fija para que siempre quede visible */
   top:0; left:0; right:0;
   display:flex;
   align-items:center;
   justify-content:space-between;
   padding:18px 40px;
   z-index:10;
+  height:60px; /* altura explícita para cálculo de padding */
 }
 
 .brand{
@@ -94,6 +97,55 @@ body{
   .menu{ display:none; } 
   .hero-content h1{ font-size:60px; }
   .info{ grid-template-columns:1fr; padding:30px 18px; }
+}
+
+/* HAMBURGER MENU */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.hamburger span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background: #333;
+  border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+@media (max-width: 900px) {
+  .hamburger {
+    display: flex;
+  }
+  .menu {
+    position: absolute;
+    top: 60px;
+    right: 18px;
+    background: white;
+    flex-direction: column;
+    padding: 10px;
+    gap: 15px;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: none;
+  }
+  .menu.open {
+    display: flex;
+  }
 }
 
 .hero-content {

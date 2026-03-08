@@ -13,6 +13,11 @@
   <!-- NAV -->
   <header class="topbar">
     <div class="brand">THE QUEENS</div>
+    <button class="hamburger" aria-label="Abrir menú">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
     <nav class="menu">
       <a href="/inicio.html">INICIO</a>
@@ -38,8 +43,6 @@
 </div>
 
   </header>
-
-<body>
     <div class="container">
         <h1>Accesorios</h1>
         <p>Discover our wide range of accessories that complement your style and enhance your daily life. From trendy jewelry to practical gadgets, we have something for everyone. 
@@ -48,6 +51,18 @@
         our accessories are designed to elevate your look and make a statement.
         Explore our selection and find the perfect accessory to express your individuality.</p>
     </div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const btn = document.querySelector('.hamburger');
+  const menu = document.querySelector('.menu');
+  if (btn && menu) {
+    btn.addEventListener('click', function() {
+      menu.classList.toggle('open');
+      btn.classList.toggle('active');
+    });
+  }
+});
+</script>
 </body>
 
 </html>
