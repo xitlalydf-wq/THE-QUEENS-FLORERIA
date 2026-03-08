@@ -44,34 +44,58 @@
   </header>
     <main>
         
-        <section class="payment-options">
-            <h2>Opciones de Pago</h2>
-            <p>Ofrecemos varias opciones de pago para su conveniencia:</p>
-            <ul>
-                <li>Tarjeta de Crédito/Débito</li>
-                <li>PayPal</li>
-                <li>Transferencia Bancaria</li>
-            </ul>
-        </section>
-        <section class="payment-instructions">
-            <h2>Instrucciones de Pago</h2>
-            <p>Para realizar un pago, siga estos pasos:</p>
-            <ol>
-                <li>Seleccione su método de pago preferido.</li>
-                <li>Siga las instrucciones proporcionadas para completar la transacción.</li>
-                <li>Recibirá una confirmación por correo electrónico una vez que se haya procesado su pago.</li>
-            </ol>
-        </section>
-        <section class="contact-support">
-            <h2>Soporte al Cliente</h2>
-            <p>Si tiene alguna pregunta o necesita ayuda con su pago, no dude en contactarnos:</p>
-            <ul>
-                <li>
-                    Email:
-                    <a href="mailto :"> </a>
-                </li>
-                <li>Teléfono: +123 456 7890</li>
-            </ul>
+        <section class="ticket-form">
+            <h2>Generar Ticket de Compra</h2>
+            <p>Los datos de su cuenta se cargarán automáticamente. Solo confirme la dirección y suba el comprobante de transferencia.</p>
+            
+            <!-- Resumen del Carrito (placeholder para futura conexión) -->
+            <div class="cart-summary">
+                <h3>Resumen del Carrito</h3>
+                <div class="cart-item">
+                    <span>Ramo de Rosas</span>
+                    <span>$25.00</span>
+                </div>
+                <div class="cart-item">
+                    <span>Decoración Floral</span>
+                    <span>$15.00</span>
+                </div>
+                <div class="cart-total">
+                    Total: $40.00
+                </div>
+                <p style="font-size: 12px; color: #999; margin-top: 10px;">*Estos datos se cargarán automáticamente desde el carrito en futuras actualizaciones.</p>
+            </div>
+            
+            <form id="ticketForm">
+                <div class="form-group">
+                    <label for="direccion">Dirección de Entrega</label>
+                    <textarea id="direccion" name="direccion" rows="3" required placeholder="Confirme o actualice su dirección"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="metodo">Método de Pago</label>
+                    <select id="metodo" name="metodo" disabled>
+                        <option value="transferencia" selected>Transferencia Bancaria</option>
+                    </select>
+                </div>
+                
+                <!-- Subida de Comprobante -->
+                <div class="upload-section">
+                    <label for="comprobante">Subir Comprobante de Depósito</label>
+                    <input type="file" id="comprobante" name="comprobante" accept="image/*" required>
+                </div>
+                
+                <!-- Opción WhatsApp -->
+                <div class="whatsapp-option">
+                    <input type="checkbox" id="whatsapp" name="whatsapp" checked>
+                    <label for="whatsapp">Enviar ticket y comprobante por WhatsApp</label>
+                </div>
+                
+                <button type="submit" class="btn-generate">Generar Ticket</button>
+            </form>
+            
+            <div class="ticket-info">
+                <p>Al enviar, se generará un ticket con los detalles de su pedido. Recibirá una confirmación por WhatsApp.</p>
+            </div>
         </section>
 
     </main>
@@ -84,6 +108,27 @@ document.addEventListener('DOMContentLoaded', function() {
     btn.addEventListener('click', function() {
       menu.classList.toggle('open');
       btn.classList.toggle('active');
+    });
+  }
+
+  // Manejo del formulario de ticket
+  const form = document.getElementById('ticketForm');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const whatsappChecked = document.getElementById('whatsapp').checked;
+      const comprobante = document.getElementById('comprobante').files[0];
+      
+      let message = '¡Ticket generado exitosamente! Los datos se obtuvieron de su login.';
+      if (comprobante) {
+        message += ' Comprobante subido correctamente.';
+      }
+      if (whatsappChecked) {
+        message += ' Se enviará por WhatsApp.';
+      }
+      
+      alert(message);
+      // Aquí se conectará con base de datos y API de WhatsApp en futuras versiones
     });
   }
 });
