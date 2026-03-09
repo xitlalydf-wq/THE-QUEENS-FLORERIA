@@ -16,3 +16,4 @@ sql.connect(config)
 .catch(err => console.log("Error:", err));
 
 module.exports = sql;
+
