@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Administrador | The Queens</title>
+    <link rel="stylesheet" href="/public/CSS/admin-dashboard.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="admin-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="admin-sidebar">
+            <div class="admin-brand">
+                <h2>THE QUEENS</h2>
+                <p>Panel Administrador</p>
+            </div>
+
+            <nav class="admin-menu">
+                <a href="/admin/admin-dashboard.html" class="active">Dashboard</a>
+                <a href="/admin/admin-productos.html">Productos</a>
+                <a href="/admin/admin-pedidos.html">Pedidos</a>
+             
+
+
+                <a href="#">Clientes</a>
+                <a href="#">Categorías</a>
+                <a href="#">Inventario</a>
+                <a href="#">Mensajes</a>
+                <a href="#">Configuración</a>
+                <a href="/inicio.html">Volver a la tienda</a>
+            </nav>
+        </aside>
+
+        <!-- MAIN -->
+        <main class="admin-main">
+
+            <!-- TOPBAR -->
+            <header class="admin-topbar">
+                <div>
+                    <p class="admin-subtitle">Administración</p>
+                    <h1>Dashboard</h1>
+                </div>
+
+                <div class="admin-user">
+                    <span>Admin</span>
+                </div>
+            </header>
+
+            <!-- CARDS -->
+            <section class="admin-cards">
+                <div class="admin-card">
+                    <h3>Ventas del día</h3>
+                    <p>$2,450 MXN</p>
+                </div>
+
+                <div class="admin-card">
+                    <h3>Pedidos nuevos</h3>
+                    <p>12</p>
+                </div>
+
+                <div class="admin-card">
+                    <h3>Clientes registrados</h3>
+                    <p>48</p>
+                </div>
+
+                <div class="admin-card">
+                    <h3>Productos activos</h3>
+                    <p>36</p>
+                </div>
+            </section>
+
+            <!-- TABLA PEDIDOS -->
+            <section class="admin-section">
+                <div class="section-header">
+                    <h2>Pedidos recientes</h2>
+                    <button>Ver todos</button>
+                </div>
+
+                <div class="table-box">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID Pedido</th>
+                                <th>Cliente</th>
+                                <th>Producto</th>
+                                <th>Total</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#001</td>
+                                <td>María López</td>
+                                <td>Ramo Dulzura</td>
+                                <td>$850 MXN</td>
+                                <td><span class="status pending">Pendiente</span></td>
+                            </tr>
+                            <tr>
+                                <td>#002</td>
+                                <td>Ana Torres</td>
+                                <td>Decoración Gala</td>
+                                <td>$1,150 MXN</td>
+                                <td><span class="status process">En proceso</span></td>
+                            </tr>
+                            <tr>
+                                <td>#003</td>
+                                <td>Daniel Pérez</td>
+                                <td>Jarrón Cristal</td>
+                                <td>$350 MXN</td>
+                                <td><span class="status delivered">Entregado</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- STOCK -->
+            <section class="admin-section">
+                <div class="section-header">
+                    <h2>Productos con poco stock</h2>
+                    <button>Gestionar inventario</button>
+                </div>
+
+                <div class="stock-list">
+                    <div class="stock-item">
+                        <span>Ramo Aurora</span>
+                        <span>3 disponibles</span>
+                    </div>
+
+                    <div class="stock-item">
+                        <span>Tarjeta Floral</span>
+                        <span>5 disponibles</span>
+                    </div>
+
+                    <div class="stock-item">
+                        <span>Decoración Primavera</span>
+                        <span>2 disponibles</span>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+    </div>
+
+</body>
+</html>

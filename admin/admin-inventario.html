@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario | Panel Admin The Queens</title>
+    <link rel="stylesheet" href="/public/CSS/admin-inventario.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="admin-layout">
+
+        <aside class="admin-sidebar">
+            <div class="admin-brand">
+                <h2>THE QUEENS</h2>
+                <p>Panel Administrador</p>
+            </div>
+
+            <nav class="admin-menu">
+    <a href="/admin/admin-dashboard.html">Dashboard</a>
+    <a href="/admin/admin-productos.html">Productos</a>
+    <a href="/admin/admin-pedidos.html">Pedidos</a>
+    <a href="/admin/admin-clientes.html">Clientes</a>
+    <a href="#">Categorías</a>
+    <a href="/admin/admin-inventario.html" class="active">Inventario</a>
+    <a href="#">Mensajes</a>
+    <a href="#">Configuración</a>
+    <a href="/inicio.html">Volver a la tienda</a>
+</nav>
+        </aside>
+
+        <main class="admin-main">
+
+            <header class="admin-topbar">
+                <div>
+                    <p class="admin-subtitle">Administración</p>
+                    <h1>Inventario</h1>
+                </div>
+
+                <button class="btn-primary">+ Actualizar stock</button>
+            </header>
+
+            <section class="admin-toolbar">
+                <div class="search-box">
+                    <input type="text" placeholder="Buscar producto...">
+                </div>
+
+                <div class="filter-box">
+                    <select>
+                        <option>Todo el inventario</option>
+                        <option>Stock alto</option>
+                        <option>Stock medio</option>
+                        <option>Bajo stock</option>
+                        <option>Agotados</option>
+                    </select>
+                </div>
+            </section>
+
+            <section class="admin-section">
+                <div class="section-header">
+                    <h2>Control de inventario</h2>
+                    <button>Exportar</button>
+                </div>
+
+                <div class="table-box">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Categoría</th>
+                                <th>Stock actual</th>
+                                <th>Stock mínimo</th>
+                                <th>Estado</th>
+                                <th>Última actualización</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>Ramo Dulzura</td>
+                                <td>Ramos</td>
+                                <td>12</td>
+                                <td>5</td>
+                                <td><span class="status good">Disponible</span></td>
+                                <td>12/03/2026</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-view">Ver</button>
+                                        <button class="btn-edit">Editar</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Centro Aurora</td>
+                                <td>Arreglos</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td><span class="status low">Bajo stock</span></td>
+                                <td>11/03/2026</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-view">Ver</button>
+                                        <button class="btn-edit">Editar</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Jarrón Cristal</td>
+                                <td>Accesorios</td>
+                                <td>0</td>
+                                <td>3</td>
+                                <td><span class="status out">Agotado</span></td>
+                                <td>10/03/2026</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-view">Ver</button>
+                                        <button class="btn-edit">Editar</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>Tarjeta Floral</td>
+                                <td>Accesorios</td>
+                                <td>18</td>
+                                <td>5</td>
+                                <td><span class="status good">Disponible</span></td>
+                                <td>09/03/2026</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-view">Ver</button>
+                                        <button class="btn-edit">Editar</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="admin-cards">
+                <div class="admin-card">
+                    <h3>Productos disponibles</h3>
+                    <p>29</p>
+                </div>
+
+                <div class="admin-card">
+                    <h3>Bajo stock</h3>
+                    <p>6</p>
+                </div>
+
+                <div class="admin-card">
+                    <h3>Agotados</h3>
+                    <p>3</p>
+                </div>
+
+                <div class="admin-card">
+                    <h3>Total inventario</h3>
+                    <p>38</p>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+</body>
+</html>

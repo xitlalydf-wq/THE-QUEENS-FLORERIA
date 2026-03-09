@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos | Panel Admin The Queens</title>
+    <link rel="stylesheet" href="/public/CSS/admin-productos.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="admin-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="admin-sidebar">
+            <div class="admin-brand">
+                <h2>THE QUEENS</h2>
+                <p>Panel Admin</p>
+            </div>
+
+            <nav class="admin-menu">
+     <a href="/admin/admin-dashboard.html">Dashboard</a>
+    <a href="/admin/admin-productos.html" class="active">Productos</a>
+    <a href="/admin/admin-pedidos.html">Pedidos</a>
+    <a href="#">Clientes</a>
+    <a href="#">Categorías</a>
+    <a href="#">Inventario</a>
+    <a href="#">Mensajes</a>
+    <a href="#">Configuración</a>
+    <a href="/inicio.html">Volver a la tienda</a>
+            </nav>
+        </aside>
+
+        <!-- MAIN -->
+        <main class="admin-main">
+
+            <header class="admin-topbar">
+                <div>
+                    <p class="admin-subtitle">Administración</p>
+                    <h1>Productos</h1>
+                </div>
+
+                <button class="btn-primary">+ Agregar producto</button>
+            </header>
+
+            <!-- FILTROS -->
+            <section class="admin-toolbar">
+                <div class="search-box">
+                    <input type="text" placeholder="Buscar producto...">
+                </div>
+
+                <div class="filter-box">
+                    <select>
+                        <option>Todas las categorías</option>
+                        <option>Ramos</option>
+                        <option>Arreglos</option>
+                        <option>Accesorios</option>
+                    </select>
+                </div>
+            </section>
+
+            <!-- TABLA PRODUCTOS -->
+            <section class="admin-section">
+                <div class="section-header">
+                    <h2>Lista de productos</h2>
+                    <button>Exportar</button>
+                </div>
+
+                <div class="table-box">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Imagen</th>
+                                <th>Producto</th>
+                                <th>Categoría</th>
+                                <th>Precio</th>
+                                <th>Stock</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="product-thumb">
+                                        <img src="/images/ramo1.png" alt="Ramo Dulzura">
+                                    </div>
+                                </td>
+                                <td>Ramo Dulzura</td>
+                                <td>Ramos</td>
+                                <td>$850 MXN</td>
+                                <td>12</td>
+                                <td><span class="status active">Activo</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-edit">Editar</button>
+                                        <button class="btn-delete">Eliminar</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div class="product-thumb">
+                                        <img src="/images/decorativo3.png" alt="Centro Aurora">
+                                    </div>
+                                </td>
+                                <td>Centro Aurora</td>
+                                <td>Arreglos</td>
+                                <td>$720 MXN</td>
+                                <td>8</td>
+                                <td><span class="status active">Activo</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-edit">Editar</button>
+                                        <button class="btn-delete">Eliminar</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div class="product-thumb">
+                                        <img src="/images/accesorio1.png" alt="Jarrón Cristal">
+                                    </div>
+                                </td>
+                                <td>Jarrón Cristal</td>
+                                <td>Accesorios</td>
+                                <td>$350 MXN</td>
+                                <td>5</td>
+                                <td><span class="status low">Bajo stock</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-edit">Editar</button>
+                                        <button class="btn-delete">Eliminar</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div class="product-thumb">
+                                        <img src="/images/ramo6.png" alt="Ramo Encanto">
+                                    </div>
+                                </td>
+                                <td>Ramo Encanto</td>
+                                <td>Ramos</td>
+                                <td>$1,090 MXN</td>
+                                <td>0</td>
+                                <td><span class="status inactive">Agotado</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-edit">Editar</button>
+                                        <button class="btn-delete">Eliminar</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- FORMULARIO RÁPIDO -->
+            <section class="admin-section">
+                <div class="section-header">
+                    <h2>Agregar producto rápido</h2>
+                </div>
+
+                <form class="product-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Nombre del producto</label>
+                            <input type="text" placeholder="Ej. Ramo Primavera">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Categoría</label>
+                            <select>
+                                <option>Selecciona una categoría</option>
+                                <option>Ramos</option>
+                                <option>Arreglos</option>
+                                <option>Accesorios</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Precio</label>
+                            <input type="text" placeholder="$0.00">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Stock</label>
+                            <input type="number" placeholder="0">
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Descripción</label>
+                            <textarea rows="4" placeholder="Escribe una breve descripción del producto..."></textarea>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Imagen</label>
+                            <input type="file">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Guardar producto</button>
+                </form>
+            </section>
+
+        </main>
+
+    </div>
+
+</body>
+</html>
