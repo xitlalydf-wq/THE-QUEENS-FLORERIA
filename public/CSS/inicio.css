@@ -1,192 +1,329 @@
-body {
-    margin: 0;
-    padding: 0;
-    background: #f6f1f0;
-    font-family: 'Poppins', sans-serif;
-    color: #4b3b3f;
+body{
+
+margin:0;
+padding:0;
+
+background:#f6f1f0;
+
+font-family:'Poppins',sans-serif;
+
+color:#4b3b3f;
+
 }
 
-/* ===== NAVBAR ===== */
+
+/* NAV */
 
 .topbar{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:18px 32px;
-    background:#f6f1f0;
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+padding:20px 60px;
+
+background:#f6f1f0;
+
 }
 
 .brand{
-    font-family:'Cormorant Garamond', serif;
-    letter-spacing:4px;
-    font-size:18px;
-    color:#d29aa3;
-    min-width:180px;
+
+font-family:'Cormorant Garamond',serif;
+
+letter-spacing:3px;
+
+font-size:18px;
+
+color:#b76e79;
+
 }
 
 .menu{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:42px;
-    flex:1;
+
+display:flex;
+
+gap:40px;
+
 }
 
 .menu a{
-    text-decoration:none;
-    font-family:'Poppins', sans-serif;
-    font-size:13px;
-    letter-spacing:2px;
-    color:#4b3b3f;
-    transition:0.3s;
+
+text-decoration:none;
+
+font-size:14px;
+
+letter-spacing:2px;
+
+color:#4b3b3f;
+
+transition:0.3s;
+
 }
 
 .menu a:hover{
-    color:#b76e79;
+
+color:#b76e79;
+
 }
 
 .icons{
-    display:flex;
-    align-items:center;
-    gap:16px;
-    min-width:120px;
-    justify-content:flex-end;
+
+display:flex;
+
+gap:20px;
+
 }
 
 .icons img{
-    width:20px;
-    height:20px;
-    object-fit:contain;
+
+width:20px;
+
+height:20px;
+
 }
 
-/* ===== SECCIÓN INICIO ===== */
 
-.hero-section{
-    background:#f6f1f0;
-    padding:40px 0 80px;
+/* HERO */
+
+.hero-inicio{
+
+width:100%;
+
+padding:70px 20px 40px;
+
+text-align:center;
+
+background:#f6f1f0;
+
 }
 
-.hero-container{
-    width:90%;
-    max-width:1200px;
-    margin:0 auto;
-    text-align:center;
+.hero-contenido{
+
+max-width:1100px;
+
+margin:0 auto;
+
 }
+
+
+/* TEXTO */
 
 .hero-subtitle{
-    font-size:14px;
-    letter-spacing:3px;
-    text-transform:uppercase;
-    color:#b7868f;
-    margin-bottom:10px;
+
+font-size:14px;
+
+letter-spacing:4px;
+
+color:#c08f98;
+
+margin-bottom:28px;
+
 }
 
 .hero-title{
-    font-size:56px;
-    color:#4b3b3f;
-    margin-bottom:20px;
-    font-family:'Cormorant Garamond', serif;
-    font-weight:600;
-    line-height:1.1;
+
+font-family:'Cormorant Garamond',serif;
+
+font-size:66px;
+
+font-weight:600;
+
+color:#4b3b3f;
+
+margin:0;
+
+line-height:1.1;
+
 }
 
-.hero-text{
-    max-width:700px;
-    margin:0 auto 35px;
-    font-size:16px;
-    line-height:1.8;
-    color:#7d676d;
+.hero-title-sec{
+
+font-family:'Cormorant Garamond',serif;
+
+font-size:58px;
+
+font-weight:500;
+
+color:#4b3b3f;
+
+margin:8px 0 30px;
+
+line-height:1.1;
+
 }
 
-.hero-image{
+
+/* IMAGEN */
+
+.hero-imagen{
+
+display:flex;
+
+justify-content:center;
+
+margin-top:20px;
+
+}
+
+.hero-imagen img{
+
+width:100%;
+
+max-width:460px;
+
+opacity:0.45;
+
+height:auto;
+
+transition:transform 0.5s ease;
+
+}
+
+
+/* ANIMACION */
+
+.animar-hero{
+
+animation:moverHero 0.9s ease;
+
+}
+
+@keyframes moverHero{
+
+0%{
+
+transform:translateY(0) scale(1);
+
+}
+
+30%{
+
+transform:translateY(-12px) scale(1.03);
+
+}
+
+60%{
+
+transform:translateY(6px) scale(0.99);
+
+}
+
+100%{
+
+transform:translateY(0) scale(1);
+
+}
+
+}
+
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+.hero-title{
+
+font-size:46px;
+
+}
+
+.hero-title-sec{
+
+font-size:40px;
+
+}
+
+.hero-subtitle{
+
+font-size:12px;
+
+letter-spacing:3px;
+
+}
+
+.hero-imagen img{
+
+max-width:320px;
+
+}
+
+}
+
+/* CATEGORIAS */
+
+.inicio-categorias{
+
+width:100%;
+margin-top:80px;
+display:flex;
+justify-content:center;
+
+}
+
+.categorias-grid{
+
+width:100%;
+max-width:1100px;
+
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:25px;
+
+}
+
+/* TARJETAS */
+
+.categoria-card{
+
+position:relative;
+display:block;
+overflow:hidden;
+
+}
+
+.categoria-card img{
+
+width:100%;
+height:260px;
+object-fit:cover;
+
+transition:transform .5s ease;
+
+}
+
+/* TEXTO */
+
+.categoria-card span{
+
+position:absolute;
+left:30px;
+bottom:30px;
+
+font-family:'Poppins', sans-serif;
+font-size:14px;
+letter-spacing:3px;
+
+color:#8f6b73;
+
+background:rgba(255,255,255,0.8);
+padding:10px 20px;
+
+}
+
+/* HOVER */
+
+.categoria-card:hover img{
+
+transform:scale(1.05);
+
+}
+
+.categoria-card.vacia{
+    height:260px;
+    background:#ece6e6;
     display:flex;
-    justify-content:center;
-    align-items:center;
-}
-
-.hero-image img{
-    width:100%;
-    max-width:420px;
-    height:auto;
-    object-fit:contain;
-}
-
-/* ===== INFO EXTRA ===== */
-
-.info-section{
-    background:#f6f1f0;
-    padding:20px 0 80px;
-}
-
-.info-container{
-    width:90%;
-    max-width:1000px;
-    margin:0 auto;
-    text-align:center;
-}
-
-.info-container h3{
-    font-size:28px;
-    color:#4b3b3f;
-    margin-bottom:16px;
-    font-family:'Cormorant Garamond', serif;
-    font-weight:600;
-}
-
-.info-container p{
-    font-size:15px;
-    line-height:1.8;
-    color:#7d676d;
-    margin:0 auto;
-    max-width:760px;
-}
-
-/* ===== RESPONSIVE ===== */
-
-@media (max-width: 992px) {
-    .hero-title{
-        font-size:42px;
-    }
-
-    .menu{
-        gap:24px;
-    }
-}
-
-@media (max-width: 576px) {
-    .topbar{
-        padding:16px 18px;
-        flex-wrap:wrap;
-        gap:12px;
-    }
-
-    .brand{
-        min-width:auto;
-        font-size:16px;
-    }
-
-    .menu{
-        width:100%;
-        flex-wrap:wrap;
-        gap:14px;
-        justify-content:center;
-    }
-
-    .icons{
-        width:100%;
-        justify-content:center;
-        min-width:auto;
-    }
-
-    .hero-title{
-        font-size:36px;
-    }
-
-    .hero-text{
-        font-size:15px;
-    }
-
-    .hero-image img{
-        max-width:300px;
-    }
+    align-items:flex-end;
+    padding:30px;
 }

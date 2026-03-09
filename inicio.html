@@ -5,12 +5,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Queens</title>
+
 <link rel="stylesheet" href="/public/CSS/inicio.css">
 
 <!-- Tipografías -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
@@ -20,20 +22,26 @@
 
 <div class="brand">THE QUEENS</div>
 
-    <nav class="menu">
-      <a href="inicio.html">INICIO</a>
-      <a href="Productos/ramos.html">RAMOS</a>
-      <a href="Productos/decorativos.html">ARREGLOS</a>
-      <a href="Productos/accesorios.html">ACCESORIOS</a>
-      <a href="sobre-nosotros.html">SOBRE NOSOTROS</a>
-      <a href="contacto.html">CONTACTO</a>
-    </nav>
+<nav class="menu">
 
-    <div class="icons">
-  <a href="#">
-    <img src="images/buscar.png" alt="Buscar">
-  </a>
+<a href="/inicio.html" id="btnInicio">INICIO</a>
 
+<a href="/productos/ramos.html">RAMOS</a>
+
+<a href="/productos/decorativos.html">ARREGLOS</a>
+
+<a href="/productos/accesorios.html">ACCESORIOS</a>
+
+<a href="/sobre-nosotros.html">SOBRE NOSOTROS</a>
+
+<a href="/contacto.html">CONTACTO</a>
+
+</nav>
+
+<div class="icons">
+        <a href="#">
+            <img src="/images/buscar.png" alt="Buscar">
+        </a>
 <a href="#">
 <img src="/images/usuario.png" alt="Usuario">
 </a>
@@ -41,63 +49,97 @@
 <a href="/Compras/carrito.html">
 <img src="/images/carrito.png" alt="Carrito">
 </a>
+
 </div>
 
 </header>
 
 
-<!-- HERO -->
-<section class="hero">
+<!-- HERO INICIO -->
 
-<div class="hero-overlay"></div>
+<section class="hero-inicio">
 
-<div class="hero-content">
+<div class="hero-contenido">
 
-<img src="/images/ramo-hero.png" class="decoracion" alt="Ramo">
+<p class="hero-subtitle">
+COLECCIÓN FLORAL
+</p>
 
-<h1>
-Arte <br>
-Floral
+<h1 class="hero-title">
+THE QUEENS FLORERÍA
 </h1>
 
-<p class="tagline">
-Elegancia natural para cada ocasión
-</p>
+<h2 class="hero-title-sec">
+Arte Floral
+</h2>
+
+
+<div class="hero-imagen" id="heroImagen">
+
+<!--  -->
+
+<img src="/images/flor.png  " alt="The Queens Florería">
+
+</div>
 
 </div>
 
 </section>
 
+<section class="inicio-categorias">
 
-<!-- INFO -->
-<section class="info">
+    <div class="categorias-grid">
 
-<div class="info-left">
-<h3>THE QUEENS</h3>
-</div>
+        <a href="/productos/ramos.html" class="categoria-card">
+            <img src="images/cat-ramos.jpg" alt="Ramos">
+            <span>RAMOS</span>
+        </a>
 
-<div class="info-right">
-<p>
-En The Queens creamos arreglos florales elegantes y únicos para cada momento especial. 
-Nuestros ramos están diseñados con flores frescas y una estética delicada que transmite
-belleza, emoción y estilo.
-</p>
-</div>
+        <a href="/productos/decorativos.html" class="categoria-card">
+            <img src="images/cat-arreglos.jpg" alt="Arreglos">
+            <span>ARREGLOS</span>
+        </a>
+
+        <a href="/productos/accesorios.html" class="categoria-card">
+            <img src="images/cat-accesorios.jpg" alt="Accesorios">
+            <span>ACCESORIOS</span>
+        </a>
+
+        <a href="#" class="categoria-card">
+            <img src="images/cat-extra.jpg" alt="">
+            <span></span>
+        </a>
+
+    </div>
 
 </section>
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  const btn = document.querySelector('.hamburger');
-  const menu = document.querySelector('.menu');
-  if (btn && menu) {
-    btn.addEventListener('click', function() {
-      menu.classList.toggle('open');
-      btn.classList.toggle('active');
-    });
-  }
+
+document.addEventListener("DOMContentLoaded", function () {
+
+const btnInicio = document.getElementById("btnInicio");
+
+const heroImagen = document.getElementById("heroImagen");
+
+if (btnInicio && heroImagen) {
+
+btnInicio.addEventListener("click", function () {
+
+heroImagen.classList.remove("animar-hero");
+
+void heroImagen.offsetWidth;
+
+heroImagen.classList.add("animar-hero");
+
 });
+
+}
+
+});
+
 </script>
+
+
 </body>
+
 </html>
-               
-                     
