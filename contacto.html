@@ -7,11 +7,17 @@
     <title>Contacto</title>
     <link rel="stylesheet" href="/public/CSS/Ramos.css">
     <link rel="stylesheet" href="/public/CSS/Contacto.css">
-
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <!-- Tipografías -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+         <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body>
@@ -56,9 +62,9 @@
         <div class="contacto-form-box">
             <form class="contacto-form-grid">
                 <input type="email" placeholder="Email">
-                <input type="text" placeholder="Phone">
-                <input type="text" placeholder="Name" class="full-width">
-                <textarea placeholder="Message" class="full-width"></textarea>
+                <input type="text" placeholder="Celular">
+                <input type="text" placeholder="Nombre" class="full-width">
+                <textarea placeholder="Descripción" class="full-width"></textarea>
                 <button type="submit" class="contacto-btn">Submit Button</button>
             </form>
         </div>
@@ -82,37 +88,65 @@
     <!-- DATOS DE CONTACTO -->
     <div class="contacto-cards">
         <div class="contact-card">
-            <h4>(+876) 765 65</h4>
+            <h1><strong>Telefono</strong></h1>
             <p>
-                numero de telefono de la tienda, aqui va a ir un boton que te abra lo del telefono para llamar a la tienda
+                <li>
+                    <strong>Telefono</strong>
+                    <a href="tel:+521234567890">(+52) 123 456 7890</a>
+                </li>
             </p>
         </div>
 
         <div class="contact-card">
-            <h4>THE QUEENS CORREO</h4>
+            <h1>CORREO </h1>
             <p>
-                AQUI VA A IR EL BOTON QUE TE ABRA LO DEL CORREO.
+                <li>
+                    <strong >Email</strong>
+                    <a href="mailto:info@thequeensfloreria.com">info@thequeensfloreria.com</a>
+                </li>
             </p>
         </div>
 
-        <div class="contact-card white-card">
-            <h4>DIRECCION ESCRITA </h4>
+        <div class="contact-card">
+            <h1>DIRECCION</h1>
             <p>
-                aqui va a ir un boton que te lleve al mapa de google maps  pero con la direccion de la tienda 
+                <li>><strong>Ubicación</strong>
+                <a href="https://www.google.com/maps/dir/?api=1&destination=Av.+20+de+Noviembre,+Almaguer,+88780+Reynosa,+Tamps." target="_blank">Av. 20 de Noviembre, Almaguer, 88780 Reynosa, Tamps.</a>
+                </li>
             </p>
         </div>
     </div>
 
     <!-- MAPA -->
     <div class="map-box">
-        <div class="map-placeholder">
-            Aquí irá el mapa
-        </div>
+        <div id="map"></div>
     </div>
 
 </div>
 
     </div>
+</section>
+
+<!-- JavaScript de Leaflet -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+    // Esperar a que el DOM esté completamente cargado
+    document.addEventListener('DOMContentLoaded', function() {
+        // Inicializar el mapa con coordenadas de Av. 20 de Noviembre, Reynosa
+        var map = L.map('map').setView([26.023969, -98.239094], 20);
+
+        // Añadir capa de tiles (mapa base)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Añadir un marcador en la ubicación exacta
+        L.marker([26.023969, -98.239094]).addTo(map)
+            .bindPopup('<b>THE QUEENS</b><br>Av. 20 de Noviembre, Almaguer<br>88780 Reynosa, Tamps.')
+            .openPopup();
+    });
+</script>
 
 </body>
 </html>
