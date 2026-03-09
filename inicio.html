@@ -20,19 +20,19 @@
 
 <div class="brand">THE QUEENS</div>
 
-<nav class="menu">
-<a href="/inicio.html">INICIO</a>
-<a href="/productos/ramos.html">RAMOS</a>
-<a href="/productos/decorativos.html">DECORATIVOS</a>
-<a href="/productos/accesorios.html">ACCESORIOS</a>
-<a href="/about.html">SOBRE NOSOTROS</a>
-<a href="/contacto.html">CONTACTO</a>
-</nav>
+    <nav class="menu">
+      <a href="inicio.html">INICIO</a>
+      <a href="Productos/ramos.html">RAMOS</a>
+      <a href="Productos/decorativos.html">ARREGLOS</a>
+      <a href="Productos/accesorios.html">ACCESORIOS</a>
+      <a href="sobre-nosotros.html">SOBRE NOSOTROS</a>
+      <a href="contacto.html">CONTACTO</a>
+    </nav>
 
-<div class="icons">
-<a href="#">
-<img src="/images/buscar.png" alt="Buscar">
-</a>
+    <div class="icons">
+  <a href="#">
+    <img src="images/buscar.png" alt="Buscar">
+  </a>
 
 <a href="#">
 <img src="/images/usuario.png" alt="Usuario">
@@ -85,7 +85,18 @@ belleza, emoción y estilo.
 </div>
 
 </section>
-
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const btn = document.querySelector('.hamburger');
+  const menu = document.querySelector('.menu');
+  if (btn && menu) {
+    btn.addEventListener('click', function() {
+      menu.classList.toggle('open');
+      btn.classList.toggle('active');
+    });
+  }
+});
+</script>
 </body>
 </html>
                

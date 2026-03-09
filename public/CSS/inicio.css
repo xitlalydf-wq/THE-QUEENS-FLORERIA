@@ -6,336 +6,36 @@ body {
     color: #4b3b3f;
 }
 
-.icons img{
-    width: 22px;
-    height: 22px;
-    object-fit: contain;
-}
-
-.icons{
-    display: flex;
-    align-items: center;
-    gap: 18px;
-}
-
-.icons a{
-    display: flex;
-    align-items: center;
-}
-
-/* ===== SECCIÓN PRODUCTOS ===== */
-
-.ramos-section {
-    background: #f6f1f0;
-    padding: 70px 0 100px;
-}
-
-.ramos-container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    background: #f6f1f0;
-    font-family: 'Poppins', sans-serif;
-    color: #4b3b3f;
-}
-
-.icons img{
-    width: 22px;
-    height: 22px;
-    object-fit: contain;
-}
-
-.icons{
-    display: flex;
-    align-items: center;
-    gap: 18px;
-}
-
-.icons a{
-    display: flex;
-    align-items: center;
-}
-
-.ramos-section {
-    background: #f6f1f0;
-    padding: 70px 0 100px;
-}
-
-.ramos-container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.ramos-header {
-    text-align: center;
-    margin-bottom: 55px;
-}
-
-.ramos-subtitle {
-    font-size: 14px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #b7868f;
-    margin-bottom: 10px;
-    font-family: 'Poppins', sans-serif;
-}
-
-.ramos-title {
-    font-size: 56px;
-    color: #4b3b3f;
-    margin-bottom: 28px;
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 600;
-}
-
-.ramos-tabs {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 30px;
-    border-bottom: 1px solid #e7d9dc;
-    padding-bottom: 14px;
-}
-
-.ramos-tabs a {
-    text-decoration: none;
-    color: #7d676d;
-    font-size: 15px;
-    font-family: 'Poppins', sans-serif;
-    position: relative;
-    transition: 0.3s ease;
-}
-
-.ramos-tabs a:hover,
-.ramos-tabs a.active {
-    color: #b76e79;
-}
-
-.ramos-tabs a.active::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -15px;
-    width: 100%;
-    height: 2px;
-    background: #c8959d;
-    border-radius: 10px;
-}
-
-.ramos-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-    max-width: 1100px;
-    margin: 45px auto;
-}
-
-/* ===== CARDS ===== */
-
-.ramo-card {
-    position: relative;
-    background: #fffdfc;
-    border-radius: 28px;
-    padding: 30px 24px 24px;
-    text-align: center;
-    box-shadow: 0 12px 30px rgba(191, 154, 162, 0.12);
-    transition: transform 0.35s ease, box-shadow 0.35s ease;
-    width: 300px;
-}
-
-.ramo-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 18px 36px rgba(191, 154, 162, 0.20);
-}
-
-.btn-fav {
-    position: absolute;
-    top: 18px;
-    right: 18px;
-    width: 44px;
-    height: 44px;
-    border: 1px solid #efd8dd;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.95);
-    color: #b76e79;
-    font-size: 22px;
-    line-height: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 8px 18px rgba(191, 154, 162, 0.15);
-    transition: all 0.25s ease;
-    z-index: 5;
-}
-
-.btn-fav:hover {
-    transform: scale(1.08);
-    background: #fbecef;
-    color: #a85d6c;
-    box-shadow: 0 10px 22px rgba(191, 154, 162, 0.22);
-}
-
-.btn-fav.active {
-    background: linear-gradient(135deg, #d99aa7, #b76e79);
-    color: #fff;
-    border-color: transparent;
-}
-
-.ramo-img-box {
-    width: 100%;
-    height: 180px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-.ramo-img-box img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-}
-
-.ramo-card h3 {
-    font-size: 28px;
-    color: #4b3b3f;
-    margin-bottom: 8px;
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 600;
-}
-
-.stock {
-    font-size: 14px;
-    color: #9a8a8f;
-    margin-bottom: 12px;
-    font-family: 'Poppins', sans-serif;
-}
-
-.precio {
-    font-size: 28px;
-    color: #7f5b62;
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 700;
-    margin-bottom: 20px;
-}
-
-.btn-ramo {
-    display: inline-block;
-    padding: 13px 34px;
-    background: #e4c6cb;
-    color: #5c454a;
-    text-decoration: none;
-    border-radius: 999px;
-    font-size: 14px;
-    font-family: 'Poppins', sans-serif;
-    transition: 0.3s ease;
-}
-
-.btn-ramo:hover {
-    background: #c8959d;
-    color: #fff;
-}
-
-.btn-carrito.agregado {
-    background: #b76e79;
-    color: #fff;
-}
-
-/* ===== FIN CARDS ===== */
-
-.ramos-more {
-    text-align: center;
-    margin-top: 45px;
-}
-
-.ramos-more a {
-    text-decoration: none;
-    font-size: 24px;
-    color: #6b555a;
-    font-family: 'Cormorant Garamond', serif;
-    transition: 0.3s ease;
-}
-
-.ramos-more a:hover {
-    color: #b76e79;
-}
-
-@media (max-width: 992px) {
-    .ramos-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .ramos-title {
-        font-size: 42px;
-    }
-}
-
-@media (max-width: 576px) {
-    .ramos-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    max-width: 1100px;
-    margin: 45px auto 0;
-    gap: 40px;
-}
-
-    .ramos-title {
-        font-size: 36px;
-    }
-
-    .ramos-tabs {
-        gap: 16px;
-    }
-
-   .ramo-card {
-    width: 100%;
-}
-    .ramo-img-box {
-        height: 220px;
-    }
-
-    .btn-fav {
-        width: 40px;
-        height: 40px;
-        font-size: 20px;
-        top: 14px;
-        right: 14px;
-    }
-}
-
-/* ===== NAVBAR THE QUEENS ===== */
+/* ===== NAVBAR ===== */
 
 .topbar{
     display:flex;
     align-items:center;
     justify-content:space-between;
-    padding:20px 60px;
+    padding:18px 32px;
     background:#f6f1f0;
 }
 
 .brand{
     font-family:'Cormorant Garamond', serif;
-    letter-spacing:3px;
+    letter-spacing:4px;
     font-size:18px;
-    color:#b76e79;
+    color:#d29aa3;
+    min-width:180px;
 }
 
 .menu{
     display:flex;
-    gap:40px;
+    align-items:center;
+    justify-content:center;
+    gap:42px;
+    flex:1;
 }
 
 .menu a{
     text-decoration:none;
     font-family:'Poppins', sans-serif;
-    font-size:14px;
+    font-size:13px;
     letter-spacing:2px;
     color:#4b3b3f;
     transition:0.3s;
@@ -345,16 +45,148 @@ body {
     color:#b76e79;
 }
 
-/* ICONOS */
-
 .icons{
     display:flex;
     align-items:center;
-    gap:20px;
+    gap:16px;
+    min-width:120px;
+    justify-content:flex-end;
 }
 
 .icons img{
     width:20px;
     height:20px;
     object-fit:contain;
+}
+
+/* ===== SECCIÓN INICIO ===== */
+
+.hero-section{
+    background:#f6f1f0;
+    padding:40px 0 80px;
+}
+
+.hero-container{
+    width:90%;
+    max-width:1200px;
+    margin:0 auto;
+    text-align:center;
+}
+
+.hero-subtitle{
+    font-size:14px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:#b7868f;
+    margin-bottom:10px;
+}
+
+.hero-title{
+    font-size:56px;
+    color:#4b3b3f;
+    margin-bottom:20px;
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    line-height:1.1;
+}
+
+.hero-text{
+    max-width:700px;
+    margin:0 auto 35px;
+    font-size:16px;
+    line-height:1.8;
+    color:#7d676d;
+}
+
+.hero-image{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.hero-image img{
+    width:100%;
+    max-width:420px;
+    height:auto;
+    object-fit:contain;
+}
+
+/* ===== INFO EXTRA ===== */
+
+.info-section{
+    background:#f6f1f0;
+    padding:20px 0 80px;
+}
+
+.info-container{
+    width:90%;
+    max-width:1000px;
+    margin:0 auto;
+    text-align:center;
+}
+
+.info-container h3{
+    font-size:28px;
+    color:#4b3b3f;
+    margin-bottom:16px;
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+}
+
+.info-container p{
+    font-size:15px;
+    line-height:1.8;
+    color:#7d676d;
+    margin:0 auto;
+    max-width:760px;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 992px) {
+    .hero-title{
+        font-size:42px;
+    }
+
+    .menu{
+        gap:24px;
+    }
+}
+
+@media (max-width: 576px) {
+    .topbar{
+        padding:16px 18px;
+        flex-wrap:wrap;
+        gap:12px;
+    }
+
+    .brand{
+        min-width:auto;
+        font-size:16px;
+    }
+
+    .menu{
+        width:100%;
+        flex-wrap:wrap;
+        gap:14px;
+        justify-content:center;
+    }
+
+    .icons{
+        width:100%;
+        justify-content:center;
+        min-width:auto;
+    }
+
+    .hero-title{
+        font-size:36px;
+    }
+
+    .hero-text{
+        font-size:15px;
+    }
+
+    .hero-image img{
+        max-width:300px;
+    }
 }
