@@ -3,196 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagos</title>
+    <title>Pagos | The Queens</title>
     <link rel="stylesheet" href="/public/CSS/pago.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-  <!-- NAV -->
-  <header class="topbar">
-    <div class="brand">THE QUEENS</div>
-    <button class="hamburger" aria-label="Abrir menú">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+    <!-- NAV -->
+    <header class="topbar">
+        <div class="brand">THE QUEENS</div>
 
-    <nav class="menu">
-      <a href="/inicio.html">INICIO</a>
-      <a href="/productos/ramos.html">RAMOS</a>
-      <a href="/productos/decorativos.html">DECORATIVOS</a>
-      <a href="/productos/accesorios.html">ACCESORIOS</a>
-      <a href="/about.html">SOBRE NOSOTROS</a>
-      <a href="/contacto.html">CONTACTO</a>
-    </nav>
+        <nav class="menu">
+            <a href="/inicio.html">INICIO</a>
+            <a href="/productos/ramos.html">RAMOS</a>
+            <a href="/productos/decorativos.html">ARREGLOS</a>
+            <a href="/productos/accesorios.html">ACCESORIOS</a>
+            <a href="/sobre-nosotros.html">SOBRE NOSOTROS</a>
+            <a href="/contacto.html">CONTACTO</a>
+        </nav>
 
-    <div class="icons">
-      <form class="search-form" id="search-form" action="#" method="get">
-        <div style="position:relative;">
-          <input type="text" name="q" placeholder="Buscar..." autocomplete="off" />
-          <ul class="search-suggestions"></ul>
+        <div class="icons">
+            <a href="#">
+                <img src="/images/usuario.png" alt="Usuario">
+            </a>
+
+            <a href="/Compras/carrito.html">
+                <img src="/images/carrito.png" alt="Carrito">
+            </a>
         </div>
-      </form>
-  <button type="button" form="search-form"><img src="/images/buscar.png" alt="Buscar"></button>
+    </header>
 
-  <a href="#">
-    <img src="/images/usuario.png" alt="Usuario">
-  </a>
+    <main class="pagos-page">
 
-  <a href="/Compras/carrito.html">
-    <img src="/images/carrito.png" alt="Carrito">
-  </a>
-</div>
+        <section class="pagos-hero">
+            <p class="pagos-subtitle">Confirmación de compra</p>
+            <h1 class="pagos-title">Generar Ticket de Compra</h1>
+            <p class="pagos-text">
+                Confirma tu dirección, revisa tu pedido y sube el comprobante de pago
+                para generar tu ticket de compra.
+            </p>
+        </section>
 
-  </header>
-    <main>
-        
-        <section class="ticket-form">
-            <h2>Generar Ticket de Compra</h2>
-            <p>Los datos de su cuenta se cargarán automáticamente. Solo confirme la dirección y suba el comprobante de transferencia.</p>
-            
-            <!-- Resumen del Carrito (placeholder para futura conexión) -->
-            <div class="cart-summary">
-                <h3>Resumen del Carrito</h3>
-                <div class="cart-item">
-                    <span>Ramo de Rosas</span>
-                    <span>$25.00</span>
+        <section class="pagos-layout">
+
+            <div class="ticket-form-card">
+                <div class="cart-summary">
+                    <h3>Resumen del Carrito</h3>
+
+                    <div class="cart-item">
+                        <span>Ramo de Rosas</span>
+                        <span>$25.00</span>
+                    </div>
+
+                    <div class="cart-item">
+                        <span>Decoración Floral</span>
+                        <span>$15.00</span>
+                    </div>
+
+                    <div class="cart-total">
+                        Total: $40.00
+                    </div>
+
+                    <p class="cart-note">
+                        *Estos datos se cargarán automáticamente desde el carrito en futuras actualizaciones.
+                    </p>
                 </div>
-                <div class="cart-item">
-                    <span>Decoración Floral</span>
-                    <span>$15.00</span>
+
+                <form id="ticketForm" class="ticket-form">
+                    <div class="form-group">
+                        <label for="direccion">Dirección de Entrega</label>
+                        <textarea id="direccion" name="direccion" rows="4" required placeholder="Confirme o actualice su dirección"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="metodo">Método de Pago</label>
+                        <select id="metodo" name="metodo" disabled>
+                            <option value="transferencia" selected>Transferencia Bancaria</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="comprobante">Subir Comprobante de Depósito</label>
+                        <input type="file" id="comprobante" name="comprobante" accept="image/*" required>
+                    </div>
+
+                    <div class="whatsapp-option">
+                        <input type="checkbox" id="whatsapp" name="whatsapp" checked>
+                        <label for="whatsapp">Enviar ticket y comprobante por WhatsApp</label>
+                    </div>
+
+                    <button type="submit" class="btn-generate">Generar Ticket</button>
+                </form>
+
+                <div class="ticket-info">
+                    <p>
+                        Al enviar, se generará un ticket con los detalles de tu pedido y
+                        recibirás confirmación por WhatsApp.
+                    </p>
                 </div>
-                <div class="cart-total">
-                    Total: $40.00
-                </div>
-                <p style="font-size: 12px; color: #999; margin-top: 10px;">*Estos datos se cargarán automáticamente desde el carrito en futuras actualizaciones.</p>
             </div>
-            
-            <form id="ticketForm">
-                <div class="form-group">
-                    <label for="direccion">Dirección de Entrega</label>
-                    <textarea id="direccion" name="direccion" rows="3" required placeholder="Confirme o actualice su dirección"></textarea>
-                </div>
-                
-                <div class="form-group">
-                    <label for="metodo">Método de Pago</label>
-                    <select id="metodo" name="metodo" disabled>
-                        <option value="transferencia" selected>Transferencia Bancaria</option>
-                    </select>
-                </div>
-                
-                <!-- Subida de Comprobante -->
-                <div class="upload-section">
-                    <label for="comprobante">Subir Comprobante de Depósito</label>
-                    <input type="file" id="comprobante" name="comprobante" accept="image/*" required>
-                </div>
-                
-                <!-- Opción WhatsApp -->
-                <div class="whatsapp-option">
-                    <input type="checkbox" id="whatsapp" name="whatsapp" checked>
-                    <label for="whatsapp">Enviar ticket y comprobante por WhatsApp</label>
-                </div>
-                
-                <button type="submit" class="btn-generate">Generar Ticket</button>
-            </form>
-            
-            <div class="ticket-info">
-                <p>Al enviar, se generará un ticket con los detalles de su pedido. Recibirá una confirmación por WhatsApp.</p>
-            </div>
+
         </section>
 
     </main>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const btn = document.querySelector('.hamburger');
-  const menu = document.querySelector('.menu');
-  if (btn && menu) {
-    btn.addEventListener('click', function() {
-      menu.classList.toggle('open');
-      btn.classList.toggle('active');
-    });
-  }
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('ticketForm');
 
-  const sampleProducts = ['Ramos', 'Decorativos', 'Accesorios', 'Flores de temporada'];
-  const searchInput = document.querySelector('.search-form input[name=q]');
-  const suggestions = document.querySelector('.search-suggestions');
-  if (searchInput) {
-    searchInput.addEventListener('input', function() {
-      const term = this.value.toLowerCase();
-      suggestions.innerHTML = '';
-      if (term.length === 0) {
-        suggestions.style.display = 'none';
-        return;
-      }
-      const matches = sampleProducts.filter(p => p.toLowerCase().includes(term));
-      matches.forEach(m => {
-        const li = document.createElement('li');
-        li.textContent = m;
-        li.addEventListener('click', () => {
-          searchInput.value = m;
-          suggestions.style.display = 'none';
-        });
-        suggestions.appendChild(li);
-      });
-      suggestions.style.display = matches.length ? 'block' : 'none';
-    });
-    document.addEventListener('click', e => {
-      if (!searchInput.contains(e.target)) {
-        suggestions.style.display = 'none';
-      }
-    });
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
 
-    const searchForm = document.querySelector('.search-form');
-    const searchButton = document.querySelector('button[form="search-form"]');
-    if (searchButton) {
-      searchForm.addEventListener('submit', e => e.preventDefault());
-      searchButton.addEventListener('click', function(e) {
-        e.preventDefault();
-        if (!searchForm.classList.contains('active')) {
-          searchForm.classList.add('active');
-          searchInput.focus();
-        } else {
-          const term = searchInput.value.trim().toLowerCase();
-          if (term) {
-            if (term.includes('ramos')) {
-              window.location.href = '/Productos/ramos.html';
-            } else if (term.includes('decorativos')) {
-              window.location.href = '/Productos/decorativos.html';
-            } else if (term.includes('accesorios')) {
-              window.location.href = '/Productos/accesorios.html';
-            } else {
-              window.location.href = '/search.html?q=' + encodeURIComponent(searchInput.value);
-            }
-          }
+                const whatsappChecked = document.getElementById('whatsapp').checked;
+                const comprobante = document.getElementById('comprobante').files[0];
+
+                let message = '¡Ticket generado exitosamente!';
+                if (comprobante) {
+                    message += ' Comprobante subido correctamente.';
+                }
+                if (whatsappChecked) {
+                    message += ' Se enviará por WhatsApp.';
+                }
+
+                alert(message);
+            });
         }
-      });
-    }
-  }
-
-  // Manejo del formulario de ticket
-  const form = document.getElementById('ticketForm');
-  if (form) {
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const whatsappChecked = document.getElementById('whatsapp').checked;
-      const comprobante = document.getElementById('comprobante').files[0];
-      
-      let message = '¡Ticket generado exitosamente! Los datos se obtuvieron de su login.';
-      if (comprobante) {
-        message += ' Comprobante subido correctamente.';
-      }
-      if (whatsappChecked) {
-        message += ' Se enviará por WhatsApp.';
-      }
-      
-      alert(message);
-      // Aquí se conectará con base de datos y API de WhatsApp en futuras versiones
     });
-  }
-});
-</script>
-</body>
+    </script>
 
+</body>
 </html>
