@@ -1,0 +1,289 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #f6f1f0;
+    font-family: 'Poppins', sans-serif;
+    color: #4b3b3f;
+}
+
+/* NAVBAR */
+.topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:20px 60px;
+    background:#f6f1f0;
+}
+
+.brand{
+    font-family:'Cormorant Garamond', serif;
+    letter-spacing:3px;
+    font-size:18px;
+    color:#b76e79;
+}
+
+.menu{
+    display:flex;
+    gap:40px;
+}
+
+.menu a{
+    text-decoration:none;
+    font-family:'Poppins', sans-serif;
+    font-size:14px;
+    letter-spacing:2px;
+    color:#4b3b3f;
+    transition:0.3s;
+}
+
+.menu a:hover{
+    color:#b76e79;
+}
+
+.icons{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.icons img{
+    width:20px;
+    height:20px;
+    object-fit:contain;
+}
+
+/* CONTENIDO */
+.carrito-page{
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 0 70px;
+}
+
+.carrito-hero{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.carrito-subtitle{
+    font-size:14px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+    color:#c08f98;
+    margin-bottom:12px;
+}
+
+.carrito-title{
+    font-family:'Cormorant Garamond', serif;
+    font-size:60px;
+    font-weight:600;
+    color:#4b3b3f;
+    margin:0 0 16px;
+}
+
+.carrito-text{
+    max-width:800px;
+    margin:0 auto;
+    line-height:1.8;
+    color:#6b555a;
+    font-size:16px;
+}
+
+.carrito-layout{
+    display:grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 35px;
+    align-items:start;
+}
+
+.section-title{
+    font-family:'Cormorant Garamond', serif;
+    font-size:38px;
+    color:#4b3b3f;
+    margin-bottom:24px;
+}
+
+.carrito-items,
+.cart-summary{
+    background:#fffdfc;
+    border-radius:28px;
+    padding:30px;
+    box-shadow:0 12px 30px rgba(191, 154, 162, 0.10);
+}
+
+/* CARD PRODUCTO */
+.item-card{
+    display:flex;
+    gap:24px;
+    align-items:center;
+    padding:24px 0;
+    border-bottom:1px solid #eee1e3;
+}
+
+.item-card:last-child{
+    border-bottom:none;
+}
+
+.item-image{
+    width:140px;
+    height:140px;
+    background:#f9f3f4;
+    border-radius:22px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+    flex-shrink:0;
+}
+
+.item-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.item-details h3{
+    font-family:'Cormorant Garamond', serif;
+    font-size:34px;
+    margin:0 0 10px;
+    color:#4b3b3f;
+}
+
+.item-price,
+.item-total{
+    margin:8px 0;
+    color:#6b555a;
+    font-size:15px;
+}
+
+.quantity-controls{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin:14px 0;
+}
+
+.quantity-controls button{
+    width:38px;
+    height:38px;
+    border:none;
+    border-radius:50%;
+    background:#e4c6cb;
+    color:#4b3b3f;
+    font-size:20px;
+    cursor:pointer;
+    transition:0.3s ease;
+}
+
+.quantity-controls button:hover{
+    background:#c8959d;
+    color:#fff;
+}
+
+.quantity{
+    font-size:18px;
+    font-weight:600;
+    min-width:20px;
+    text-align:center;
+}
+
+.remove-btn{
+    border:none;
+    background:#f0b8c1;
+    color:#fff;
+    padding:12px 18px;
+    border-radius:14px;
+    cursor:pointer;
+    font-size:14px;
+    transition:0.3s ease;
+}
+
+.remove-btn:hover{
+    background:#d98b98;
+}
+
+/* RESUMEN */
+.summary-box{
+    background:#f9f3f4;
+    border-radius:22px;
+    padding:24px;
+}
+
+.summary-box p{
+    font-size:18px;
+    color:#4b3b3f;
+    margin-bottom:24px;
+}
+
+#cart-total{
+    font-weight:700;
+    color:#b76e79;
+}
+
+.checkout-link{
+    text-decoration:none;
+}
+
+.checkout-button{
+    width:100%;
+    border:none;
+    background:#b88a93;
+    color:#fff;
+    padding:16px 20px;
+    border-radius:999px;
+    font-size:15px;
+    font-family:'Poppins', sans-serif;
+    cursor:pointer;
+    transition:0.3s ease;
+}
+
+.checkout-button:hover{
+    background:#9f717b;
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px){
+    .carrito-layout{
+        grid-template-columns:1fr;
+    }
+
+    .carrito-title{
+        font-size:48px;
+    }
+
+    .menu{
+        gap:24px;
+    }
+}
+
+@media (max-width: 700px){
+    .topbar{
+        padding:18px 20px;
+        flex-wrap:wrap;
+        gap:15px;
+    }
+
+    .menu{
+        width:100%;
+        justify-content:center;
+        flex-wrap:wrap;
+    }
+
+    .icons{
+        width:100%;
+        justify-content:center;
+    }
+
+    .item-card{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .item-details h3{
+        font-size:28px;
+    }
+
+    .carrito-title{
+        font-size:40px;
+    }
+}
