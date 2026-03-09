@@ -29,9 +29,13 @@
     </nav>
 
     <div class="icons">
-  <a href="#">
-    <img src="/images/buscar.png" alt="Buscar">
-  </a>
+      <form id="search-form" class="search-form" action="#" method="get">
+        <div style="position:relative;">
+          <input type="text" name="q" placeholder="Buscar..." autocomplete="off" />
+          <ul class="search-suggestions"></ul>
+        </div>
+      </form>
+  <button type="button" form="search-form"><img src="/images/buscar.png" alt="Buscar"></button>
 
   <a href="#">
     <img src="/images/usuario.png" alt="Usuario">
@@ -57,6 +61,62 @@ document.addEventListener('DOMContentLoaded', function() {
       menu.classList.toggle('open');
       btn.classList.toggle('active');
     });
+  }
+
+  const sampleProducts = ['Ramos', 'Decorativos', 'Accesorios', 'Flores de temporada'];
+  const searchInput = document.querySelector('.search-form input[name=q]');
+  const suggestions = document.querySelector('.search-suggestions');
+  if (searchInput) {
+    searchInput.addEventListener('input', function() {
+      const term = this.value.toLowerCase();
+      suggestions.innerHTML = '';
+      if (term.length === 0) {
+        suggestions.style.display = 'none';
+        return;
+      }
+      const matches = sampleProducts.filter(p => p.toLowerCase().includes(term));
+      matches.forEach(m => {
+        const li = document.createElement('li');
+        li.textContent = m;
+        li.addEventListener('click', () => {
+          searchInput.value = m;
+          suggestions.style.display = 'none';
+        });
+        suggestions.appendChild(li);
+      });
+      suggestions.style.display = matches.length ? 'block' : 'none';
+    });
+    document.addEventListener('click', e => {
+      if (!searchInput.contains(e.target)) {
+        suggestions.style.display = 'none';
+      }
+    });
+
+    const searchForm = document.querySelector('.search-form');
+    const searchButton = document.querySelector('button[form="search-form"]');
+    if (searchButton) {
+      searchForm.addEventListener('submit', e => e.preventDefault());
+      searchButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (!searchForm.classList.contains('active')) {
+          searchForm.classList.add('active');
+          searchInput.focus();
+        } else {
+          const term = searchInput.value.trim().toLowerCase();
+          if (term) {
+            if (term.includes('ramos')) {
+              window.location.href = '/Productos/ramos.html';
+            } else if (term.includes('decorativos')) {
+              window.location.href = '/Productos/decorativos.html';
+            } else if (term.includes('accesorios')) {
+              window.location.href = '/Productos/accesorios.html';
+            } else {
+              window.location.href = '/search.html?q=' + encodeURIComponent(searchInput.value);
+            }
+          }
+        }
+      });
+    }
   }
 });
 </script>

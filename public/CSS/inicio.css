@@ -215,7 +215,83 @@ opacity: 0.8;
   transition: 0.2s ease;
 }
 
+/* search form styles (same as pago.css) */
+.search-form {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  max-width: 180px;
+  flex: 0 1 auto; /* no crecer demasiado ni ocupar toda la fila */
+}
+
+.search-form input[type="text"] {
+  padding: 4px 8px;
+  font-size: 13px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.search-suggestions {
+  position: absolute;
+  top: 38px;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  max-height: 180px;
+  overflow-y: auto;
+  display: none;
+  z-index: 20;
+}
+
+.search-suggestions li {
+  list-style: none;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.search-suggestions li:hover {
+  background: #f0f0f0;
+}
+
+.search-form button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.search-form button img {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
+/* hide duplicate search icon in .icons */
+/* .icons a[href="#"] {
+  display: none;
+} */
+
 .icons img:hover {
+  opacity: 0.6;
+  transform: scale(1.1);
+}
+button[form="search-form"] {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+button[form="search-form"] img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  transition: 0.2s ease;
+}
+button[form="search-form"] img:hover {
   opacity: 0.6;
   transform: scale(1.1);
 }

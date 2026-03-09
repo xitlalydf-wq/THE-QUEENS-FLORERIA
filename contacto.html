@@ -29,10 +29,6 @@
 
     <div class="icons">
   <a href="#">
-    <img src="/images/buscar.png" alt="Buscar">
-  </a>
-
-  <a href="#">
     <img src="/images/usuario.png" alt="Usuario">
   </a>
 
@@ -61,6 +57,48 @@ document.addEventListener('DOMContentLoaded', function() {
       menu.classList.toggle('open');
       btn.classList.toggle('active');
     });
+  }
+
+  const sampleProducts = ['Ramos', 'Decorativos', 'Accesorios', 'Flores de temporada'];
+  const searchInput = document.querySelector('.search-form input[name=q]');
+  const suggestions = document.querySelector('.search-suggestions');
+  if (searchInput) {
+    searchInput.addEventListener('input', function() {
+      const term = this.value.toLowerCase();
+      suggestions.innerHTML = '';
+      if (term.length === 0) {
+        suggestions.style.display = 'none';
+        return;
+      }
+      const matches = sampleProducts.filter(p => p.toLowerCase().includes(term));
+      matches.forEach(m => {
+        const li = document.createElement('li');
+        li.textContent = m;
+        li.addEventListener('click', () => {
+          searchInput.value = m;
+          suggestions.style.display = 'none';
+        });
+        suggestions.appendChild(li);
+      });
+      suggestions.style.display = matches.length ? 'block' : 'none';
+    });
+    document.addEventListener('click', e => {
+      if (!searchInput.contains(e.target)) {
+        suggestions.style.display = 'none';
+      }
+    });
+
+    const searchForm = document.querySelector('.search-form');
+    const searchButton = document.querySelector('button[form="search-form"]');
+    if (searchButton) {
+      searchButton.addEventListener('click', function(e) {
+        if (!searchForm.classList.contains('active')) {
+          e.preventDefault();
+          searchForm.classList.add('active');
+          searchInput.focus();
+        }
+      });
+    }
   }
 });
 </script>

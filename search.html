@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagos</title>
+    <title>Búsqueda</title>
     <link rel="stylesheet" href="/public/CSS/pago.css">
 </head>
-
 <body>
-
-  <!-- NAV -->
+  <!-- NAV (copiado de otros archivos) -->
   <header class="topbar">
     <div class="brand">THE QUEENS</div>
     <button class="hamburger" aria-label="Abrir menú">
@@ -18,7 +15,6 @@
       <span></span>
       <span></span>
     </button>
-
     <nav class="menu">
       <a href="/inicio.html">INICIO</a>
       <a href="/productos/ramos.html">RAMOS</a>
@@ -27,34 +23,26 @@
       <a href="/about.html">SOBRE NOSOTROS</a>
       <a href="/contacto.html">CONTACTO</a>
     </nav>
-
     <div class="icons">
-      <form id="search-form" class="search-form" action="#" method="get">
+      <form class="search-form" id="search-form" action="#" method="get">
         <div style="position:relative;">
-          <input type="text" name="q" placeholder="Buscar..." autocomplete="off" />
+          <input type="text" name="q" placeholder="Buscar..." value="">
           <ul class="search-suggestions"></ul>
         </div>
       </form>
-  <button type="button" form="search-form"><img src="/images/buscar.png" alt="Buscar"></button>
-
-  <a href="#">
-    <img src="/images/usuario.png" alt="Usuario">
-  </a>
-
-  <a href="/Compras/carrito.html">
-    <img src="/images/carrito.png" alt="Carrito">
-  </a>
-</div>
-
-  </header>
-    <div class="container">
-        <h1>Accesorios</h1>
-        <p>Discover our wide range of accessories that complement your style and enhance your daily life. From trendy jewelry to practical gadgets, we have something for everyone. 
-        Our collection includes stylish watches, fashionable bags, and innovative tech accessories that combine functionality with aesthetics.
-        Whether you're looking for the perfect finishing touch to your outfit or a unique gift for a loved one,
-        our accessories are designed to elevate your look and make a statement.
-        Explore our selection and find the perfect accessory to express your individuality.</p>
+      <button type="button" form="search-form"><img src="/images/buscar.png" alt="Buscar"></button>
+      <a href="#"><img src="/images/usuario.png" alt="Usuario"></a>
+      <a href="/Compras/carrito.html"><img src="/images/carrito.png" alt="Carrito"></a>
     </div>
+  </header>
+  <main>
+    <section class="search-results">
+      <h2>Resultados de búsqueda</h2>
+      <p id="query-text"></p>
+      <!-- placeholder para resultados --><div id="results"></div>
+    </section>
+  </main>
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const btn = document.querySelector('.hamburger');
@@ -121,8 +109,13 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
   }
+
+  // mostrar término de búsqueda
+  const params = new URLSearchParams(window.location.search);
+  const q = params.get('q');
+  document.getElementById('query-text').textContent = q ? `Has buscado: "${q}"` : 'No se ingresó ningún término.';
+  // aquí podrías ejecutar lógica para filtrar productos real
 });
 </script>
 </body>
-
 </html>
