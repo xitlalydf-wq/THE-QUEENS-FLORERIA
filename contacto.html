@@ -1,106 +1,118 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagos</title>
-    <link rel="stylesheet" href="/public/CSS/pago.css">
+    <title>Contacto</title>
+    <link rel="stylesheet" href="/public/CSS/Ramos.css">
+    <link rel="stylesheet" href="/public/CSS/Contacto.css">
+
+    <!-- Tipografías -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-  <!-- NAV -->
-  <header class="topbar">
+<!-- NAV -->
+<header class="topbar">
     <div class="brand">THE QUEENS</div>
-    <button class="hamburger" aria-label="Abrir menú">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
 
     <nav class="menu">
-      <a href="/inicio.html">INICIO</a>
-      <a href="/productos/ramos.html">RAMOS</a>
-      <a href="/productos/decorativos.html">DECORATIVOS</a>
-      <a href="/productos/accesorios.html">ACCESORIOS</a>
-      <a href="/about.html">SOBRE NOSOTROS</a>
-      <a href="/contacto.html">CONTACTO</a>
+        <a href="/inicio.html">INICIO</a>
+        <a href="/productos/ramos.html">RAMOS</a>
+        <a href="/productos/decorativos.html">ARREGLOS</a>
+        <a href="/productos/accesorios.html">ACCESORIOS</a>
+        <a href="/sobre-nosotros.html">SOBRE NOSOTROS</a>
+        <a href="/contacto.html">CONTACTO</a>
     </nav>
 
     <div class="icons">
-  <a href="#">
-    <img src="/images/usuario.png" alt="Usuario">
-  </a>
+        <a href="#">
+            <img src="/images/usuario.png" alt="Usuario">
+        </a>
 
-  <a href="/Compras/carrito.html">
-    <img src="/images/carrito.png" alt="Carrito">
-  </a>
+        <a href="/Compras/carrito.html">
+            <img src="/images/carrito.png" alt="Carrito">
+        </a>
+    </div>
+</header>
+
+<!-- SECCIÓN CONTACTO -->
+<section class="ramos-section">
+    <div class="ramos-container">
+
+        <div class="ramos-header">
+            <p class="ramos-subtitle">Estamos para ti</p>
+            <h2 class="ramos-title">Contacto</h2>
+        </div>
+
+       <div class="contacto-extra">
+
+    <div class="contacto-top">
+        <!-- FORMULARIO -->
+        <div class="contacto-form-box">
+            <form class="contacto-form-grid">
+                <input type="email" placeholder="Email">
+                <input type="text" placeholder="Phone">
+                <input type="text" placeholder="Name" class="full-width">
+                <textarea placeholder="Message" class="full-width"></textarea>
+                <button type="submit" class="contacto-btn">Submit Button</button>
+            </form>
+        </div>
+
+        <!-- NEWSLETTER -->
+        <div class="newsletter-box">
+            <h3>¿Necesitas ayuda?</h3>
+            <p>
+               Cuéntanos qué tipo de arreglo floral necesitas
+               y te ayudaremos a crear el diseño perfecto
+               para tu ocasión especial.
+            </p>
+
+            <form class="newsletter-form">
+                <input type="email" placeholder="Email">
+                <button type="submit" class="contacto-btn dark-btn">mensaje</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- DATOS DE CONTACTO -->
+    <div class="contacto-cards">
+        <div class="contact-card">
+            <h4>(+876) 765 65</h4>
+            <p>
+                numero de telefono de la tienda, aqui va a ir un boton que te abra lo del telefono para llamar a la tienda
+            </p>
+        </div>
+
+        <div class="contact-card">
+            <h4>THE QUEENS CORREO</h4>
+            <p>
+                AQUI VA A IR EL BOTON QUE TE ABRA LO DEL CORREO.
+            </p>
+        </div>
+
+        <div class="contact-card white-card">
+            <h4>DIRECCION ESCRITA </h4>
+            <p>
+                aqui va a ir un boton que te lleve al mapa de google maps  pero con la direccion de la tienda 
+            </p>
+        </div>
+    </div>
+
+    <!-- MAPA -->
+    <div class="map-box">
+        <div class="map-placeholder">
+            Aquí irá el mapa
+        </div>
+    </div>
+
 </div>
 
-  </header>
-    <div class="container">
-        <h1>Contacto</h1>
-        <p>Si tienes alguna pregunta, comentario o necesitas asistencia, no dudes en ponerte en contacto con nosotros. Estamos aquí para ayudarte y asegurarnos de que tengas la mejor experiencia de compra posible.</p>
-        <p>Puedes contactarnos a través de los siguientes medios:</p>
-        <ul>
-            <li><strong>Correo electrónico:</strong>
-                <a href="mailto:info@thequeensfloreria.com">info@thequeensfloreria.com</a>
-            </li>
-        </ul>
     </div>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const btn = document.querySelector('.hamburger');
-  const menu = document.querySelector('.menu');
-  if (btn && menu) {
-    btn.addEventListener('click', function() {
-      menu.classList.toggle('open');
-      btn.classList.toggle('active');
-    });
-  }
 
-  const sampleProducts = ['Ramos', 'Decorativos', 'Accesorios', 'Flores de temporada'];
-  const searchInput = document.querySelector('.search-form input[name=q]');
-  const suggestions = document.querySelector('.search-suggestions');
-  if (searchInput) {
-    searchInput.addEventListener('input', function() {
-      const term = this.value.toLowerCase();
-      suggestions.innerHTML = '';
-      if (term.length === 0) {
-        suggestions.style.display = 'none';
-        return;
-      }
-      const matches = sampleProducts.filter(p => p.toLowerCase().includes(term));
-      matches.forEach(m => {
-        const li = document.createElement('li');
-        li.textContent = m;
-        li.addEventListener('click', () => {
-          searchInput.value = m;
-          suggestions.style.display = 'none';
-        });
-        suggestions.appendChild(li);
-      });
-      suggestions.style.display = matches.length ? 'block' : 'none';
-    });
-    document.addEventListener('click', e => {
-      if (!searchInput.contains(e.target)) {
-        suggestions.style.display = 'none';
-      }
-    });
-
-    const searchForm = document.querySelector('.search-form');
-    const searchButton = document.querySelector('button[form="search-form"]');
-    if (searchButton) {
-      searchButton.addEventListener('click', function(e) {
-        if (!searchForm.classList.contains('active')) {
-          e.preventDefault();
-          searchForm.classList.add('active');
-          searchInput.focus();
-        }
-      });
-    }
-  }
-});
-</script>
 </body>
 </html>

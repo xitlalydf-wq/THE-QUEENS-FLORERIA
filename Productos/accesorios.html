@@ -4,125 +4,233 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagos</title>
-    <link rel="stylesheet" href="/public/CSS/pago.css">
+    <title>Accesorios</title>
+    <link rel="stylesheet" href="/public/CSS/Ramos.css">
+
+    <!-- Tipografías -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-  <!-- NAV -->
-  <header class="topbar">
+<!-- NAV -->
+<header class="topbar">
     <div class="brand">THE QUEENS</div>
-    <button class="hamburger" aria-label="Abrir menú">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
 
     <nav class="menu">
-      <a href="/inicio.html">INICIO</a>
-      <a href="/productos/ramos.html">RAMOS</a>
-      <a href="/productos/decorativos.html">DECORATIVOS</a>
-      <a href="/productos/accesorios.html">ACCESORIOS</a>
-      <a href="/about.html">SOBRE NOSOTROS</a>
-      <a href="/contacto.html">CONTACTO</a>
+        <a href="/inicio.html">INICIO</a>
+        <a href="/productos/ramos.html">RAMOS</a>
+        <a href="/productos/decorativos.html">ARREGLOS</a>
+        <a href="/productos/accesorios.html">ACCESORIOS</a>
+        <a href="/sobre-nosotros.html">SOBRE NOSOTROS</a>
+        <a href="/contacto.html">CONTACTO</a>
     </nav>
 
     <div class="icons">
-      <form id="search-form" class="search-form" action="#" method="get">
-        <div style="position:relative;">
-          <input type="text" name="q" placeholder="Buscar..." autocomplete="off" />
-          <ul class="search-suggestions"></ul>
-        </div>
-      </form>
-  <button type="button" form="search-form"><img src="/images/buscar.png" alt="Buscar"></button>
+        <a href="#">
+            <img src="/images/buscar.png" alt="Buscar">
+        </a>
 
-  <a href="#">
-    <img src="/images/usuario.png" alt="Usuario">
-  </a>
+        <a href="#">
+            <img src="/images/usuario.png" alt="Usuario">
+        </a>
 
-  <a href="/Compras/carrito.html">
-    <img src="/images/carrito.png" alt="Carrito">
-  </a>
+        <a href="/Compras/carrito.html">
+            <img src="/images/carrito.png" alt="Carrito">
+        </a>
+    </div>
+</header>
+
+
+<!-- SECCIÓN ACCESORIOS -->
+<section class="ramos-section">
+<div class="ramos-container">
+
+<div class="ramos-header">
+<p class="ramos-subtitle">Detalles florales</p>
+<h2 class="ramos-title">Accesorios</h2>
+
+<div class="ramos-tabs">
+<a href="#" class="tab-link active" data-filter="vases">Jarrones</a>
+<a href="#" class="tab-link" data-filter="extras">Extras</a>
+<a href="#" class="tab-link" data-filter="regalos">Regalos</a>
+<a href="#" class="tab-link" data-filter="todos">Todos</a>
+</div>
 </div>
 
-  </header>
-    <div class="container">
-        <h1>Accesorios</h1>
-        <p>Discover our wide range of accessories that complement your style and enhance your daily life. From trendy jewelry to practical gadgets, we have something for everyone. 
-        Our collection includes stylish watches, fashionable bags, and innovative tech accessories that combine functionality with aesthetics.
-        Whether you're looking for the perfect finishing touch to your outfit or a unique gift for a loved one,
-        our accessories are designed to elevate your look and make a statement.
-        Explore our selection and find the perfect accessory to express your individuality.</p>
-    </div>
+
+<div class="ramos-grid">
+
+<!-- ACCESORIO 1 -->
+<div class="ramo-card" data-category="vases">
+<button class="btn-fav">♡</button>
+
+<div class="ramo-img-box">
+<img src="../images/accesorio1.png" alt="Jarrón Cristal">
+</div>
+
+<h3>Jarrón “Cristal”</h3>
+<p class="stock">• Disponible</p>
+<p class="precio">$350 MXN</p>
+
+<a href="../Compras/carrito.html" class="btn-ramo btn-carrito">
+Añadir al carrito
+</a>
+</div>
+
+
+<!-- ACCESORIO 2 -->
+<div class="ramo-card" data-category="extras">
+<button class="btn-fav">♡</button>
+
+<div class="ramo-img-box">
+<img src="../images/accesorio2.png" alt="Listón Premium">
+</div>
+
+<h3>Listón “Premium”</h3>
+<p class="stock">• Disponible</p>
+<p class="precio">$120 MXN</p>
+
+<a href="../Compras/carrito.html" class="btn-ramo btn-carrito">
+Añadir al carrito
+</a>
+</div>
+
+
+<!-- ACCESORIO 3 -->
+<div class="ramo-card" data-category="regalos">
+<button class="btn-fav">♡</button>
+
+<div class="ramo-img-box">
+<img src="../images/accesorio3.png" alt="Tarjeta Floral">
+</div>
+
+<h3>Tarjeta “Floral”</h3>
+<p class="stock">• Disponible</p>
+<p class="precio">$80 MXN</p>
+
+<a href="../Compras/carrito.html" class="btn-ramo btn-carrito">
+Añadir al carrito
+</a>
+</div>
+
+
+<!-- ACCESORIO 4 -->
+<div class="ramo-card" data-category="vases">
+<button class="btn-fav">♡</button>
+
+<div class="ramo-img-box">
+<img src="../images/accesorio4.png" alt="Jarrón Elegance">
+</div>
+
+<h3>Jarrón “Elegance”</h3>
+<p class="stock">• Disponible</p>
+<p class="precio">$420 MXN</p>
+
+<a href="../Compras/carrito.html" class="btn-ramo btn-carrito">
+Añadir al carrito
+</a>
+</div>
+
+
+<!-- ACCESORIO 5 -->
+<div class="ramo-card" data-category="extras">
+<button class="btn-fav">♡</button>
+
+<div class="ramo-img-box">
+<img src="../images/accesorio5.png" alt="Envoltura Deluxe">
+</div>
+
+<h3>Envoltura “Deluxe”</h3>
+<p class="stock">• Disponible</p>
+<p class="precio">$150 MXN</p>
+
+<a href="../Compras/carrito.html" class="btn-ramo btn-carrito">
+Añadir al carrito
+</a>
+</div>
+
+
+<!-- ACCESORIO 6 -->
+<div class="ramo-card" data-category="regalos">
+<button class="btn-fav">♡</button>
+
+<div class="ramo-img-box">
+<img src="../images/accesorio6.png" alt="Caja Regalo">
+</div>
+
+<h3>Caja “Regalo”</h3>
+<p class="stock">• Disponible</p>
+<p class="precio">$260 MXN</p>
+
+<a href="../Compras/carrito.html" class="btn-ramo btn-carrito">
+Añadir al carrito
+</a>
+</div>
+
+</div>
+</div>
+</section>
+
+
+<!-- FILTROS -->
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  const btn = document.querySelector('.hamburger');
-  const menu = document.querySelector('.menu');
-  if (btn && menu) {
-    btn.addEventListener('click', function() {
-      menu.classList.toggle('open');
-      btn.classList.toggle('active');
-    });
-  }
+document.addEventListener('DOMContentLoaded', function () {
 
-  const sampleProducts = ['Ramos', 'Decorativos', 'Accesorios', 'Flores de temporada'];
-  const searchInput = document.querySelector('.search-form input[name=q]');
-  const suggestions = document.querySelector('.search-suggestions');
-  if (searchInput) {
-    searchInput.addEventListener('input', function() {
-      const term = this.value.toLowerCase();
-      suggestions.innerHTML = '';
-      if (term.length === 0) {
-        suggestions.style.display = 'none';
-        return;
-      }
-      const matches = sampleProducts.filter(p => p.toLowerCase().includes(term));
-      matches.forEach(m => {
-        const li = document.createElement('li');
-        li.textContent = m;
-        li.addEventListener('click', () => {
-          searchInput.value = m;
-          suggestions.style.display = 'none';
-        });
-        suggestions.appendChild(li);
-      });
-      suggestions.style.display = matches.length ? 'block' : 'none';
-    });
-    document.addEventListener('click', e => {
-      if (!searchInput.contains(e.target)) {
-        suggestions.style.display = 'none';
-      }
-    });
+const tabLinks = document.querySelectorAll('.tab-link');
+const cards = document.querySelectorAll('.ramo-card');
 
-    const searchForm = document.querySelector('.search-form');
-    const searchButton = document.querySelector('button[form="search-form"]');
-    if (searchButton) {
-      searchForm.addEventListener('submit', e => e.preventDefault());
-      searchButton.addEventListener('click', function(e) {
-        e.preventDefault();
-        if (!searchForm.classList.contains('active')) {
-          searchForm.classList.add('active');
-          searchInput.focus();
-        } else {
-          const term = searchInput.value.trim().toLowerCase();
-          if (term) {
-            if (term.includes('ramos')) {
-              window.location.href = '/Productos/ramos.html';
-            } else if (term.includes('decorativos')) {
-              window.location.href = '/Productos/decorativos.html';
-            } else if (term.includes('accesorios')) {
-              window.location.href = '/Productos/accesorios.html';
-            } else {
-              window.location.href = '/search.html?q=' + encodeURIComponent(searchInput.value);
-            }
-          }
-        }
-      });
-    }
-  }
+tabLinks.forEach(link => {
+
+link.addEventListener('click', function (e) {
+
+e.preventDefault();
+
+const filter = this.getAttribute('data-filter');
+
+tabLinks.forEach(tab => tab.classList.remove('active'));
+this.classList.add('active');
+
+cards.forEach(card => {
+
+const category = card.getAttribute('data-category');
+
+if (filter === 'todos' || category === filter) {
+card.style.display = 'block';
+} else {
+card.style.display = 'none';
+}
+
+});
+
+});
+
+});
+
 });
 </script>
-</body>
 
-</html>
+
+<!-- FAVORITOS -->
+<script>
+document.querySelectorAll(".btn-fav").forEach(boton => {
+
+boton.addEventListener("click", function(){
+
+if(this.classList.contains("active")){
+this.classList.remove("active");
+this.innerHTML = "♡";
+}else{
+this.classList.add("active");
+this.innerHTML = "♥";
+}
+
+});
+
+});
+</script>
+
+</body>
+</html>s

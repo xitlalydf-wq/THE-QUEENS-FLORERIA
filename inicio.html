@@ -1,105 +1,88 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>The Queens Floreria</title>
-    <link rel="stylesheet" href="public/CSS/inicio.css">
-</head>
 
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Queens</title>
+<link rel="stylesheet" href="/public/CSS/inicio.css">
+
+<!-- Tipografías -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
 
 <body>
 
-  <!-- NAV -->
-  <header class="topbar">
-    <div class="brand">THE QUEENS</div>
-    <button class="hamburger" aria-label="Abrir menú">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+<!-- NAV -->
+<header class="topbar">
+
+<div class="brand">THE QUEENS</div>
 
     <nav class="menu">
       <a href="inicio.html">INICIO</a>
       <a href="Productos/ramos.html">RAMOS</a>
-      <a href="Productos/decorativos.html">DECORATIVOS</a>
+      <a href="Productos/decorativos.html">ARREGLOS</a>
       <a href="Productos/accesorios.html">ACCESORIOS</a>
-      <a href="/about.html">SOBRE NOSOTROS</a>
+      <a href="sobre-nosotros.html">SOBRE NOSOTROS</a>
       <a href="contacto.html">CONTACTO</a>
     </nav>
+
     <div class="icons">
-      <form id="search-form" class="search-form" action="#" method="get">
-        <div style="position:relative;">
-          <input type="text" name="q" placeholder="Buscar..." autocomplete="off" />
-          <ul class="search-suggestions"></ul>
-        </div>
-      </form>
-  <button type="button" form="search-form">
-    <img src="images/buscar.png" alt="Buscar">
-  </button>
-
   <a href="#">
-    <img src="images/usuario.png" alt="Usuario">
+    <img src="images/buscar.png" alt="Buscar">
   </a>
 
-  <a href="Compras/carrito.html">
-    <img src="images/carrito.png" alt="Carrito">
-  </a>
+<a href="#">
+<img src="/images/usuario.png" alt="Usuario">
+</a>
+
+<a href="/Compras/carrito.html">
+<img src="/images/carrito.png" alt="Carrito">
+</a>
 </div>
 
-  </header>
+</header>
 
-  <!-- HERO -->
+
+<!-- HERO -->
 <section class="hero">
 
-  <div class="hero-content">
-    <img src="images/flor.png" class="decoracion" alt="Flor">
+<div class="hero-overlay"></div>
 
-    <h1>Arte Floral</h1>
-  </div>
+<div class="hero-content">
+
+<img src="/images/ramo-hero.png" class="decoracion" alt="Ramo">
+
+<h1>
+Arte <br>
+Floral
+</h1>
+
+<p class="tagline">
+Elegancia natural para cada ocasión
+</p>
+
+</div>
 
 </section>
 
-  <!-- SECCIÓN ABAJO -->
-  <section class="info">
-    <div class="info-left">
-      <h3>arte<br/>floral</h3>
-    </div>
 
-    <div class="info-right">
-      <p>
-        TEXTO QUE DESCRIBE LA FLORERIA.
-      </p>
-    </div>
-  </section>
-<section class="categorias">
+<!-- INFO -->
+<section class="info">
 
-  <a href="Productos/ramos.html" class="card">
-    <img src="images/fresh.jpg" alt="">
-    <div class="overlay">
-      <h3>RAMOS</h3>
-    </div>
-  </a>
+<div class="info-left">
+<h3>THE QUEENS</h3>
+</div>
 
-  <a href="Productos/decorativos.html" class="card">
-    <img src="images/bouquet.jpg" alt="">
-    <div class="overlay">
-      <h3>DECORATIVOS</h3>
-    </div>
-  </a>
-
-  <a href="Productos/accesorios.html" class="card">
-    <img src="images/accesorios.png" alt="">
-    <div class="overlay">
-      <h3>ACCESORIOS</h3>
-    </div>
-  </a>
-
-  <a href="Productos/flores-temporada.html" class="card">
-    <img src="images/flores-temporada.jpg" alt="">
-    <div class="overlay">
-      <h3>FLORES DE TEMPORADA</h3>
-    </div>
-  </a>
+<div class="info-right">
+<p>
+En The Queens creamos arreglos florales elegantes y únicos para cada momento especial. 
+Nuestros ramos están diseñados con flores frescas y una estética delicada que transmite
+belleza, emoción y estilo.
+</p>
+</div>
 
 </section>
 <script>
@@ -112,68 +95,9 @@ document.addEventListener('DOMContentLoaded', function() {
       btn.classList.toggle('active');
     });
   }
-
-  // búsqueda en vivo
-  const sampleProducts = ['Ramos', 'Decorativos', 'Accesorios', 'Flores de temporada'];
-  const searchInput = document.querySelector('.search-form input[name=q]');
-  const suggestions = document.querySelector('.search-suggestions');
-  if (searchInput) {
-    searchInput.addEventListener('input', function() {
-      const term = this.value.toLowerCase();
-      suggestions.innerHTML = '';
-      if (term.length === 0) {
-        suggestions.style.display = 'none';
-        return;
-      }
-      const matches = sampleProducts.filter(p => p.toLowerCase().includes(term));
-      matches.forEach(m => {
-        const li = document.createElement('li');
-        li.textContent = m;
-        li.addEventListener('click', () => {
-          searchInput.value = m;
-          suggestions.style.display = 'none';
-          // opcional: enviar formulario automáticamente
-          // searchInput.closest('form').submit();
-        });
-        suggestions.appendChild(li);
-      });
-      suggestions.style.display = matches.length ? 'block' : 'none';
-    });
-    document.addEventListener('click', e => {
-      if (!searchInput.contains(e.target)) {
-        suggestions.style.display = 'none';
-      }
-    });
-
-    // toggle search bar when icon clicked
-    const searchForm = document.querySelector('.search-form');
-    const searchButton = document.querySelector('button[form="search-form"]');
-    if (searchButton) {
-      searchForm.addEventListener('submit', e => e.preventDefault());
-      searchButton.addEventListener('click', function(e) {
-        e.preventDefault();
-        if (!searchForm.classList.contains('active')) {
-          searchForm.classList.add('active');
-          searchInput.focus();
-        } else {
-          const term = searchInput.value.trim().toLowerCase();
-          if (term) {
-            if (term.includes('ramos')) {
-              window.location.href = '/Productos/ramos.html';
-            } else if (term.includes('decorativos')) {
-              window.location.href = '/Productos/decorativos.html';
-            } else if (term.includes('accesorios')) {
-              window.location.href = '/Productos/accesorios.html';
-            } else {
-              window.location.href = '/search.html?q=' + encodeURIComponent(searchInput.value);
-            }
-          }
-        }
-      });
-    }
-  }
 });
 </script>
 </body>
 </html>
-    
+               
+                     
