@@ -1,0 +1,189 @@
+.about{
+    background:#f6f1f0;
+    padding:80px 0;
+}
+
+.about-container{
+    width:90%;
+    max-width:1200px;
+    margin:0 auto;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:80px;
+}
+
+/* IMAGEN */
+.about-image{
+    flex:1;
+    display:flex;
+    justify-content:center;
+}
+
+.about-image img{
+    width:100%;
+    max-width:520px;
+    height:auto;
+}
+
+/* TEXTO */
+.about-text{
+    flex:1;
+}
+
+.about-text h1{
+    font-family:'Cormorant Garamond', serif;
+    font-size:52px;
+    margin-bottom:25px;
+    color:#4b3b3f;
+}
+
+.about-text p{
+    font-family:'Poppins', sans-serif;
+    font-size:16px;
+    line-height:1.8;
+    margin-bottom:18px;
+    color:#6b555a;
+}
+/* ===== NAVBAR THE QUEENS ===== */
+
+.topbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:20px 60px;
+    background:#f6f1f0;
+}
+
+.brand{
+    font-family:'Cormorant Garamond', serif;
+    letter-spacing:3px;
+    font-size:18px;
+    color:#b76e79;
+}
+
+.menu{
+    display:flex;
+    gap:40px;
+}
+
+.menu a{
+    text-decoration:none;
+    font-family:'Poppins', sans-serif;
+    font-size:14px;
+    letter-spacing:2px;
+    color:#4b3b3f;
+    transition:0.3s;
+}
+
+.menu a:hover{
+    color:#b76e79;
+}
+
+/* ICONOS */
+
+.icons{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.icons img{
+    width:20px;
+    height:20px;
+    object-fit:contain;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #f6f1f0;
+    font-family: 'Poppins', sans-serif;
+    color: #4b3b3f;
+}
+
+.icons img{
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+}
+
+.icons{
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.icons a{
+    display: flex;
+    align-items: center;
+}
+.about{
+    background:#f6f1f0;
+    padding:80px 0;
+}
+
+.about-container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:80px;
+}
+
+/* TEXTO */
+.about-text{
+    flex:1;
+}
+
+.about-text h1{
+    font-family:'Cormorant Garamond', serif;
+    font-size:64px;
+    color:#a8737a;
+    margin-bottom:25px;
+}
+
+.about-text p{
+    font-family:'Poppins', sans-serif;
+    font-size:17px;
+    line-height:1.8;
+    color:#6b555a;
+    margin-bottom:18px;
+}
+
+/* CONTENEDOR DE IMAGEN */
+.about-image{
+    flex:1;
+    display:flex;
+    justify-content:center;
+}
+
+/* MARCO */
+.about-image::before{
+    content:"";
+    position:absolute;
+    width:380px;
+    height:500px;
+    border:2px solid #e6c7cc;
+    border-radius:30px;
+    transform:translate(40px,40px);
+    z-index:0;
+}
+
+/* TARJETA */
+.about-image{
+    position:relative;
+}
+
+.about-image img{
+    width:360px;
+    background:#f9f5f4;
+    padding:30px;
+    border-radius:30px;
+    position:relative;
+    z-index:1;
+}
