@@ -39,4 +39,5 @@ document.addEventListener('DOMContentLoaded', () => {
       console.error(err);
       contenedor.innerHTML = '<p style="text-align:center; color:red; grid-column: 1 / -1;">Error al cargar los productos. Intenta recargar la página.</p>';
     });
+    //<!--Probando 123-->
 });

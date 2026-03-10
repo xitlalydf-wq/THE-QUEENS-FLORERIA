@@ -32,3 +32,5 @@ const poolPromise = new sql.ConnectionPool(dbConfig)
   });
 
 module.exports = { sql, poolPromise };
+
+//<!--Probando 123-->
