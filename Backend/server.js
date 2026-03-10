@@ -178,6 +178,53 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
+// Ruta de registro
+app.post('/api/signup', async (req, res) => {
+  const { nombre, correo, contrasena } = req.body;
+
+  if (!nombre || !correo || !contrasena) {
+    return res.status(400).json({ error: 'Nombre, correo y contraseña son requeridos' });
+  }
+
+  try {
+    const pool = await poolPromise;
+
+    // Verificar si el correo ya existe en Clientes
+    let result = await pool.request()
+      .input('correo', sql.NVarChar(255), correo)
+      .query('SELECT Id_cliente FROM Clientes WHERE Correo = @correo');
+
+    if (result.recordset.length > 0) {
+      return res.status(409).json({ error: 'El correo ya está registrado' });
+    }
+
+    // Verificar en Administradores (por si acaso)
+    result = await pool.request()
+      .input('correo', sql.NVarChar(255), correo)
+      .query('SELECT Id_admin FROM Administradores WHERE Correo = @correo');
+
+    if (result.recordset.length > 0) {
+      return res.status(409).json({ error: 'El correo ya está registrado' });
+    }
+
+    // Hashear la contraseña
+    const hashedPassword = await bcrypt.hash(contrasena, 10);
+
+    // Insertar nuevo cliente
+    await pool.request()
+      .input('nombre', sql.NVarChar(255), nombre)
+      .input('correo', sql.NVarChar(255), correo)
+      .input('contrasena', sql.NVarChar(256), hashedPassword)
+      .query('INSERT INTO Clientes (Nombre, Correo, Contraseña) VALUES (@nombre, @correo, @contrasena)');
+
+    console.log(`Usuario registrado: ${correo}`);
+    res.json({ success: true, message: 'Cuenta creada exitosamente' });
+  } catch (err) {
+    console.error('Error en /api/signup:', err.message);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+});
+
 // Iniciar servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

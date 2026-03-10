@@ -89,7 +89,12 @@
   errorDiv.textContent = '';
 
   try {
-    const response = await fetch('http://localhost:3000/api/login', {   // ← URL completa al backend
+    // use absolute backend address; if the page is opened via Live Server (port 5500)
+    // the origin will be different, so force localhost:3000.
+    const backendBase = window.location.origin.includes('5500')
+        ? 'http://localhost:3000'
+        : '';
+    const response = await fetch(backendBase + '/api/login', {   // ← URL completa al backend
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ correo, contrasena })
@@ -109,7 +114,7 @@
     if (data.role === 'admin') {
       window.location.href = 'admin/admin-dashboard.html';
     } else {
-      window.location.href = 'inicio.html';  // ajusta según tu página principal
+      window.location.href = 'Productos/ramos.html';  // ajusta según tu página principal
     }
   } catch (err) {
     errorDiv.textContent = err.message || 'Error al conectar con el servidor';
