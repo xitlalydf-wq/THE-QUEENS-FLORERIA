@@ -5,153 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Login</title>
 
-<style>
-body{
-    margin:0;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-family:Arial, Helvetica, sans-serif;
-    overflow:hidden;
-    background: linear-gradient(120deg,#ff9a9e,#fad0c4);
-    position: relative;
-    transition: opacity 0.5s;
-}
+<link rel="stylesheet" href="public/CSS/login.css">
 
-.fade-out{
-    opacity: 0;
-}
-
-/* 🌷 Capa de tulipanes */
-#tulips-layer{
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-}
-
-/* 🌷 Tulipán (flor + tallo) */
-.tulip{
-    position:absolute;
-    top:-15vh;
-    width: 26px;
-    height: 46px;
-    opacity: var(--op, .9);
-    will-change: transform;
-    animation: tulipFall var(--dur, 10s) linear var(--del, 0s) infinite;
-    filter: drop-shadow(0 10px 12px rgba(0,0,0,.10));
-    transform: rotate(var(--rot, 0deg)) scale(var(--sc, 1));
-}
-
-/* Cabeza del tulipán */
-.tulip::before{
-    content:"";
-    position:absolute;
-    left:50%;
-    top:0;
-    width:18px;
-    height:18px;
-    transform: translateX(-50%);
-    border-radius: 12px 12px 14px 14px;
-    background: linear-gradient(145deg, var(--c1, #ff4d8d), var(--c2, #ffb3d9));
-    box-shadow: inset 0 -3px 6px rgba(255,255,255,.35);
-}
-
-/* Pétalos laterales + tallo + hojas */
-.tulip::after{
-    content:"";
-    position:absolute;
-    inset:0;
-
-    /* 1) pétalo izq  2) pétalo der  3) tallo  4) hoja izq  5) hoja der */
-    background:
-      radial-gradient(14px 16px at 38% 22%, rgba(255,255,255,.22) 0 35%, transparent 36%),
-      radial-gradient(14px 16px at 62% 22%, rgba(255,255,255,.14) 0 35%, transparent 36%),
-      radial-gradient(2px 18px at 50% 76%, var(--stem, #3aa35c) 0 98%, transparent 99%),
-      radial-gradient(10px 8px at 42% 80%, rgba(58,163,92,.75) 0 55%, transparent 56%),
-      radial-gradient(10px 8px at 58% 80%, rgba(58,163,92,.55) 0 55%, transparent 56%);
-
-    /* “pétalos” con tinte igual al de la flor */
-    mix-blend-mode: normal;
-}
-
-/* Caída + viento */
-@keyframes tulipFall{
-    0%{
-        transform: translate3d(0,0,0) rotate(var(--rot,0deg)) scale(var(--sc,1));
-    }
-    50%{
-        transform: translate3d(var(--drift, 0px), 55vh, 0) rotate(calc(var(--rot,0deg) + 120deg)) scale(var(--sc,1));
-    }
-    100%{
-        transform: translate3d(calc(var(--drift, 0px) * -1), 115vh, 0) rotate(calc(var(--rot,0deg) + 260deg)) scale(var(--sc,1));
-        opacity: 0;
-    }
-}
-
-/* Login Glass (tu card) */
-.login{
-    width:320px;
-    padding:40px;
-    border-radius:20px;
-    backdrop-filter: blur(15px);
-    background: rgba(255,255,255,0.15);
-    box-shadow:0 8px 32px rgba(0,0,0,0.3);
-    text-align:center;
-    color:white;
-    z-index:10; /* 👈 arriba de los tulipanes */
-    animation: aparecer 1s ease;
-    position: relative;
-}
-
-@keyframes aparecer{
-    from{ opacity:0; transform:translateY(40px); }
-    to{ opacity:1; transform:translateY(0); }
-}
-
-.login h2{ margin-bottom:20px; }
-
-.inputBox{ margin:15px 0; }
-
-.inputBox input{
-    width:100%;
-    padding:12px;
-    border:none;
-    border-radius:10px;
-    outline:none;
-}
-
-/* Botón */
-#btn{
-    background:#72be5f;
-    color:white;
-    cursor:pointer;
-    transition:.3s;
-}
-
-#btn:hover{
-    transform:scale(1.05);
-    background:#65a755;
-}
-
-.group{
-    margin-top:15px;
-    display:flex;
-    justify-content:space-between;
-}
-
-.group a{
-    color:white;
-    text-decoration:none;
-    font-size:14px;
-}
-</style>
 </head>
 
 <body>
 
-<!-- 🌷 Tulipanes -->
 <div id="tulips-layer" aria-hidden="true"></div>
 
 <script>
@@ -161,11 +20,11 @@ body{
   const TULIP_COUNT = 22;
 
   const colors = [
-    { c1: "#ff4d8d", c2: "#ffb3d9" }, // rosa
-    { c1: "#ff5a3c", c2: "#ffd1c7" }, // coral
-    { c1: "#b04cff", c2: "#e2c6ff" }, // morado
-    { c1: "#ff2f6f", c2: "#ff9fc2" }, // fucsia
-    { c1: "#ffb400", c2: "#ffe3a6" }  // amarillo
+    { c1: "#ff4d8d", c2: "#ffb3d9" },
+    { c1: "#ff5a3c", c2: "#ffd1c7" },
+    { c1: "#b04cff", c2: "#e2c6ff" },
+    { c1: "#ff2f6f", c2: "#ff9fc2" },
+    { c1: "#ffb400", c2: "#ffe3a6" }
   ];
 
   const rand = (min, max) => Math.random() * (max - min) + min;
@@ -194,35 +53,27 @@ body{
 })();
 </script>
 
-<!-- Login -->
-<div class="login">
-    <h2>Iniciar Sesion</h2>
+<div class="card">
 
-    <div class="inputBox">
-        <input type="text" placeholder="Correo">
-    </div>
+<h2>Iniciar Sesión</h2>
 
-    <div class="inputBox">
-        <input type="password" placeholder="Contraseña">
-    </div>
-
-    <div class="inputBox">
-        <input type="submit" value="Iniciar" id="btn">
-    </div>
-
-    <div class="group">
-        <a href="#">Olvidaste contraseña?</a>
-        <a href="signup.html">Crear Cuenta</a>
-    </div>
+<div class="inputBox">
+<input type="email" placeholder="Correo">
 </div>
-<script>
 
-document.getElementById("btn").onclick = function(){
-     document.body.classList.add("fade-out");
+<div class="inputBox">
+<input type="password" placeholder="Contraseña">
+</div>
 
-    setTimeout(()=>{
-    window.location.href = "inicio.html";}, 500);
-}
-</script>
+<div class="inputBox">
+<button class="btn btn-primary">Iniciar sesión</button>
+</div>
+
+<div class="small">
+¿No tienes cuenta? <a href="signup.html">Crear cuenta</a>
+</div>
+
+</div>
+
 </body>
 </html>
