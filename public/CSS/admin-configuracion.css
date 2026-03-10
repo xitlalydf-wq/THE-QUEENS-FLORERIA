@@ -1,0 +1,178 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins', sans-serif;
+    background:#f6f1f0;
+    color:#4b3b3f;
+}
+
+.admin-layout{
+    display:flex;
+    min-height:100vh;
+}
+
+/* SIDEBAR */
+.admin-sidebar{
+    width:260px;
+    background:#fffdfc;
+    border-right:1px solid #eadfe1;
+    padding:30px 22px;
+}
+
+.admin-brand h2{
+    font-family:'Cormorant Garamond', serif;
+    font-size:32px;
+    color:#b76e79;
+    margin-bottom:5px;
+}
+
+.admin-brand p{
+    font-size:14px;
+    color:#8d6c73;
+    margin-bottom:35px;
+}
+
+.admin-menu{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.admin-menu a{
+    text-decoration:none;
+    padding:14px 16px;
+    border-radius:14px;
+    color:#4b3b3f;
+    font-size:15px;
+    transition:0.3s;
+}
+
+.admin-menu a:hover,
+.admin-menu a.active{
+    background:#eadfe1;
+    color:#b76e79;
+}
+
+/* MAIN */
+.admin-main{
+    flex:1;
+    padding:35px;
+}
+
+/* TOPBAR */
+.admin-topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.admin-subtitle{
+    font-size:13px;
+    letter-spacing:3px;
+    color:#c08f98;
+    margin-bottom:6px;
+}
+
+.admin-topbar h1{
+    font-family:'Cormorant Garamond', serif;
+    font-size:48px;
+}
+
+/* SECCIÓN */
+.admin-section{
+    background:#fffdfc;
+    padding:30px;
+    border-radius:22px;
+    box-shadow:0 10px 24px rgba(191,154,162,0.10);
+    max-width:800px;
+}
+
+.admin-section h2{
+    font-family:'Cormorant Garamond', serif;
+    font-size:34px;
+    margin-bottom:24px;
+}
+
+/* FORM */
+.config-form{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.config-form label{
+    font-size:14px;
+    color:#6b555a;
+    font-weight:500;
+    margin-bottom:4px;
+}
+
+.config-form input{
+    width:100%;
+    padding:14px 16px;
+    border:1px solid #e6d6d9;
+    border-radius:14px;
+    background:#fff;
+    font-size:14px;
+    color:#4b3b3f;
+    outline:none;
+    transition:0.3s;
+}
+
+.config-form input:focus{
+    border-color:#c8959d;
+}
+
+/* BOTÓN */
+.btn-primary{
+    margin-top:10px;
+    border:none;
+    background:#b76e79;
+    color:white;
+    padding:12px 20px;
+    border-radius:999px;
+    cursor:pointer;
+    font-size:14px;
+    transition:0.3s;
+    width:fit-content;
+}
+
+.btn-primary:hover{
+    background:#9e5b66;
+}
+
+/* RESPONSIVE */
+@media(max-width:1000px){
+    .admin-layout{
+        flex-direction:column;
+    }
+
+    .admin-sidebar{
+        width:100%;
+        border-right:none;
+        border-bottom:1px solid #eadfe1;
+    }
+}
+
+@media(max-width:800px){
+    .admin-main{
+        padding:22px;
+    }
+
+    .admin-topbar h1{
+        font-size:40px;
+    }
+
+    .admin-section h2{
+        font-size:28px;
+    }
+
+    .btn-primary{
+        width:100%;
+    }
+}
