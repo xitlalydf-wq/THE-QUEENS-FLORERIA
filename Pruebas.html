@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pruebas - Productos desde BD</title>
+</head>
+<body>
+    <h1>Lista de Productos</h1>
+    <ul id="productos"></ul>
+
+    <script>
+        async function cargarProductos() {
+            try {
+                // use absolute backend address; if the page is opened via Live Server (port 5500)
+                // the origin will be different, so force localhost:3000.
+                const backendBase = window.location.origin.includes('5500')
+                    ? 'http://localhost:3000'
+                    : '';
+                const resp = await fetch(backendBase + '/api/productos');
+                const productos = await resp.json();
+                const lista = document.getElementById('productos');
+                productos.forEach(p => {
+                    const item = document.createElement('li');
+                    item.textContent = `[${p.tipo}] ${p.Nombre} - $${p.Precio}`;
+                    lista.appendChild(item);
+                });
+            } catch (err) {
+                console.error('Error al cargar productos:', err);
+            }
+        }
+        cargarProductos();
+    </script>
+</body>
+</html>

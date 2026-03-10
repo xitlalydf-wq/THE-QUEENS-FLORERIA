@@ -16,6 +16,13 @@ app.use(cors({
 app.use(express.json());
 
 app.use(express.static(path.join(__dirname, '..', 'public')));
+app.use(express.static(path.join(__dirname, '..')));
+
+// Servir carpetas específicas para navegación
+app.use('/admin', express.static(path.join(__dirname, '..', 'admin')));
+app.use('/Productos', express.static(path.join(__dirname, '..', 'Productos')));
+app.use('/Compras', express.static(path.join(__dirname, '..', 'Compras')));
+app.use('/images', express.static(path.join(__dirname, '..', 'images')));
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'Index.html'));
@@ -68,6 +75,47 @@ app.get('/api/productos', async (req, res) => {
   } catch (err) {
     console.error('Error al obtener productos:', err);
     res.status(500).json({ error: 'Error al obtener productos' });
+  }
+});
+
+// Ruta para obtener clientes
+app.get('/api/clientes', async (req, res) => {
+  try {
+    const pool = await poolPromise;
+    const result = await pool.request().query('SELECT Id_cliente, Nombre, Correo FROM Clientes');
+    res.json(result.recordset);
+  } catch (err) {
+    console.error('Error al obtener clientes:', err);
+    res.status(500).json({ error: 'Error al obtener clientes' });
+  }
+});
+
+// Ruta para obtener pedidos
+app.get('/api/pedidos', async (req, res) => {
+  try {
+    const pool = await poolPromise;
+    const result = await pool.request().query(`
+      SELECT p.Id_pedido, p.Id_cliente, c.Nombre AS Cliente, p.Fecha, p.Estado, p.Total, p.Notas
+      FROM Pedidos p
+      JOIN Clientes c ON p.Id_cliente = c.Id_cliente
+      ORDER BY p.Fecha DESC
+    `);
+    res.json(result.recordset);
+  } catch (err) {
+    console.error('Error al obtener pedidos:', err);
+    res.status(500).json({ error: 'Error al obtener pedidos' });
+  }
+});
+
+// Ruta para obtener administradores
+app.get('/api/administradores', async (req, res) => {
+  try {
+    const pool = await poolPromise;
+    const result = await pool.request().query('SELECT Id_admin, Nombre, Correo FROM Administradores');
+    res.json(result.recordset);
+  } catch (err) {
+    console.error('Error al obtener administradores:', err);
+    res.status(500).json({ error: 'Error al obtener administradores' });
   }
 });
 
