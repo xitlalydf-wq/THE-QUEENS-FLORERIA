@@ -1,145 +1,100 @@
+<!doctype html>
+<html lang="es">
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Queens</title>
+    <meta charset="UTF-8">
+    <title>The Queens Floreria</title>
 
-<link rel="stylesheet" href="/public/CSS/inicio.css">
-
-<!-- Tipografías -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="inicio.css">
 
 </head>
 
+
 <body>
 
-<!-- NAV -->
-<header class="topbar">
+  <!-- NAV -->
+  <header class="topbar">
+    <div class="brand">THE QUEENS</div>
 
-<div class="brand">THE QUEENS</div>
+    <nav class="menu">
+      <a href="#">INICIO</a>
+      <a href="#">RAMOS</a>
+      <a href="#">DECORATIVOS</a>
+      <a href="#">ACCESORIOS</a>
+      <a href="#">SOBRE NOSOTROS</a>
+      <a href="#">CONTACTO</a>
+    </nav>
 
-<nav class="menu">
+    <div class="icons">
+  <a href="#">
+    <img src="imagenes/buscar.png" alt="Buscar">
+  </a>
 
-<a href="/inicio.html" id="btnInicio">INICIO</a>
+  <a href="#">
+    <img src="imagenes/usuario.png" alt="Usuario">
+  </a>
 
-<a href="/productos/ramos.html">RAMOS</a>
-
-<a href="/productos/decorativos.html">ARREGLOS</a>
-
-<a href="/productos/accesorios.html">ACCESORIOS</a>
-
-<a href="/sobre-nosotros.html">SOBRE NOSOTROS</a>
-
-<a href="/contacto.html">CONTACTO</a>
-
-</nav>
-
-<div class="icons">
-        <a href="#">
-            <img src="/images/buscar.png" alt="Buscar">
-        </a>
-<a href="#">
-<img src="/images/usuario.png" alt="Usuario">
-</a>
-
-<a href="/Compras/carrito.html">
-<img src="/images/carrito.png" alt="Carrito">
-</a>
-
+  <a href="#">
+    <img src="imagenes/carrito.png" alt="Carrito">
+  </a>
 </div>
+  </header>
 
-</header>
+  <!-- HERO -->
+<section class="hero">
 
+  <div class="hero-content">
+    <img src="imagenes/flor.png" class="decoracion" alt="Flor">
 
-<!-- HERO INICIO -->
-
-<section class="hero-inicio">
-
-<div class="hero-contenido">
-
-<p class="hero-subtitle">
-COLECCIÓN FLORAL
-</p>
-
-<h1 class="hero-title">
-THE QUEENS FLORERÍA
-</h1>
-
-<h2 class="hero-title-sec">
-Arte Floral
-</h2>
-
-
-<div class="hero-imagen" id="heroImagen">
-
-<!--  -->
-
-<img src="/images/flor.png  " alt="The Queens Florería">
-
-</div>
-
-</div>
+    <h1>Arte Floral</h1>
+  </div>
 
 </section>
 
-<section class="inicio-categorias">
-
-    <div class="categorias-grid">
-
-        <a href="/productos/ramos.html" class="categoria-card">
-            <img src="images/cat-ramos.jpg" alt="Ramos">
-            <span>RAMOS</span>
-        </a>
-
-        <a href="/productos/decorativos.html" class="categoria-card">
-            <img src="images/cat-arreglos.jpg" alt="Arreglos">
-            <span>ARREGLOS</span>
-        </a>
-
-        <a href="/productos/accesorios.html" class="categoria-card">
-            <img src="images/cat-accesorios.jpg" alt="Accesorios">
-            <span>ACCESORIOS</span>
-        </a>
-
-        <a href="#" class="categoria-card">
-            <img src="images/cat-extra.jpg" alt="">
-            <span></span>
-        </a>
-
+  <!-- SECCIÓN ABAJO -->
+  <section class="info">
+    <div class="info-left">
+      <h3>arte<br/>floral</h3>
     </div>
 
+    <div class="info-right">
+      <p>
+        TEXTO QUE DESCRIBE LA FLORERIA.
+      </p>
+    </div>
+  </section>
+<section class="categorias">
+
+  <a href="#" class="card">
+    <img src="imagenes/fresh.jpg" alt="">
+    <div class="overlay">
+      <h3>RAMOS</h3>
+    </div>
+  </a>
+
+  <a href="#" class="card">
+    <img src="imagenes/bouquet.jpg" alt="">
+    <div class="overlay">
+      <h3>DECORATIVOS</h3>
+    </div>
+  </a>
+
+  <a href="#" class="card">
+    <img src="imagenes/accesorios.png" alt="">
+    <div class="overlay">
+      <h3>ACCESORIOS</h3>
+    </div>
+  </a>
+
+  <a href="#" class="card">
+    <img src="imagenes/accessories.jpg" alt="">
+    <div class="overlay">
+      <h3>FLORES DE TEMPORADA</h3>
+    </div>
+  </a>
+
 </section>
-<script>
-
-document.addEventListener("DOMContentLoaded", function () {
-
-const btnInicio = document.getElementById("btnInicio");
-
-const heroImagen = document.getElementById("heroImagen");
-
-if (btnInicio && heroImagen) {
-
-btnInicio.addEventListener("click", function () {
-
-heroImagen.classList.remove("animar-hero");
-
-void heroImagen.offsetWidth;
-
-heroImagen.classList.add("animar-hero");
-
-});
-
-}
-
-});
-
-</script>
-
-
 </body>
-
 </html>
+    
