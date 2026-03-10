@@ -171,7 +171,7 @@ body {
     border:2px solid #e6c7cc;
     border-radius:30px;
     transform:translate(40px,40px);
-    z-index:0;
+    z-Index:0;
 }
 
 /* TARJETA */
@@ -185,5 +185,5 @@ body {
     padding:30px;
     border-radius:30px;
     position:relative;
-    z-index:1;
+    z-Index:1;
 }
