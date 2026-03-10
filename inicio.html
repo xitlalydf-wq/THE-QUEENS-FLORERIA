@@ -1,100 +1,79 @@
-<!doctype html>
-<html lang="es">
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>The Queens Floreria</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
 
-    <link rel="stylesheet" href="inicio.css">
+<link rel="stylesheet" href="public/CSS/login.css">
 
 </head>
 
-
 <body>
 
-  <!-- NAV -->
-  <header class="topbar">
-    <div class="brand">THE QUEENS</div>
+<div id="tulips-layer" aria-hidden="true"></div>
 
-    <nav class="menu">
-      <a href="#">INICIO</a>
-      <a href="#">RAMOS</a>
-      <a href="#">DECORATIVOS</a>
-      <a href="#">ACCESORIOS</a>
-      <a href="#">SOBRE NOSOTROS</a>
-      <a href="#">CONTACTO</a>
-    </nav>
+<script>
+(() => {
+  const layer = document.getElementById("tulips-layer");
 
-    <div class="icons">
-  <a href="#">
-    <img src="imagenes/buscar.png" alt="Buscar">
-  </a>
+  const TULIP_COUNT = 22;
 
-  <a href="#">
-    <img src="imagenes/usuario.png" alt="Usuario">
-  </a>
+  const colors = [
+    { c1: "#ff4d8d", c2: "#ffb3d9" },
+    { c1: "#ff5a3c", c2: "#ffd1c7" },
+    { c1: "#b04cff", c2: "#e2c6ff" },
+    { c1: "#ff2f6f", c2: "#ff9fc2" },
+    { c1: "#ffb400", c2: "#ffe3a6" }
+  ];
 
-  <a href="#">
-    <img src="imagenes/carrito.png" alt="Carrito">
-  </a>
+  const rand = (min, max) => Math.random() * (max - min) + min;
+
+  function createTulip(){
+    const t = document.createElement("span");
+    t.className = "tulip";
+
+    t.style.left = `${rand(0, 100)}vw`;
+    t.style.setProperty("--dur", `${rand(7, 15)}s`);
+    t.style.setProperty("--del", `${rand(0, 6)}s`);
+    t.style.setProperty("--drift", `${rand(-80, 80)}px`);
+    t.style.setProperty("--rot", `${rand(-30, 30)}deg`);
+    t.style.setProperty("--sc", `${rand(0.7, 1.3)}`);
+    t.style.setProperty("--op", `${rand(0.45, 0.95)}`);
+
+    const pick = colors[Math.floor(Math.random() * colors.length)];
+    t.style.setProperty("--c1", pick.c1);
+    t.style.setProperty("--c2", pick.c2);
+    t.style.setProperty("--stem", Math.random() > 0.5 ? "#2f9e57" : "#3aa35c");
+
+    layer.appendChild(t);
+  }
+
+  for(let i=0; i<TULIP_COUNT; i++) createTulip();
+})();
+</script>
+
+<div class="card">
+
+<h2>Iniciar Sesión</h2>
+
+<div class="inputBox">
+<input type="email" placeholder="Correo">
 </div>
-  </header>
 
-  <!-- HERO -->
-<section class="hero">
+<div class="inputBox">
+<input type="password" placeholder="Contraseña">
+</div>
 
-  <div class="hero-content">
-    <img src="imagenes/flor.png" class="decoracion" alt="Flor">
+<div class="inputBox">
+<button class="btn btn-primary">Iniciar sesión</button>
+</div>
 
-    <h1>Arte Floral</h1>
-  </div>
+<div class="small">
+¿No tienes cuenta? <a href="signup.html">Crear cuenta</a>
+</div>
 
-</section>
+</div>
 
-  <!-- SECCIÓN ABAJO -->
-  <section class="info">
-    <div class="info-left">
-      <h3>arte<br/>floral</h3>
-    </div>
-
-    <div class="info-right">
-      <p>
-        TEXTO QUE DESCRIBE LA FLORERIA.
-      </p>
-    </div>
-  </section>
-<section class="categorias">
-
-  <a href="#" class="card">
-    <img src="imagenes/fresh.jpg" alt="">
-    <div class="overlay">
-      <h3>RAMOS</h3>
-    </div>
-  </a>
-
-  <a href="#" class="card">
-    <img src="imagenes/bouquet.jpg" alt="">
-    <div class="overlay">
-      <h3>DECORATIVOS</h3>
-    </div>
-  </a>
-
-  <a href="#" class="card">
-    <img src="imagenes/accesorios.png" alt="">
-    <div class="overlay">
-      <h3>ACCESORIOS</h3>
-    </div>
-  </a>
-
-  <a href="#" class="card">
-    <img src="imagenes/accessories.jpg" alt="">
-    <div class="overlay">
-      <h3>FLORES DE TEMPORADA</h3>
-    </div>
-  </a>
-
-</section>
 </body>
 </html>
-    
