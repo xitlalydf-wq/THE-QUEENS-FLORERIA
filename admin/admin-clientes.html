@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes | Panel Admin The Queens</title>
+    <link rel="stylesheet" href="/public/CSS/admin-clientes.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="admin-layout">
+
+        <aside class="admin-sidebar">
+            <div class="admin-brand">
+                <h2>THE QUEENS</h2>
+                <p>Panel Administrador</p>
+            </div>
+
+           <nav class="admin-menu">
+    <a href="/admin/admin-dashboard.html">Dashboard</a>
+    <a href="/admin/admin-productos.html">Productos</a>
+    <a href="/admin/admin-pedidos.html">Pedidos</a>
+    <a href="/admin/admin-clientes.html" class="active">Clientes</a>
+    <a href="#">Categorías</a>
+    <a href="/admin/admin-inventario.html">Inventario</a>
+    <a href="#">Mensajes</a>
+    <a href="#">Configuración</a>
+    <a href="/inicio.html">Volver a la tienda</a>
+</nav>
+        </aside>
+
+        <main class="admin-main">
+
+            <header class="admin-topbar">
+                <div>
+                    <p class="admin-subtitle">Administración</p>
+                    <h1>Clientes</h1>
+                </div>
+
+                <button class="btn-primary">+ Agregar cliente</button>
+            </header>
+
+            <section class="admin-toolbar">
+                <div class="search-box">
+                    <input type="text" placeholder="Buscar cliente...">
+                </div>
+
+                <div class="filter-box">
+                    <select>
+                        <option>Todos los clientes</option>
+                        <option>Frecuentes</option>
+                        <option>Nuevos</option>
+                        <option>Con pedidos recientes</option>
+                    </select>
+                </div>
+            </section>
+
+            <section class="admin-section">
+                <div class="section-header">
+                    <h2>Lista de clientes</h2>
+                    <button>Exportar</button>
+                </div>
+
+                <div class="table-box">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Correo</th>
+                                <th>Teléfono</th>
+                                <th>Pedidos</th>
+                                <th>Total comprado</th>
+                                <th>Última compra</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="client-info">
+                                        <div class="client-avatar">M</div>
+                                        <span>María López</span>
+                                    </div>
+                                </td>
+                                <td>maria@email.com</td>
+                                <td>899 123 4567</td>
+                                <td>8</td>
+                                <td>$4,850 MXN</td>
+                                <td>12/03/2026</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-view">Ver</button>
+                                        <button class="btn-edit">Editar</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div class="client-info">
+                                        <div class="client-avatar">A</div>
+                                        <span>Ana Torres</span>
+                                    </div>
+                                </td>
+                                <td>ana@email.com</td>
+                                <td>899 555 8888</td>
+                                <td>3</td>
+                                <td>$2,120 MXN</td>
+                                <td>10/03/2026</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-view">Ver</button>
+                                        <button class="btn-edit">Editar</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div class="client-info">
+                                        <div class="client-avatar">D</div>
+                                        <span>Daniel Pérez</span>
+                                    </div>
+                                </td>
+                                <td>daniel@email.com</td>
+                                <td>899 777 1122</td>
+                                <td>1</td>
+                                <td>$350 MXN</td>
+                                <td>08/03/2026</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-view">Ver</button>
+                                        <button class="btn-edit">Editar</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="admin-cards">
+                <div class="admin-card">
+                    <h3>Clientes registrados</h3>
+                    <p>48</p>
+                </div>
+
+                <div class="admin-card">
+                    <h3>Clientes frecuentes</h3>
+                    <p>12</p>
+                </div>
+
+                <div class="admin-card">
+                    <h3>Nuevos este mes</h3>
+                    <p>9</p>
+                </div>
+
+                <div class="admin-card">
+                    <h3>Promedio por cliente</h3>
+                    <p>$1,280</p>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+</body>
+</html>

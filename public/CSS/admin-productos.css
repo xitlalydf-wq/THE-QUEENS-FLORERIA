@@ -1,0 +1,294 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins', sans-serif;
+    background:#f6f1f0;
+    color:#4b3b3f;
+}
+
+.admin-layout{
+    display:flex;
+    min-height:100vh;
+}
+
+/* SIDEBAR */
+
+.admin-sidebar{
+    width:260px;
+    background:#fffdfc;
+    border-right:1px solid #eadfe1;
+    padding:30px 22px;
+}
+
+.admin-brand h2{
+    font-family:'Cormorant Garamond', serif;
+    font-size:32px;
+    color:#b76e79;
+    margin-bottom:5px;
+}
+
+.admin-brand p{
+    font-size:14px;
+    color:#8d6c73;
+    margin-bottom:35px;
+}
+
+.admin-menu{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.admin-menu a{
+    text-decoration:none;
+    padding:14px 16px;
+    border-radius:14px;
+    color:#4b3b3f;
+    font-size:15px;
+    transition:0.3s;
+}
+
+.admin-menu a:hover,
+.admin-menu a.active{
+    background:#eadfe1;
+    color:#b76e79;
+}
+
+/* MAIN */
+
+.admin-main{
+    flex:1;
+    padding:35px;
+}
+
+/* TOPBAR */
+
+.admin-topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.admin-subtitle{
+    font-size:13px;
+    letter-spacing:3px;
+    color:#c08f98;
+    margin-bottom:6px;
+}
+
+.admin-topbar h1{
+    font-family:'Cormorant Garamond', serif;
+    font-size:48px;
+}
+
+/* BOTONES */
+
+.btn-primary{
+    border:none;
+    background:#b76e79;
+    color:white;
+    padding:12px 20px;
+    border-radius:999px;
+    cursor:pointer;
+    font-size:14px;
+    transition:0.3s;
+}
+
+.btn-primary:hover{
+    background:#9e5b66;
+}
+
+/* TOOLBAR */
+
+.admin-toolbar{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:25px;
+}
+
+.search-box input{
+    padding:12px 14px;
+    border-radius:12px;
+    border:1px solid #e6d6d9;
+    width:250px;
+}
+
+.filter-box select{
+    padding:12px;
+    border-radius:12px;
+    border:1px solid #e6d6d9;
+}
+
+/* SECCIONES */
+
+.admin-section{
+    background:#fffdfc;
+    padding:25px;
+    border-radius:22px;
+    box-shadow:0 10px 24px rgba(191,154,162,0.1);
+    margin-bottom:30px;
+}
+
+.section-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.section-header h2{
+    font-family:'Cormorant Garamond', serif;
+    font-size:32px;
+}
+
+/* TABLA */
+
+.table-box{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+thead{
+    background:#f9f3f4;
+}
+
+thead th{
+    padding:14px;
+    text-align:left;
+    font-size:14px;
+    color:#8d6c73;
+}
+
+tbody td{
+    padding:16px;
+    border-bottom:1px solid #f0e5e7;
+}
+
+/* IMAGEN PRODUCTO */
+
+.product-thumb{
+    width:60px;
+    height:60px;
+    border-radius:12px;
+    overflow:hidden;
+}
+
+.product-thumb img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* ESTADOS */
+
+.status{
+    padding:6px 12px;
+    border-radius:999px;
+    font-size:12px;
+}
+
+.status.active{
+    background:#d9f0df;
+    color:#3f7d4d;
+}
+
+.status.low{
+    background:#fff3cd;
+    color:#856404;
+}
+
+.status.inactive{
+    background:#f8d7da;
+    color:#721c24;
+}
+
+/* BOTONES ACCIONES */
+
+.action-buttons{
+    display:flex;
+    gap:10px;
+}
+
+.btn-edit{
+    border:none;
+    padding:8px 14px;
+    border-radius:999px;
+    background:#d8e7f8;
+    cursor:pointer;
+}
+
+.btn-delete{
+    border:none;
+    padding:8px 14px;
+    border-radius:999px;
+    background:#f8d7da;
+    cursor:pointer;
+}
+
+/* FORMULARIO PRODUCTOS */
+
+.product-form{
+    margin-top:20px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+    margin-bottom:20px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+}
+
+.form-group label{
+    margin-bottom:6px;
+    font-size:14px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+    padding:12px;
+    border-radius:12px;
+    border:1px solid #e6d6d9;
+}
+
+.full-width{
+    grid-column:span 2;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:1000px){
+
+.admin-layout{
+flex-direction:column;
+}
+
+.admin-sidebar{
+width:100%;
+border-right:none;
+border-bottom:1px solid #eadfe1;
+}
+
+.form-grid{
+grid-template-columns:1fr;
+}
+
+.full-width{
+grid-column:span 1;
+}
+
+}
