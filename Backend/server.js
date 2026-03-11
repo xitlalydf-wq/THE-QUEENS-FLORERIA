@@ -61,13 +61,13 @@ app.get('/api/productos', async (req, res) => {
   try {
     const pool = await poolPromise;
     const result = await pool.request().query(`
-      SELECT 'Ramo' AS tipo, Id_ramo AS id, Nombre, Precio, Descripción, Stock, NULL AS ImagenURL
+      SELECT 'Ramo' AS tipo, Id_ramo AS id, Nombre, Precio, Descripción, Stock, ImagenURL, Categoria
       FROM Ramos
       UNION ALL
-      SELECT 'Accesorio' AS tipo, Id_accesorio AS id, Nombre, Precio, Descripción, Stock, NULL AS ImagenURL
+      SELECT 'Accesorio' AS tipo, Id_accesorio AS id, Nombre, Precio, Descripción, Stock, NULL AS ImagenURL, NULL AS Categoria
       FROM Accesorios
       UNION ALL
-      SELECT 'Decorativo' AS tipo, Id_decorativo AS id, Nombre, Precio, Descripción, Stock, NULL AS ImagenURL
+      SELECT 'Decorativo' AS tipo, Id_decorativo AS id, Nombre, Precio, Descripción, Stock, NULL AS ImagenURL, NULL AS Categoria
       FROM Decorativos
       ORDER BY Nombre
     `);
