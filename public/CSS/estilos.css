@@ -64,7 +64,7 @@
   top: 20px;
   left: 20px;
   border-radius: 200px 200px 10px 10px; /* Forma de arco */
-  z-index: 0;
+  z-Index: 0;
 }
 
 .about-image img {
@@ -73,7 +73,7 @@
   height: 500px;
   object-fit: cover;
   border-radius: 200px 200px 10px 10px; /* Imagen en forma de arco */
-  z-index: 1;
+  z-Index: 1;
   box-shadow: 15px 15px 40px rgba(168, 107, 122, 0.1);
   border: 8px solid white; /* Efecto de fotografía física */
 }

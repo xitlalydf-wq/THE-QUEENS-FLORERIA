@@ -56,31 +56,90 @@
 
 <h2>Crear Cuenta</h2>
 
+<form id="signupForm">
 <div class="inputBox">
-<input type="text" placeholder="Nombre">
+<input type="text" id="nombre" placeholder="Nombre" required>
 </div>
 
 <div class="inputBox">
-<input type="email" placeholder="Correo">
+<input type="email" id="correo" placeholder="Correo" required>
 </div>
 
 <div class="inputBox">
-<input type="password" placeholder="Contraseña">
+<input type="password" id="contrasena" placeholder="Contraseña" required>
 </div>
 
 <div class="inputBox">
-<input type="password" placeholder="Confirmar contraseña">
+<input type="password" id="confirmar" placeholder="Confirmar contraseña" required>
 </div>
 
 <div class="inputBox">
-<button class="btn btn-primary">Crear cuenta</button>
+<button type="submit" class="btn btn-primary">Crear cuenta</button>
+</div>
+</form>
+
+<div id="mensaje-error" style="color: red; text-align: center; margin-top: 10px; display: none;">
 </div>
 
 <div class="small">
-¿Ya tienes cuenta? <a href="index.html">Inicia sesión</a>
+¿Ya tienes cuenta? <a href="Index.html">Inicia sesión</a>
 </div>
 
 </div>
+
+<script>
+document.getElementById('signupForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  const nombre = document.getElementById('nombre').value.trim();
+  const correo = document.getElementById('correo').value.trim();
+  const contrasena = document.getElementById('contrasena').value;
+  const confirmar = document.getElementById('confirmar').value;
+  const errorDiv = document.getElementById('mensaje-error');
+
+  errorDiv.style.display = 'none';
+  errorDiv.textContent = '';
+
+  if (contrasena !== confirmar) {
+    errorDiv.textContent = 'Las contraseñas no coinciden';
+    errorDiv.style.display = 'block';
+    return;
+  }
+
+  if (contrasena.length < 6) {
+    errorDiv.textContent = 'La contraseña debe tener al menos 6 caracteres';
+    errorDiv.style.display = 'block';
+    return;
+  }
+
+  try {
+    // use absolute backend address; if the page is opened via Live Server (port 5500)
+    // the origin will be different, so force localhost:3000.
+    const backendBase = window.location.origin.includes('5500')
+        ? 'http://localhost:3000'
+        : '';
+    const response = await fetch(backendBase + '/api/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre, correo, contrasena })
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Error ${response.status}: ${errorText}`);
+    }
+
+    const data = await response.json();
+    alert('Cuenta creada exitosamente. Ahora puedes iniciar sesión.');
+    window.location.href = 'index%20pruebas.html';  // redirigir al login
+  } catch (err) {
+    errorDiv.textContent = err.message || 'Error al crear la cuenta';
+    errorDiv.style.display = 'block';
+    console.error(err);
+  }
+});
+</script>
+<!--Probando 123-->
 
 </body>
 </html>

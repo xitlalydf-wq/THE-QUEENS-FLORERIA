@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Login</title>
-
-<link rel="stylesheet" href="public/CSS/login.css">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="public/CSS/login.css">
 </head>
 
 <body>
 
-<div id="tulips-layer" aria-hidden="true"></div>
+  <div id="tulips-layer" aria-hidden="true"></div>
 
-<script>
+  <script>
 (() => {
   const layer = document.getElementById("tulips-layer");
 
@@ -54,26 +52,77 @@
 </script>
 
 <div class="card">
+  <h2>Iniciar Sesión</h2>
 
-<h2>Iniciar Sesión</h2>
+  <form id="loginForm">
+    <div class="inputBox">
+      <input type="email" id="correo" placeholder="Correo" required autocomplete="email">
+    </div>
 
-<div class="inputBox">
-<input type="email" placeholder="Correo">
-</div>
+    <div class="inputBox">
+      <input type="password" id="contrasena" placeholder="Contraseña" required autocomplete="current-password">
+    </div>
 
-<div class="inputBox">
-<input type="password" placeholder="Contraseña">
-</div>
+    <div class="inputBox">
+      <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+    </div>
 
-<div class="inputBox">
-<button class="btn btn-primary">Iniciar sesión</button>
-</div>
+  <div id="mensaje-error" style="color: red; text-align: center; margin-top: 10px; display: none;">
 
-<div class="small">
-¿No tienes cuenta? <a href="signup.html">Crear cuenta</a>
-</div>
+  </div>
 
-</div>
+    <div class="small">
+      ¿No tienes cuenta? <a href="signup.html">Crear cuenta</a>
+    </div>
+  </form> 
+  </div>
 
+<script>
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  const correo = document.getElementById('correo').value.trim();       // asegúrate que el id sea "correo"
+  const contrasena = document.getElementById('contrasena').value;
+  const errorDiv = document.getElementById('mensaje-error');
+
+  errorDiv.style.display = 'none';
+  errorDiv.textContent = '';
+
+  try {
+    // use absolute backend address; if the page is opened via Live Server (port 5500)
+    // the origin will be different, so force localhost:3000.
+    const backendBase = window.location.origin.includes('5500')
+        ? 'http://localhost:3000'
+        : '';
+    const response = await fetch(backendBase + '/api/login', {   // ← URL completa al backend
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ correo, contrasena })
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Error ${response.status}: ${errorText}`);
+    }
+
+    const data = await response.json();
+
+    localStorage.setItem('userToken', data.token || 'simple-token');
+    localStorage.setItem('userRole', data.role);
+    localStorage.setItem('userName', data.nombre);
+
+    if (data.role === 'admin') {
+      window.location.href = 'admin/admin-dashboard.html';
+    } else {
+      window.location.href = 'Productos/ramospruebas.html';  // ajusta según tu página principal
+    }
+  } catch (err) {
+    errorDiv.textContent = err.message || 'Error al conectar con el servidor';
+    errorDiv.style.display = 'block';
+    console.error(err);
+  }
+});
+  </script>
+<!--Probando 123-->
 </body>
 </html>

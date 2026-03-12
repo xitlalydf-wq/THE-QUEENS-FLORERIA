@@ -1,38 +1,234 @@
+const path = require('path');
+
 const express = require('express');
 const sql = require('mssql');
 const cors = require('cors');
+const bcrypt = require('bcrypt');
 
 const app = express();
-app.use(cors());
+
+app.use(cors({
+  origin: true,               // permite cualquier origen (dev)
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type'],
+  credentials: true
+}));
 app.use(express.json());
 
-// Configuración de la conexión a SQL Server
+app.use(express.static(path.join(__dirname, '..', 'public')));
+app.use(express.static(path.join(__dirname, '..')));
+
+// Servir carpetas específicas para navegación
+app.use('/admin', express.static(path.join(__dirname, '..', 'admin')));
+app.use('/Productos', express.static(path.join(__dirname, '..', 'Productos')));
+app.use('/Compras', express.static(path.join(__dirname, '..', 'Compras')));
+app.use('/images', express.static(path.join(__dirname, '..', 'images')));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'public', 'Index.html'));
+});
+
+// Configuración de conexión (ajusta si es necesario)
 const config = {
-    user: 'tu_usuario',
-    password: 'tu_contraseña',
-    server: 'localhost', // o tu servidor SQL
-    database: 'tu_base_de_datos',
-    options: {
-        encrypt: true, // para conexiones seguras
-        trustServerCertificate: true // para desarrollo
-    }
+  user: 'floreria_node',
+  password: 'test1234',
+  server: 'CHALDEAP\\SQLEXPRESS',
+  database: 'DB_THE_QUEENS_FLORERIA',
+  options: {
+    encrypt: true,
+    trustServerCertificate: true
+  },
+  pool: {
+    max: 10,
+    min: 0,
+    idleTimeoutMillis: 30000
+  }
 };
 
-// Conectar a la base de datos
-sql.connect(config).then(pool => {
-    console.log('Conectado a SQL Server');
-    
-    // Endpoint para obtener datos
-    app.get('/api/datos', async (req, res) => {
-        try {
-            const result = await pool.request().query('SELECT * FROM tu_tabla');
-            res.json(result.recordset);
-        } catch (err) {
-            res.status(500).send(err.message);
-        }
-    });
-    
-}).catch(err => console.error('Error de conexión:', err));
+const poolPromise = new sql.ConnectionPool(config)
+  .connect()
+  .then(pool => {
+    console.log('Conectado a SQL Server exitosamente 🌸');
+    return pool;
+  })
+  .catch(err => {
+    console.error('¡FALLO CRÍTICO! No se pudo conectar a la base de datos:', err);
+    process.exit(1);
+  });
 
-const PORT = 3000;
-app.listen(PORT, () => console.log(`Servidor corriendo en puerto ${PORT}`));
+// Ruta para obtener productos (ajusta la query si tu tabla no es "Productos")
+app.get('/api/productos', async (req, res) => {
+  try {
+    const pool = await poolPromise;
+    const result = await pool.request().query(`
+      SELECT 'Ramo' AS tipo, Id_ramo AS id, Nombre, Precio, Descripción, Stock, ImagenURL, Categoria
+      FROM Ramos
+      UNION ALL
+      SELECT 'Accesorio' AS tipo, Id_accesorio AS id, Nombre, Precio, Descripción, Stock, NULL AS ImagenURL, NULL AS Categoria
+      FROM Accesorios
+      UNION ALL
+      SELECT 'Decorativo' AS tipo, Id_decorativo AS id, Nombre, Precio, Descripción, Stock, NULL AS ImagenURL, NULL AS Categoria
+      FROM Decorativos
+      ORDER BY Nombre
+    `);
+    res.json(result.recordset);
+  } catch (err) {
+    console.error('Error al obtener productos:', err);
+    res.status(500).json({ error: 'Error al obtener productos' });
+  }
+});
+
+// Ruta para obtener clientes
+app.get('/api/clientes', async (req, res) => {
+  try {
+    const pool = await poolPromise;
+    const result = await pool.request().query('SELECT Id_cliente, Nombre, Correo FROM Clientes');
+    res.json(result.recordset);
+  } catch (err) {
+    console.error('Error al obtener clientes:', err);
+    res.status(500).json({ error: 'Error al obtener clientes' });
+  }
+});
+
+// Ruta para obtener pedidos
+app.get('/api/pedidos', async (req, res) => {
+  try {
+    const pool = await poolPromise;
+    const result = await pool.request().query(`
+      SELECT p.Id_pedido, p.Id_cliente, c.Nombre AS Cliente, p.Fecha, p.Estado, p.Total, p.Notas
+      FROM Pedidos p
+      JOIN Clientes c ON p.Id_cliente = c.Id_cliente
+      ORDER BY p.Fecha DESC
+    `);
+    res.json(result.recordset);
+  } catch (err) {
+    console.error('Error al obtener pedidos:', err);
+    res.status(500).json({ error: 'Error al obtener pedidos' });
+  }
+});
+
+// Ruta para obtener administradores
+app.get('/api/administradores', async (req, res) => {
+  try {
+    const pool = await poolPromise;
+    const result = await pool.request().query('SELECT Id_admin, Nombre, Correo FROM Administradores');
+    res.json(result.recordset);
+  } catch (err) {
+    console.error('Error al obtener administradores:', err);
+    res.status(500).json({ error: 'Error al obtener administradores' });
+  }
+});
+
+// Ruta de login
+app.post('/api/login', async (req, res) => {
+  const { correo, contrasena } = req.body;
+
+  if (!correo || !contrasena) {
+    return res.status(400).json({ error: 'Correo y contraseña son requeridos' });
+  }
+
+  try {
+    const pool = await poolPromise;
+
+    // Buscar en Clientes
+    let result = await pool.request()
+      .input('correo', sql.NVarChar(255), correo)
+      .query(`
+        SELECT Id_cliente AS id, Nombre, Contraseña, 'cliente' AS role 
+        FROM Clientes 
+        WHERE Correo = @correo
+      `);
+
+    let user = result.recordset[0];
+
+    // Si no es cliente, buscar en Administradores
+    if (!user) {
+      result = await pool.request()
+        .input('correo', sql.NVarChar(255), correo)
+        .query(`
+          SELECT Id_admin AS id, Nombre, Contraseña, 'admin' AS role 
+          FROM Administradores 
+          WHERE Correo = @correo
+        `);
+      user = result.recordset[0];
+    }
+
+    if (!user) {
+      return res.status(401).json({ error: 'Correo o contraseña incorrectos' });
+    }
+
+    const match = await bcrypt.compare(contrasena, user.Contraseña.trim());
+    if (match) {
+  console.log(`Login exitoso: ${correo} (${user.role})`);
+}
+    if (!match) {
+      return res.status(401).json({ error: 'Correo o contraseña incorrectos' });
+    }
+
+    res.json({
+      success: true,
+      token: 'token-simulado-' + Date.now(),
+      role: user.role,
+      nombre: user.Nombre,
+      id: user.id
+    });
+  } catch (err) {
+    console.error('Error en /api/login:', err.message);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+});
+
+// Ruta de registro
+app.post('/api/signup', async (req, res) => {
+  const { nombre, correo, contrasena } = req.body;
+
+  if (!nombre || !correo || !contrasena) {
+    return res.status(400).json({ error: 'Nombre, correo y contraseña son requeridos' });
+  }
+
+  try {
+    const pool = await poolPromise;
+
+    // Verificar si el correo ya existe en Clientes
+    let result = await pool.request()
+      .input('correo', sql.NVarChar(255), correo)
+      .query('SELECT Id_cliente FROM Clientes WHERE Correo = @correo');
+
+    if (result.recordset.length > 0) {
+      return res.status(409).json({ error: 'El correo ya está registrado' });
+    }
+
+    // Verificar en Administradores (por si acaso)
+    result = await pool.request()
+      .input('correo', sql.NVarChar(255), correo)
+      .query('SELECT Id_admin FROM Administradores WHERE Correo = @correo');
+
+    if (result.recordset.length > 0) {
+      return res.status(409).json({ error: 'El correo ya está registrado' });
+    }
+
+    // Hashear la contraseña
+    const hashedPassword = await bcrypt.hash(contrasena, 10);
+
+    // Insertar nuevo cliente
+    await pool.request()
+      .input('nombre', sql.NVarChar(255), nombre)
+      .input('correo', sql.NVarChar(255), correo)
+      .input('contrasena', sql.NVarChar(256), hashedPassword)
+      .query('INSERT INTO Clientes (Nombre, Correo, Contraseña) VALUES (@nombre, @correo, @contrasena)');
+
+    console.log(`Usuario registrado: ${correo}`);
+    res.json({ success: true, message: 'Cuenta creada exitosamente' });
+  } catch (err) {
+    console.error('Error en /api/signup:', err.message);
+    res.status(500).json({ error: 'Error interno del servidor' });
+  }
+});
+
+// Iniciar servidor
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+});
+
+//<!--Probando 123-->
