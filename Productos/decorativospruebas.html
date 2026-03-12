@@ -1,17 +1,153 @@
 <!DOCTYPE html>
-<html lang="es"> 
-    <head> 
-        <meta charset="UTF-8"> 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-        <title>Decorativos</title> 
-        <link rel="stylesheet" href="/public/CSS/Ramos.css"> 
-        <!-- Tipografías --> 
-        <link rel="preconnect" href="https://fonts.googleapis.com"> 
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-        <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"> 
-    </head> 
-    <body> <!-- NAV --> <header class="topbar"> 
-        <div class="brand">THE QUEENS</div> <nav class="menu"> <a href="/inicio.html">INICIO</a> <a href="/productos/ramos.html">RAMOS</a> <a href="/productos/decorativos.html">ARREGLOS</a> <a href="/productos/accesorios.html">ACCESORIOS</a> <a href="/sobre-nosotros.html">SOBRE NOSOTROS</a> <a href="/contacto.html">CONTACTO</a> </nav> <div class="icons"> <a href="#"> <img src="/images/buscar.png" alt="Buscar"> </a> <a href="#"> <img src="/images/usuario.png" alt="Usuario"> </a> <a href="/Compras/carrito.html"> <img src="/images/carrito.png" alt="Carrito"> </a> </div> </header> <!-- NUEVA SECCIÓN DECORATIVOS --> <section class="ramos-section"> <div class="ramos-container"> <div class="ramos-header"> <p class="ramos-subtitle">Colección decorativa</p> <h2 class="ramos-title">Decorativos</h2> <div class="ramos-tabs"> <a href="#" class="tab-link active" data-filter="centros">Centros</a> <a href="#" class="tab-link" data-filter="eventos">Eventos</a> <a href="#" class="tab-link" data-filter="especial">Especiales</a> <a href="#" class="tab-link" data-filter="todos">Todos</a> </div> </div> <div class="ramos-grid"> <div class="ramo-card" data-category="centros"> <button class="btn-fav">♡</button> <div class="ramo-img-box"> <img src="../images/decorativo1.png" alt="Centro Elegancia"> </div> <h3>Centro “Elegancia”</h3> <p class="stock">• Disponible</p> <p class="precio">$650 MXN</p> <a href="../Compras/carrito.html" class="btn-ramo btn-carrito"> Añadir al carrito </a> </div> <div class="ramo-card" data-category="eventos"> <button class="btn-fav">♡</button> <div class="ramo-img-box"> <img src="../images/decorativo2.png" alt="Decoración Rosas"> </div> <h3>Decoración “Rosas”</h3> <p class="stock">• Disponible</p> <p class="precio">$890 MXN</p> <a href="../Compras/carrito.html" class="btn-ramo btn-carrito"> Añadir al carrito </a> </div> <div class="ramo-card" data-category="especial"> <button class="btn-fav">♡</button> <div class="ramo-img-box"> <img src="../images/decorativo3.png" alt="Centro Aurora"> </div> <h3>Centro “Aurora”</h3> <p class="stock">• Disponible</p> <p class="precio">$720 MXN</p> <a href="../Compras/carrito.html" class="btn-ramo btn-carrito"> Añadir al carrito </a> </div> <div class="ramo-card" data-category="centros"> <button class="btn-fav">♡</button> <div class="ramo-img-box"> <img src="../images/decorativo4.png" alt="Decoración Primavera"> </div> <h3>Decoración “Primavera”</h3> <p class="stock">• Disponible</p> <p class="precio">$780 MXN</p> <a href="../Compras/carrito.html" class="btn-ramo btn-carrito"> Añadir al carrito </a> </div> <div class="ramo-card" data-category="especial"> <button class="btn-fav">♡</button> <div class="ramo-img-box"> <img src="../images/decorativo5.png" alt="Centro Encanto"> </div> <h3>Centro “Encanto”</h3> <p class="stock">• Disponible</p> <p class="precio">$940 MXN</p> <a href="../Compras/carrito.html" class="btn-ramo btn-carrito"> Añadir al carrito </a> </div> <div class="ramo-card" data-category="eventos"> <button class="btn-fav">♡</button> <div class="ramo-img-box"> <img src="../images/decorativo6.png" alt="Decoración Gala"> </div> <h3>Decoración “Gala”</h3> <p class="stock">• Disponible</p> <p class="precio">$1,090 MXN</p> <a href="../Compras/carrito.html" class="btn-ramo btn-carrito"> Añadir al carrito </a> </div> </div> </div> </section> <script> document.addEventListener('DOMContentLoaded', function () { const btn = document.querySelector('.hamburger'); const menu = document.querySelector('.menu'); if (btn && menu) { btn.addEventListener('click', function () { menu.classList.toggle('open'); btn.classList.toggle('active'); }); } const tabLinks = document.querySelectorAll('.tab-link'); const cards = document.querySelectorAll('.ramo-card'); tabLinks.forEach(link => { link.addEventListener('click', function (e) { e.preventDefault(); const filter = this.getAttribute('data-filter'); tabLinks.forEach(tab => tab.classList.remove('active')); this.classList.add('active'); cards.forEach(card => { const category = card.getAttribute('data-category'); if (filter === 'todos' || category === filter) { card.style.display = 'block'; } else { card.style.display = 'none'; } }); }); }); }); </script> <script> document.querySelectorAll(".btn-fav").forEach(boton => { boton.addEventListener("click", function(){ if(this.classList.contains("active")){ this.classList.remove("active"); this.innerHTML = "♡"; }else{ this.classList.add("active"); this.innerHTML = "♥"; } }); }); </script>
+<html lang="es">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decorativos</title>
+    <link rel="stylesheet" href="/public/CSS/Decorativos.css">
+
+    <!-- Tipografías -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- NAV -->
+<header class="topbar">
+    <div class="brand">THE QUEENS</div>
+
+    <nav class="menu">
+        <a href="/inicio.html">INICIO</a>
+        <a href="/productos/ramos.html">RAMOS</a>
+        <a href="/productos/decorativos.html">ARREGLOS</a>
+        <a href="/productos/accesorios.html">ACCESORIOS</a>
+        <a href="/sobre-nosotros.html">SOBRE NOSOTROS</a>
+        <a href="/contacto.html">CONTACTO</a>
+    </nav>
+
+    <div class="icons">
+        <a href="#">
+            <img src="/images/buscar.png" alt="Buscar">
+        </a>
+
+        <a href="#">
+            <img src="/images/usuario.png" alt="Usuario">
+        </a>
+
+        <a href="/Compras/carrito.html">
+            <img src="/images/carrito.png" alt="Carrito">
+        </a>
+    </div>
+</header>
+
+
+    <!-- SECCIÓN Decorativos -->
+    <section class="ramos-section"> 
+    <div class="ramos-container">
+        <div class="ramos-header">
+                <p class="ramos-subtitle">Colección decorativa</p> 
+                <h2 class="ramos-title">Decorativos</h2>
+            <div class="ramos-tabs"> 
+                <a href="#" class="tab-link active" data-filter="centros">Centros</a> 
+                <a href="#" class="tab-link" data-filter="eventos">Eventos</a>
+                <a href="#" class="tab-link" data-filter="especial">Especiales</a> 
+                <a href="#" class="tab-link" data-filter="todos">Todos</a> 
+            </div> 
+            <div class="decorativos-grid" id="decorativos-container">
+                    <!-- Cards will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+    </section>
+
+    <!-- Carga dinámica de decorativos -->
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        fetch('/api/productos')
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error(`HTTP error! status: ${res.status}`);
+                }
+                return res.json();
+            })
+
+             .then(productos => {
+                const container = document.getElementById('decorativos-container');
+                productos.filter(p => p.tipo === 'Decorativo').forEach(p => {
+                    const card = document.createElement('div');
+                    card.className = 'decorativo-card';
+                    card.setAttribute('data-category', p.Categoria || 'todos');
+                    card.innerHTML = `
+                        <button class="btn-fav">♡</button>
+                        <div class="decorativo-img-box">
+                            <img src="${p.ImagenURL || '/images/placeholder.png'}" alt="${p.Nombre}">
+                        </div>
+                        <h3>${p.Nombre}</h3>
+                        <p class="stock">• ${p.Stock > 0 ? 'Disponible' : 'Agotado'}</p>
+                        <p class="precio">$${Number(p.Precio).toFixed(2)} MXN</p>
+                        <a href="../Compras/carrito.html?id=${p.id}" class="btn-ramo btn-carrito">
+                            Añadir al carrito
+                        </a>
+                    `;
+                    container.appendChild(card);
+                });
+
+                // Setup filters after loading cards
+                setupFilters();
+                setupFavorites();
+            })
+            .catch(err => console.error('Error loading products:', err));
+    });
+
+    function setupFilters() {
+        const tabLinks = document.querySelectorAll('.tab-link');
+        const cards = document.querySelectorAll('.accesorio-card');
+
+        tabLinks.forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const filter = this.getAttribute('data-filter');
+
+                tabLinks.forEach(tab => tab.classList.remove('active'));
+                this.classList.add('active');
+
+                cards.forEach(card => {
+                    const category = card.getAttribute('data-category');
+
+                    if (filter === 'todos' || category === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    }
+    </script>
+
+<!-- FAVORITOS -->
+<script>
+document.querySelectorAll(".btn-fav").forEach(boton => {
+
+boton.addEventListener("click", function(){
+
+if(this.classList.contains("active")){
+this.classList.remove("active");
+this.innerHTML = "♡";
+}else{
+this.classList.add("active");
+this.innerHTML = "♥";
+}
+
+});
+
+});
+</script>
 //<!--Probando 123-->
 </body>
+</html>

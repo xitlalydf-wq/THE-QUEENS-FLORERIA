@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accesorios</title>
-    <link rel="stylesheet" href="/public/CSS/Ramos.css">
+    <link rel="stylesheet" href="/public/CSS/Accesorios.css">
 
     <!-- Tipografías -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,174 +44,92 @@
 </header>
 
 
-<!-- SECCIÓN ACCESORIOS -->
-<section class="ramos-section">
-<div class="ramos-container">
+    <!-- SECCIÓN ACCESORIOS -->
+    <section class="accesorios-section">
+        <div class="accesorios-container">
+            <div class="accesorios-header">
+                <p class="accesorios-subtitle">Detalles florales</p>
+                <h2 class="accesorios-title">Accesorios</h2>
 
-<div class="ramos-header">
-<p class="ramos-subtitle">Detalles florales</p>
-<h2 class="ramos-title">Accesorios</h2>
+                <div class="accesorios-tabs">
+                    <a href="#" class="tab-link active" data-filter="vases">Jarrones</a>
+                    <a href="#" class="tab-link" data-filter="extras">Extras</a>
+                    <a href="#" class="tab-link" data-filter="regalos">Regalos</a>
+                    <a href="#" class="tab-link" data-filter="todos">Todos</a>
+                </div>
+            </div>
+                <div class="accesorios-grid" id="accesorios-container">
+                    <!-- Cards will be loaded dynamically -->
+                </div>
+        </div>
+    </section>
 
-<div class="ramos-tabs">
-<a href="#" class="tab-link active" data-filter="vases">Jarrones</a>
-<a href="#" class="tab-link" data-filter="extras">Extras</a>
-<a href="#" class="tab-link" data-filter="regalos">Regalos</a>
-<a href="#" class="tab-link" data-filter="todos">Todos</a>
-</div>
-</div>
+    <!-- Carga dinámica de accesorios -->
 
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        fetch('/api/productos')
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error(`HTTP error! status: ${res.status}`);
+                }
+                return res.json();
+            })
 
-<div class="ramos-grid">
+             .then(productos => {
+                const container = document.getElementById('accesorios-container');
+                productos.filter(p => p.tipo === 'Accesorio').forEach(p => {
+                    const card = document.createElement('div');
+                    card.className = 'accesorio-card';
+                    card.setAttribute('data-category', p.Categoria || 'todos');
+                    card.innerHTML = `
+                        <button class="btn-fav">♡</button>
+                        <div class="accesorio-img-box">
+                            <img src="${p.ImagenURL || '/images/placeholder.png'}" alt="${p.Nombre}">
+                        </div>
+                        <h3>${p.Nombre}</h3>
+                        <p class="stock">• ${p.Stock > 0 ? 'Disponible' : 'Agotado'}</p>
+                        <p class="precio">$${Number(p.Precio).toFixed(2)} MXN</p>
+                        <a href="../Compras/carrito.html?id=${p.id}" class="btn-ramo btn-carrito">
+                            Añadir al carrito
+                        </a>
+                    `;
+                    container.appendChild(card);
+                });
 
-<!-- ACCESORIO 1 -->
-<div class="ramo-card" data-category="vases">
-<button class="btn-fav">♡</button>
+                // Setup filters after loading cards
+                setupFilters();
+                setupFavorites();
+            })
+            .catch(err => console.error('Error loading products:', err));
+    });
 
-<div class="ramo-img-box">
-<img src="../images/accesorio1.png" alt="Jarrón Cristal">
-</div>
+    function setupFilters() {
+        const tabLinks = document.querySelectorAll('.tab-link');
+        const cards = document.querySelectorAll('.accesorio-card');
 
-<h3>Jarrón “Cristal”</h3>
-<p class="stock">• Disponible</p>
-<p class="precio">$350 MXN</p>
+        tabLinks.forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
 
-<a href="../Compras/carrito.html" class="btn-ramo btn-carrito">
-Añadir al carrito
-</a>
-</div>
+                const filter = this.getAttribute('data-filter');
 
+                tabLinks.forEach(tab => tab.classList.remove('active'));
+                this.classList.add('active');
 
-<!-- ACCESORIO 2 -->
-<div class="ramo-card" data-category="extras">
-<button class="btn-fav">♡</button>
+                cards.forEach(card => {
+                    const category = card.getAttribute('data-category');
 
-<div class="ramo-img-box">
-<img src="../images/accesorio2.png" alt="Listón Premium">
-</div>
-
-<h3>Listón “Premium”</h3>
-<p class="stock">• Disponible</p>
-<p class="precio">$120 MXN</p>
-
-<a href="../Compras/carrito.html" class="btn-ramo btn-carrito">
-Añadir al carrito
-</a>
-</div>
-
-
-<!-- ACCESORIO 3 -->
-<div class="ramo-card" data-category="regalos">
-<button class="btn-fav">♡</button>
-
-<div class="ramo-img-box">
-<img src="../images/accesorio3.png" alt="Tarjeta Floral">
-</div>
-
-<h3>Tarjeta “Floral”</h3>
-<p class="stock">• Disponible</p>
-<p class="precio">$80 MXN</p>
-
-<a href="../Compras/carrito.html" class="btn-ramo btn-carrito">
-Añadir al carrito
-</a>
-</div>
-
-
-<!-- ACCESORIO 4 -->
-<div class="ramo-card" data-category="vases">
-<button class="btn-fav">♡</button>
-
-<div class="ramo-img-box">
-<img src="../images/accesorio4.png" alt="Jarrón Elegance">
-</div>
-
-<h3>Jarrón “Elegance”</h3>
-<p class="stock">• Disponible</p>
-<p class="precio">$420 MXN</p>
-
-<a href="../Compras/carrito.html" class="btn-ramo btn-carrito">
-Añadir al carrito
-</a>
-</div>
-
-
-<!-- ACCESORIO 5 -->
-<div class="ramo-card" data-category="extras">
-<button class="btn-fav">♡</button>
-
-<div class="ramo-img-box">
-<img src="../images/accesorio5.png" alt="Envoltura Deluxe">
-</div>
-
-<h3>Envoltura “Deluxe”</h3>
-<p class="stock">• Disponible</p>
-<p class="precio">$150 MXN</p>
-
-<a href="../Compras/carrito.html" class="btn-ramo btn-carrito">
-Añadir al carrito
-</a>
-</div>
-
-
-<!-- ACCESORIO 6 -->
-<div class="ramo-card" data-category="regalos">
-<button class="btn-fav">♡</button>
-
-<div class="ramo-img-box">
-<img src="../images/accesorio6.png" alt="Caja Regalo">
-</div>
-
-<h3>Caja “Regalo”</h3>
-<p class="stock">• Disponible</p>
-<p class="precio">$260 MXN</p>
-
-<a href="../Compras/carrito.html" class="btn-ramo btn-carrito">
-Añadir al carrito
-</a>
-</div>
-
-</div>
-</div>
-</section>
-
-
-<!-- FILTROS -->
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-
-const tabLinks = document.querySelectorAll('.tab-link');
-const cards = document.querySelectorAll('.ramo-card');
-
-tabLinks.forEach(link => {
-
-link.addEventListener('click', function (e) {
-
-e.preventDefault();
-
-const filter = this.getAttribute('data-filter');
-
-tabLinks.forEach(tab => tab.classList.remove('active'));
-this.classList.add('active');
-
-cards.forEach(card => {
-
-const category = card.getAttribute('data-category');
-
-if (filter === 'todos' || category === filter) {
-card.style.display = 'block';
-} else {
-card.style.display = 'none';
-}
-
-});
-
-});
-
-});
-
-});
-</script>
-
+                    if (filter === 'todos' || category === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    }
+    </script>
 
 <!-- FAVORITOS -->
 <script>
