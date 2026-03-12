@@ -78,6 +78,7 @@
                 }
                 return res.json();
             })
+            
             .then(productos => {
                 const container = document.getElementById('ramos-container');
                 productos.filter(p => p.tipo === 'Ramo').forEach(p => {
@@ -131,8 +132,9 @@
             });
         });
     }
-    
+  </script>  
 
+<script>
     function setupFavorites() {
         document.querySelectorAll(".btn-fav").forEach(boton => {
             boton.addEventListener("click", function(){
