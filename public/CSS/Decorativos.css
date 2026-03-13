@@ -25,12 +25,12 @@ body {
 
 /* ===== SECCIÓN PRODUCTOS ===== */
 
-.ramos-section {
+.decorativo-section {
     background: #f6f1f0;
     padding: 70px 0 100px;
 }
 
-.ramos-container {
+.decorativos-container {
     width: 90%;
     max-width: 1200px;
     margin: 0 auto;
@@ -61,23 +61,23 @@ body {
     align-items: center;
 }
 
-.ramos-section {
+.decorativo-section {
     background: #f6f1f0;
     padding: 70px 0 100px;
 }
 
-.ramos-container {
+.decorativos-container {
     width: 90%;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-.ramos-header {
+.decorativos-header {
     text-align: center;
     margin-bottom: 55px;
 }
 
-.ramos-subtitle {
+.decorativo-subtitle {
     font-size: 14px;
     letter-spacing: 3px;
     text-transform: uppercase;
@@ -86,7 +86,7 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
-.ramos-title {
+.decorativo-title {
     font-size: 56px;
     color: #4b3b3f;
     margin-bottom: 28px;
@@ -94,7 +94,7 @@ body {
     font-weight: 600;
 }
 
-.ramos-tabs {
+.decorativos-tabs {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -103,7 +103,7 @@ body {
     padding-bottom: 14px;
 }
 
-.ramos-tabs a {
+.decorativos-tabs a {
     text-decoration: none;
     color: #7d676d;
     font-size: 15px;
@@ -112,12 +112,12 @@ body {
     transition: 0.3s ease;
 }
 
-.ramos-tabs a:hover,
-.ramos-tabs a.active {
+.decorativos-tabs a:hover,
+.decorativos-tabs a.active {
     color: #b76e79;
 }
 
-.ramos-tabs a.active::after {
+.decorativos-tabs a.active::after {
     content: "";
     position: absolute;
     left: 0;
@@ -128,7 +128,7 @@ body {
     border-radius: 10px;
 }
 
-.ramos-grid {
+.decorativos-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 40px;
@@ -138,7 +138,7 @@ body {
 
 /* ===== CARDS ===== */
 
-.ramo-card {
+.decorativo-card {
     position: relative;
     background: #fffdfc;
     border-radius: 28px;
@@ -149,7 +149,7 @@ body {
     width: 300px;
 }
 
-.ramo-card:hover {
+.decorativo-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 18px 36px rgba(191, 154, 162, 0.20);
 }
@@ -188,7 +188,7 @@ body {
     border-color: transparent;
 }
 
-.ramo-img-box {
+.decorativo-img-box {
     width: 100%;
     height: 180px;
     display: flex;
@@ -197,13 +197,13 @@ body {
     margin-bottom: 20px;
 }
 
-.ramo-img-box img {
+.decorativo-img-box img {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
 }
 
-.ramo-card h3 {
+.decorativo-card h3 {
     font-size: 28px;
     color: #4b3b3f;
     margin-bottom: 8px;
@@ -226,7 +226,7 @@ body {
     margin-bottom: 20px;
 }
 
-.btn-ramo {
+.btn-decorativo {
     display: inline-block;
     padding: 13px 34px;
     background: #e4c6cb;
@@ -238,7 +238,7 @@ body {
     transition: 0.3s ease;
 }
 
-.btn-ramo:hover {
+.btn-decorativo:hover {
     background: #c8959d;
     color: #fff;
 }
@@ -250,12 +250,12 @@ body {
 
 /* ===== FIN CARDS ===== */
 
-.ramos-more {
+.decorativos-more {
     text-align: center;
     margin-top: 45px;
 }
 
-.ramos-more a {
+.decorativos-more a {
     text-decoration: none;
     font-size: 24px;
     color: #6b555a;
@@ -263,22 +263,22 @@ body {
     transition: 0.3s ease;
 }
 
-.ramos-more a:hover {
+.decorativos-more a:hover {
     color: #b76e79;
 }
 
 @media (max-width: 992px) {
-    .ramos-grid {
+    .decorativos-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .ramos-title {
+    .decorativos-title {
         font-size: 42px;
     }
 }
 
 @media (max-width: 576px) {
-    .ramos-grid {
+    .decorativos-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     max-width: 1100px;
@@ -286,18 +286,18 @@ body {
     gap: 40px;
 }
 
-    .ramos-title {
+    .decorativos-title {
         font-size: 36px;
     }
 
-    .ramos-tabs {
+    .decorativos-tabs {
         gap: 16px;
     }
 
-   .ramo-card {
+   .decorativo-card {
     width: 100%;
 }
-    .ramo-img-box {
+    .decorativo-img-box {
         height: 220px;
     }
 
