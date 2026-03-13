@@ -47,6 +47,7 @@
     <!-- SECCIÓN ACCESORIOS -->
     <section class="accesorios-section">
         <div class="accesorios-container">
+            
             <div class="accesorios-header">
                 <p class="accesorios-subtitle">Detalles florales</p>
                 <h2 class="accesorios-title">Accesorios</h2>
@@ -90,7 +91,7 @@
                         <h3>${p.Nombre}</h3>
                         <p class="stock">• ${p.Stock > 0 ? 'Disponible' : 'Agotado'}</p>
                         <p class="precio">$${Number(p.Precio).toFixed(2)} MXN</p>
-                        <a href="../Compras/carrito.html?id=${p.id}" class="btn-ramo btn-carrito">
+                        <a href="../Compras/carrito.html?id=${p.id}" class="btn-accesorio btn-carrito">
                             Añadir al carrito
                         </a>
                     `;
@@ -133,22 +134,20 @@
 
 <!-- FAVORITOS -->
 <script>
-document.querySelectorAll(".btn-fav").forEach(boton => {
-
-boton.addEventListener("click", function(){
-
-if(this.classList.contains("active")){
-this.classList.remove("active");
-this.innerHTML = "♡";
-}else{
-this.classList.add("active");
-this.innerHTML = "♥";
-}
-
-});
-
-});
-</script>
-//<!--Probando 123-->
+    function setupFavorites() {
+        document.querySelectorAll(".btn-fav").forEach(boton => {
+            boton.addEventListener("click", function(){
+                if(this.classList.contains("active")){
+                    this.classList.remove("active");
+                    this.innerHTML = "♡";
+                }else{
+                    this.classList.add("active");
+                    this.innerHTML = "♥";
+                }
+            });
+        });
+    }
+    </script>
+<!--Probando 123-->
 </body>
 </html>
