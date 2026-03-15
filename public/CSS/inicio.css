@@ -1099,3 +1099,26 @@ body {
   background: #f8e3e8;
   transform: translateY(-2px);
 }
+
+#btnArriba{
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  background: #d98fa3;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  display: none;
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+#btnArriba:hover{
+  background: #c77a8e;
+  transform: translateY(-3px);
+}
