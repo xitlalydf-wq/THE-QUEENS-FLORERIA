@@ -173,25 +173,21 @@ body {
 }
 
 /* BOTON */
-.btn-productos {
+.btn-colecciones{
   display: inline-block;
-  margin-top: 18px;
-  padding: 16px 38px;
-  background: #b48b8b;
+  background: #b58383;
   color: white;
-  font-family: 'Poppins', sans-serif;
-  font-size: 14px;
-  letter-spacing: 1px;
+  padding: 16px 45px;
   border-radius: 40px;
-  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px;
+  text-decoration: none; /* quita el subrayado */
   transition: all 0.3s ease;
-  box-shadow: 0 12px 28px rgba(126, 87, 92, 0.18);
 }
 
-.btn-productos:hover {
-  background: #9d7373;
-  transform: translateY(-4px);
-  box-shadow: 0 16px 32px rgba(126, 87, 92, 0.24);
+.btn-colecciones:hover{
+  background: #a06f6f;
+  transform: translateY(-2px);
 }
 
 /* ANIMACION HERO */
@@ -1121,4 +1117,8 @@ body {
 #btnArriba:hover{
   background: #c77a8e;
   transform: translateY(-3px);
+}
+
+html{
+  scroll-behavior: smooth;
 }

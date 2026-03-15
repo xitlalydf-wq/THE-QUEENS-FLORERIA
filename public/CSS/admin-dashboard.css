@@ -23,7 +23,8 @@ body{
     padding: 30px 22px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 20px;
 }
 
 .admin-brand h2{
@@ -37,13 +38,14 @@ body{
 .admin-brand p{
     color: #8d6c73;
     font-size: 14px;
-    margin-bottom: 35px;
+    margin-bottom: 20px;
 }
 
 .admin-menu{
     display: flex;
     flex-direction: column;
     gap: 12px;
+    margin-top: 10px;
 }
 
 .admin-menu a{
@@ -256,6 +258,11 @@ tbody tr:last-child td{
         width: 100%;
         border-right: none;
         border-bottom: 1px solid #eadfe1;
+        padding: 25px 22px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 20px;
     }
 
     .admin-main{
