@@ -1,141 +1,178 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Queens</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Queens</title>
 
-<link rel="stylesheet" href="/public/CSS/inicio.css">
+  <link rel="stylesheet" href="/public/CSS/inicio.css">
 
-<!-- Tipografías -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
+  <!-- Tipografías -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
 <body>
 
+  <!-- PRELOADER -->
+  <div class="loader" id="loader">
+    <div class="loader-content">
+      <div class="flower-loader">
+        <span class="petal petal-1"></span>
+        <span class="petal petal-2"></span>
+        <span class="petal petal-3"></span>
+        <span class="petal petal-4"></span>
+        <span class="petal petal-5"></span>
+        <span class="petal petal-6"></span>
+        <span class="flower-center"></span>
+      </div>
 
-<!-- NAV -->
-<header class="topbar">
-
-<div class="brand">THE QUEENS</div>
-
-<nav class="menu">
-
-<a href="/inicio.html" id="btnInicio">INICIO</a>
-
-<a href="/productos/ramos.html">RAMOS</a>
-
-<a href="/productos/decorativos.html">ARREGLOS</a>
-
-<a href="/productos/accesorios.html">ACCESORIOS</a>
-
-<a href="/sobre-nosotros.html">SOBRE NOSOTROS</a>
-
-<a href="/contacto.html">CONTACTO</a>
-
-</nav>
-
-<div class="icons">
-        <a href="#">
-            <img src="/images/buscar.png" alt="Buscar">
-        </a>
-<a href="#">
-<img src="/images/usuario.png" alt="Usuario">
-</a>
-
-<a href="/Compras/carrito.html">
-<img src="/images/carrito.png" alt="Carrito">
-</a>
-
-</div>
-
-</header>
-
-
-<!-- HERO INICIO -->
-
-<section class="hero-inicio">
-
-<div class="hero-contenido">
-
-<p class="hero-subtitle">
-COLECCIÓN FLORAL
-</p>
-
-<h1 class="hero-title">
-THE QUEENS FLORERÍA
-</h1>
-
-<h2 class="hero-title-sec">
-Arte Floral
-</h2>
-
-
-<div class="hero-imagen" id="heroImagen">
-
-<!--  -->
-
-<img src="/images/flor.png  " alt="The Queens Florería">
-
-</div>
-
-</div>
-
-<section class="inicio-categorias">
-
-    <div class="categorias-grid">
-
-        <a href="/productos/ramos.html" class="categoria-card">
-            <img src="images/cat-ramos.jpg" alt="Ramos">
-            <span>RAMOS</span>
-        </a>
-
-        <a href="/productos/decorativos.html" class="categoria-card">
-            <img src="images/cat-arreglos.jpg" alt="Arreglos">
-            <span>ARREGLOS</span>
-        </a>
-
-        <a href="/productos/accesorios.html" class="categoria-card">
-            <img src="images/cat-accesorios.jpg" alt="Accesorios">
-            <span>ACCESORIOS</span>
-        </a>
-
-        <a href="#" class="categoria-card">
-            <img src="images/cat-extra.jpg" alt="">
-            <span></span>
-        </a>
-
+      <h1 class="loader-title">THE QUEENS</h1>
+      <p class="loader-subtitle">Arte floral</p>
     </div>
 
-</section>
-<script>
+    <div class="loader-door"></div>
+  </div>
 
-document.addEventListener("DOMContentLoaded", function () {
+  <!-- NAV -->
+  <header class="topbar">
+    <div class="brand">THE QUEENS</div>
 
-const btnInicio = document.getElementById("btnInicio");
+    <nav class="menu">
+      <a href="/inicio.html" id="btnInicio">INICIO</a>
+      <a href="/productos/ramos.html">RAMOS</a>
+      <a href="/productos/decorativos.html">ARREGLOS</a>
+      <a href="/productos/accesorios.html">ACCESORIOS</a>
+      <a href="/sobre-nosotros.html">SOBRE NOSOTROS</a>
+      <a href="/contacto.html">CONTACTO</a>
+    </nav>
 
-const heroImagen = document.getElementById("heroImagen");
+    <div class="icons">
+      <a href="#">
+        <img src="/images/buscar.png" alt="Buscar">
+      </a>
 
-if (btnInicio && heroImagen) {
+      <a href="#">
+        <img src="/images/usuario.png" alt="Usuario">
+      </a>
 
-btnInicio.addEventListener("click", function () {
+      <a href="/Compras/carrito.html">
+        <img src="/images/carrito.png" alt="Carrito">
+      </a>
+    </div>
+  </header>
 
-heroImagen.classList.remove("animar-hero");
+  <!-- HERO -->
+  <section class="hero-inicio reveal">
+    <div class="hero-imagen" id="heroImagen">
+      <img src="/images/flor.png" alt="The Queens Florería">
+    </div>
 
-void heroImagen.offsetWidth;
+    <div class="hero-contenido">
+      <p class="hero-subtitle">COLECCIÓN FLORAL</p>
+      <h1 class="hero-title">THE QUEENS FLORERÍA</h1>
+      <h2 class="hero-title-sec">Arte Floral</h2>
+      <a href="#productos" class="btn-productos">Conoce nuestros productos</a>
+    </div>
+  </section>
 
-heroImagen.classList.add("animar-hero");
+  <!-- POR QUE COMPRAR -->
+  <section class="why-queens reveal">
+    <h2>¿Por qué comprar en The Queens Florería?</h2>
 
-});
+    <div class="why-container">
+      <div class="why-card">
+        <img src="/images/icon-location.png" alt="Ubicación">
+        <h3>Local Store</h3>
+        <p>Encuéntranos en nuestra tienda en línea o visita nuestro local.</p>
+      </div>
 
-}
+      <div class="why-card">
+        <img src="/images/icon-custom.png" alt="Personalizados">
+        <h3>Personalizados</h3>
+        <p>Arreglos únicos diseñados especialmente para ti.</p>
+      </div>
 
-});
+      <div class="why-card">
+        <img src="/images/icon-delivery.png" alt="Envío rápido">
+        <h3>Envío rápido</h3>
+        <p>Entregas rápidas y seguras a tu ubicación.</p>
+      </div>
 
-</script>
+      <div class="why-card">
+        <img src="/images/icon-fresh.png" alt="Flores frescas">
+        <h3>Flores frescas</h3>
+        <p>Flores frescas seleccionadas con la mejor calidad.</p>
+      </div>
+    </div>
+  </section>
 
+  <!-- PRODUCTOS -->
+  <section class="productos reveal" id="productos">
+    <h2 class="titulo-productos">Nuestros Productos</h2>
+
+    <div class="productos-container">
+      <a href="/productos/ramos.html" class="producto-card">
+        <img src="/images/ramos.jpg" alt="Ramos">
+        <h3>Ramos</h3>
+      </a>
+
+      <a href="/productos/decorativos.html" class="producto-card">
+        <img src="/images/arreglos.jpg" alt="Arreglos">
+        <h3>Arreglos</h3>
+      </a>
+
+      <a href="/productos/accesorios.html" class="producto-card">
+        <img src="/images/accesorios.jpg" alt="Accesorios">
+        <h3>Accesorios</h3>
+      </a>
+    </div>
+  </section>
+
+  <script>
+    window.addEventListener("load", () => {
+      const loader = document.getElementById("loader");
+
+      if (loader) {
+        setTimeout(() => {
+          loader.classList.add("slide-out");
+          document.body.classList.add("page-ready");
+
+          setTimeout(() => {
+            loader.style.display = "none";
+          }, 1100);
+        }, 3200);
+      }
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+        }
+      });
+    });
+
+    document.querySelectorAll(".reveal").forEach((section) => {
+      observer.observe(section);
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const btnInicio = document.getElementById("btnInicio");
+      const heroImagen = document.getElementById("heroImagen");
+
+      if (btnInicio && heroImagen) {
+        btnInicio.addEventListener("click", function (e) {
+          if (window.location.pathname.includes("inicio.html") || window.location.pathname === "/") {
+            e.preventDefault();
+            heroImagen.classList.remove("animar-hero");
+            void heroImagen.offsetWidth;
+            heroImagen.classList.add("animar-hero");
+          }
+        });
+      }
+    });
+  </script>
 
 </body>
-
 </html>
