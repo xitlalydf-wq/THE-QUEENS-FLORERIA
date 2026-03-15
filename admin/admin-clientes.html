@@ -45,16 +45,14 @@
 
             <section class="admin-toolbar">
                 <div class="search-box">
-                    <input type="text" placeholder="Buscar cliente...">
+                    <input type="text" id="search-cliente" placeholder="Buscar cliente...">
                 </div>
 
                 <div class="filter-box">
-                    <select>
-                        <option>Todos los clientes</option>
-                        <option>Frecuentes</option>
-                        <option>Nuevos</option>
-                        <option>Con pedidos recientes</option>
-                    </select>
+                    <button class="filter-btn active" data-filter="todos">Todos</button>
+                    <button class="filter-btn" data-filter="frecuentes">Frecuentes</button>
+                    <button class="filter-btn" data-filter="nuevos">Nuevos</button>
+                    <button class="filter-btn" data-filter="recientes">Recientes</button>
                 </div>
             </section>
 
@@ -65,7 +63,7 @@
                 </div>
 
                 <div class="table-box">
-                    <table>
+                    <table id="clientes-table">
                         <thead>
                             <tr>
                                 <th>Cliente</th>
@@ -78,67 +76,7 @@
                             </tr>
                         </thead>
 
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="client-info">
-                                        <div class="client-avatar">M</div>
-                                        <span>María López</span>
-                                    </div>
-                                </td>
-                                <td>maria@email.com</td>
-                                <td>899 123 4567</td>
-                                <td>8</td>
-                                <td>$4,850 MXN</td>
-                                <td>12/03/2026</td>
-                                <td>
-                                    <div class="action-buttons">
-                                        <button class="btn-view">Ver</button>
-                                        <button class="btn-edit">Editar</button>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <div class="client-info">
-                                        <div class="client-avatar">A</div>
-                                        <span>Ana Torres</span>
-                                    </div>
-                                </td>
-                                <td>ana@email.com</td>
-                                <td>899 555 8888</td>
-                                <td>3</td>
-                                <td>$2,120 MXN</td>
-                                <td>10/03/2026</td>
-                                <td>
-                                    <div class="action-buttons">
-                                        <button class="btn-view">Ver</button>
-                                        <button class="btn-edit">Editar</button>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <div class="client-info">
-                                        <div class="client-avatar">D</div>
-                                        <span>Daniel Pérez</span>
-                                    </div>
-                                </td>
-                                <td>daniel@email.com</td>
-                                <td>899 777 1122</td>
-                                <td>1</td>
-                                <td>$350 MXN</td>
-                                <td>08/03/2026</td>
-                                <td>
-                                    <div class="action-buttons">
-                                        <button class="btn-view">Ver</button>
-                                        <button class="btn-edit">Editar</button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
+                                <tbody></tbody>
                     </table>
                 </div>
             </section>
@@ -146,27 +84,27 @@
             <section class="admin-cards">
                 <div class="admin-card">
                     <h3>Clientes registrados</h3>
-                    <p>48</p>
+                    <p id="stat-clientes-registrados">—</p>
                 </div>
 
                 <div class="admin-card">
                     <h3>Clientes frecuentes</h3>
-                    <p>12</p>
+                    <p id="stat-clientes-frecuentes">—</p>
                 </div>
 
                 <div class="admin-card">
                     <h3>Nuevos este mes</h3>
-                    <p>9</p>
+                    <p id="stat-clientes-nuevos">—</p>
                 </div>
 
                 <div class="admin-card">
                     <h3>Promedio por cliente</h3>
-                    <p>$1,280</p>
+                    <p id="stat-clientes-promedio">—</p>
                 </div>
             </section>
 
         </main>
     </div>
-
+    <script src="/public/js/admin-clientes.js"></script>
 </body>
 </html>

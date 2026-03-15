@@ -7,16 +7,35 @@
     <title>Ramos</title>
     <link rel="stylesheet" href="/public/CSS/Ramos.css">
     <link rel="stylesheet" href="/public/CSS/Contacto.css">
-    
+
 
     <!-- Tipografías -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        .cart-counter {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #8B5A3C;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
 </head>
 
 <body>
-    
+
     <!-- NAV -->
     <header class="topbar">
         <div class="brand">THE QUEENS</div>
@@ -35,12 +54,13 @@
                 <img src="/images/buscar.png" alt="Buscar">
             </a>
 
-            <a href="#">
+            <a href="/Usuario.html">
                 <img src="/images/usuario.png" alt="Usuario">
             </a>
 
-            <a href="/Compras/carrito.html">
+            <a href="/Compras/carrito.html" style="position: relative;">
                 <img src="/images/carrito.png" alt="Carrito">
+                <span id="cart-counter" class="cart-counter">0</span>
             </a>
         </div>
     </header>
@@ -61,112 +81,53 @@
                 </div>
             </div>
 
-            <div class="ramos-grid">
-
-                <div class="ramo-card" data-category="clasicos">
-                    <button class="btn-fav">♡</button>
-
-                    <div class="ramo-img-box">
-                        <img src="../images/ramo1.png" alt="Ramo Dulzura">
-                    </div>
-
-                    <h3>Ramo “Dulzura”</h3>
-                    <p class="stock">• Disponible</p>
-                    <p class="precio">$850 MXN</p>
-
-                    <a href="../Compras/carrito.html" class="btn-ramo btn-carrito">
-                        Añadir al carrito
-                    </a>
-                </div>
-
-                <div class="ramo-card" data-category="premium">
-                    <button class="btn-fav">♡</button>
-
-                    <div class="ramo-img-box">
-                        <img src="../images/ramo2.png" alt="Ramo Romance">
-                    </div>
-
-                    <h3>Ramo “Romance”</h3>
-                    <p class="stock">• Disponible</p>
-                    <p class="precio">$1,150 MXN</p>
-
-                    <a href="../Compras/carrito.html" class="btn-ramo btn-carrito">
-                        Añadir al carrito
-                    </a>
-                </div>
-
-                <div class="ramo-card" data-category="especiales">
-                    <button class="btn-fav">♡</button>
-
-                    <div class="ramo-img-box">
-                        <img src="../images/ramo3.png" alt="Ramo Aurora">
-                    </div>
-
-                    <h3>Ramo “Aurora”</h3>
-                    <p class="stock">• Disponible</p>
-                    <p class="precio">$990 MXN</p>
-
-                    <a href="../Compras/carrito.html" class="btn-ramo btn-carrito">
-                        Añadir al carrito
-                    </a>
-                </div>
-
-                <div class="ramo-card" data-category="clasicos">
-                    <button class="btn-fav">♡</button>
-
-                    <div class="ramo-img-box">
-                        <img src="../images/ramo4.png" alt="Ramo Primavera">
-                    </div>
-
-                    <h3>Ramo “Primavera”</h3>
-                    <p class="stock">• Disponible</p>
-                    <p class="precio">$1,250 MXN</p>
-
-                    <a href="../Compras/carrito.html" class="btn-ramo btn-carrito">
-                        Añadir al carrito
-                    </a>
-                </div>
-
-                <div class="ramo-card" data-category="especiales">
-                    <button class="btn-fav">♡</button>
-
-                    <div class="ramo-img-box">
-                        <img src="../images/ramo5.png" alt="Ramo Nube">
-                    </div>
-
-                    <h3>Ramo “Nube”</h3>
-                    <p class="stock">• Disponible</p>
-                    <p class="precio">$780 MXN</p>
-
-                    <a href="../Compras/carrito.html" class="btn-ramo btn-carrito">
-                        Añadir al carrito
-                    </a>
-                </div>
-
-                <div class="ramo-card" data-category="premium">
-                    <button class="btn-fav">♡</button>
-
-                    <div class="ramo-img-box">
-                        <img src="../images/ramo6.png" alt="Ramo Encanto">
-                    </div>
-
-                    <h3>Ramo “Encanto”</h3>
-                    <p class="stock">• Disponible</p>
-                    <p class="precio">$1,090 MXN</p>
-
-                    <a href="../Compras/carrito.html" class="btn-ramo btn-carrito">
-                        Añadir al carrito
-                    </a>
-                </div>
-
+            <div class="ramos-grid" id="ramos-container">
+                <!-- Cards will be loaded dynamically -->
             </div>
 
         </div>
     </section>
 
-    <!-- FILTROS -->
+    <!-- LOAD PRODUCTS -->
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', () => {
+        fetch('/api/productos')
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error(`HTTP error! status: ${res.status}`);
+                }
+                return res.json();
+            })
+
+            .then(productos => {
+                const container = document.getElementById('ramos-container');
+                productos.filter(p => p.tipo === 'ramos').forEach(p => {
+                    const card = document.createElement('div');
+                    card.className = 'ramo-card';
+                    card.setAttribute('data-category', p.Categoria || 'todos');
+                    card.innerHTML = `
+                        <button class="btn-fav">♡</button>
+                        <div class="ramo-img-box">
+                            <img src="${p.ImagenURL || '/images/flor.png'}" alt="${p.Nombre}">
+                        </div>
+                        <h3>${p.Nombre}</h3>
+                        <p class="stock">• ${p.Stock > 0 ? 'Disponible' : 'Agotado'}</p>
+                        <p class="precio">$${Number(p.Precio).toFixed(2)} MXN</p>
+                        <button class="btn-ramo btn-carrito" onclick="cartManager.addProduct(${JSON.stringify(p).replace(/"/g, '&quot;')})">
+                            Añadir al carrito
+                        </button>
+                    `;
+                    container.appendChild(card);
+                });
+
+                // Setup filters after loading cards
+                setupFilters();
+                setupFavorites();
+            })
+            .catch(err => console.error('Error loading products:', err));
+    });
+
+    function setupFilters() {
         const tabLinks = document.querySelectorAll('.tab-link');
         const cards = document.querySelectorAll('.ramo-card');
 
@@ -190,23 +151,22 @@
                 });
             });
         });
-    });
-    </script>
+    }
 
-    <!-- FAVORITOS -->
-    <script>
-    document.querySelectorAll(".btn-fav").forEach(boton => {
-        boton.addEventListener("click", function(){
-            if(this.classList.contains("active")){
-                this.classList.remove("active");
-                this.innerHTML = "♡";
-            }else{
-                this.classList.add("active");
-                this.innerHTML = "♥";
-            }
+    function setupFavorites() {
+        document.querySelectorAll(".btn-fav").forEach(boton => {
+            boton.addEventListener("click", function(){
+                if(this.classList.contains("active")){
+                    this.classList.remove("active");
+                    this.innerHTML = "♡";
+                }else{
+                    this.classList.add("active");
+                    this.innerHTML = "♥";
+                }
+            });
         });
-    });
+    }
     </script>
+<script src="/public/js/cart.js"></script>
+
 </body>
-//<!--Probando 123-->
-</html>

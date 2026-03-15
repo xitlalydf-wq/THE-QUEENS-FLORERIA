@@ -4,6 +4,9 @@ const express = require('express');
 const sql = require('mssql');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
+const multer = require('multer');
+
+const blacklistTokens = new Set();
 
 const app = express();
 
@@ -23,6 +26,31 @@ app.use('/admin', express.static(path.join(__dirname, '..', 'admin')));
 app.use('/Productos', express.static(path.join(__dirname, '..', 'Productos')));
 app.use('/Compras', express.static(path.join(__dirname, '..', 'Compras')));
 app.use('/images', express.static(path.join(__dirname, '..', 'images')));
+
+// Configuración de multer para subida de imágenes
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, path.join(__dirname, '..', 'images')); // Guardar en la carpeta images
+  },
+  filename: (req, file, cb) => {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    cb(null, uniqueSuffix + path.extname(file.originalname));
+  }
+});
+
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 5 * 1024 * 1024 // 5MB límite
+  },
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype.startsWith('image/')) {
+      cb(null, true);
+    } else {
+      cb(new Error('Solo se permiten archivos de imagen'), false);
+    }
+  }
+});
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'Index.html'));
@@ -56,18 +84,24 @@ const poolPromise = new sql.ConnectionPool(config)
     process.exit(1);
   });
 
+// Logging middleware para comprobar que las peticiones a /api/productos llegan
+app.use('/api/productos', (req, res, next) => {
+  console.log('[API] request to /api/productos', req.method, req.url);
+  next();
+});
+
 // Ruta para obtener productos (ajusta la query si tu tabla no es "Productos")
 app.get('/api/productos', async (req, res) => {
   try {
     const pool = await poolPromise;
     const result = await pool.request().query(`
-      SELECT 'Ramo' AS tipo, Id_ramo AS id, Nombre, Precio, Descripción, Stock, ImagenURL, Categoria
+      SELECT 'ramos' AS tipo, Id_ramo AS id, Nombre, Precio, Descripción, Stock, ISNULL(ImagenURL, '') AS ImagenURL, ISNULL(Categoria, 'Ramos') AS Categoria
       FROM Ramos
       UNION ALL
-      SELECT 'Accesorio' AS tipo, Id_accesorio AS id, Nombre, Precio, Descripción, Stock, NULL AS ImagenURL, NULL AS Categoria
+      SELECT 'accesorios' AS tipo, Id_accesorio AS id, Nombre, Precio, Descripción, Stock, ISNULL(ImagenURL, '') AS ImagenURL, ISNULL(Categoria, 'Accesorios') AS Categoria
       FROM Accesorios
       UNION ALL
-      SELECT 'Decorativo' AS tipo, Id_decorativo AS id, Nombre, Precio, Descripción, Stock, NULL AS ImagenURL, NULL AS Categoria
+      SELECT 'decorativos' AS tipo, Id_decorativo AS id, Nombre, Precio, Descripción, Stock, ISNULL(ImagenURL, '') AS ImagenURL, ISNULL(Categoria, 'Decorativos') AS Categoria
       FROM Decorativos
       ORDER BY Nombre
     `);
@@ -82,7 +116,31 @@ app.get('/api/productos', async (req, res) => {
 app.get('/api/clientes', async (req, res) => {
   try {
     const pool = await poolPromise;
-    const result = await pool.request().query('SELECT Id_cliente, Nombre, Correo FROM Clientes');
+    let query = `
+      SELECT c.Id_cliente, c.Nombre, c.Correo, c.Telefono,
+             COUNT(p.Id_pedido) AS Pedidos,
+             ISNULL(SUM(p.Total), 0) AS TotalComprado,
+             MAX(p.Fecha) AS UltimaCompra
+      FROM Clientes c
+      LEFT JOIN Pedidos p ON c.Id_cliente = p.Id_cliente
+      GROUP BY c.Id_cliente, c.Nombre, c.Correo, c.Telefono
+    `;
+
+    const filter = req.query.filter;
+    if (filter) {
+      if (filter === 'frecuentes') {
+        query += ` HAVING COUNT(p.Id_pedido) > 5`;
+      } else if (filter === 'nuevos') {
+        query += ` HAVING c.Id_cliente IN (SELECT Id_cliente FROM Clientes WHERE DATEDIFF(MONTH, GETDATE(), FechaRegistro) <= 1)`;
+        // Assuming FechaRegistro exists, if not, we might need to add it or use another logic
+      } else if (filter === 'recientes') {
+        query += ` HAVING MAX(p.Fecha) >= DATEADD(MONTH, -1, GETDATE())`;
+      }
+    }
+
+    query += ` ORDER BY c.Nombre`;
+
+    const result = await pool.request().query(query);
     res.json(result.recordset);
   } catch (err) {
     console.error('Error al obtener clientes:', err);
@@ -104,6 +162,173 @@ app.get('/api/pedidos', async (req, res) => {
   } catch (err) {
     console.error('Error al obtener pedidos:', err);
     res.status(500).json({ error: 'Error al obtener pedidos' });
+  }
+});
+
+// CRUD para productos
+// Obtener producto individual
+app.get('/api/productos/:tipo/:id', async (req, res) => {
+  try {
+    const { tipo, id } = req.params;
+    const pool = await poolPromise;
+    let table, idColumn;
+    const tipoNorm = tipo.toLowerCase();
+
+    switch (tipoNorm) {
+      case 'ramo':
+      case 'ramos':
+        table = 'Ramos';
+        idColumn = 'ID_Ramo';
+        break;
+      case 'accesorio':
+      case 'accesorios':
+        table = 'Accesorios';
+        idColumn = 'ID_Accesorio';
+        break;
+      case 'decorativo':
+      case 'decorativos':
+        table = 'Decorativos';
+        idColumn = 'ID_Decorativo';
+        break;
+      default:
+        return res.status(400).json({ error: 'Tipo de producto inválido' });
+    }
+
+    const result = await pool.request()
+      .input('id', sql.Int, id)
+      .query(`SELECT * FROM ${table} WHERE ${idColumn} = @id`);
+
+    if (result.recordset.length === 0) {
+      return res.status(404).json({ error: 'Producto no encontrado' });
+    }
+
+    const producto = result.recordset[0];
+    res.json({
+      id: producto[idColumn],
+      tipo,
+      nombre: producto.Nombre,
+      descripcion: producto.Descripcion,
+      precio: producto.Precio,
+      stock: producto.Stock,
+      imagen: producto.ImagenURL,
+      categoria: producto.Categoria
+    });
+  } catch (err) {
+    console.error('Error al obtener producto:', err);
+    res.status(500).json({ error: 'Error al obtener producto' });
+  }
+});
+
+// Crear producto
+app.post('/api/productos', upload.single('imagen'), async (req, res) => {
+  try {
+    const { tipo, nombre, precio, stock, descripcion, imagenURL, categoria } = req.body;
+    const pool = await poolPromise;
+    let table, idColumn;
+
+    // Determinar imagenURL: usar archivo subido si existe, sino usar URL proporcionada
+    let finalImagenURL = imagenURL;
+    if (req.file) {
+      finalImagenURL = `/images/${req.file.filename}`;
+    }
+
+    if (tipo === 'Ramo') {
+      table = 'Ramos';
+      idColumn = 'Id_ramo';
+    } else if (tipo === 'Accesorio') {
+      table = 'Accesorios';
+      idColumn = 'Id_accesorio';
+    } else if (tipo === 'Decorativo') {
+      table = 'Decorativos';
+      idColumn = 'Id_decorativo';
+    } else {
+      return res.status(400).json({ error: 'Tipo de producto inválido' });
+    }
+
+    const result = await pool.request()
+      .input('nombre', sql.VarChar, nombre)
+      .input('precio', sql.Decimal(10,2), precio)
+      .input('stock', sql.Int, stock)
+      .input('descripcion', sql.Text, descripcion)
+      .input('imagenURL', sql.VarChar, finalImagenURL)
+      .input('categoria', sql.VarChar, categoria)
+      .query(`INSERT INTO ${table} (Nombre, Precio, Stock, Descripción, ImagenURL, Categoria) OUTPUT INSERTED.${idColumn} AS id VALUES (@nombre, @precio, @stock, @descripcion, @imagenURL, @categoria)`);
+
+    res.json({ id: result.recordset[0].id, tipo });
+  } catch (err) {
+    console.error('Error al crear producto:', err);
+    res.status(500).json({ error: 'Error al crear producto' });
+  }
+});
+
+// Actualizar producto
+app.put('/api/productos/:tipo/:id', async (req, res) => {
+  try {
+    const { tipo, id } = req.params;
+    const { nombre, precio, stock, descripcion, imagenURL, categoria } = req.body;
+    const pool = await poolPromise;
+    let table, idColumn;
+    const tipoNorm = tipo.toLowerCase();
+
+    if (tipoNorm === 'ramo' || tipoNorm === 'ramos') {
+      table = 'Ramos';
+      idColumn = 'Id_ramo';
+    } else if (tipoNorm === 'accesorio' || tipoNorm === 'accesorios') {
+      table = 'Accesorios';
+      idColumn = 'Id_accesorio';
+    } else if (tipoNorm === 'decorativo' || tipoNorm === 'decorativos') {
+      table = 'Decorativos';
+      idColumn = 'Id_decorativo';
+    } else {
+      return res.status(400).json({ error: 'Tipo de producto inválido' });
+    }
+
+    await pool.request()
+      .input('id', sql.Int, id)
+      .input('nombre', sql.VarChar, nombre)
+      .input('precio', sql.Decimal(10,2), precio)
+      .input('stock', sql.Int, stock)
+      .input('descripcion', sql.Text, descripcion)
+      .input('imagenURL', sql.VarChar, imagenURL)
+      .input('categoria', sql.VarChar, categoria)
+      .query(`UPDATE ${table} SET Nombre = @nombre, Precio = @precio, Stock = @stock, Descripción = @descripcion, ImagenURL = @imagenURL, Categoria = @categoria WHERE ${idColumn} = @id`);
+
+    res.json({ message: 'Producto actualizado' });
+  } catch (err) {
+    console.error('Error al actualizar producto:', err);
+    res.status(500).json({ error: 'Error al actualizar producto' });
+  }
+});
+
+// Eliminar producto
+app.delete('/api/productos/:tipo/:id', async (req, res) => {
+  try {
+    const { tipo, id } = req.params;
+    const pool = await poolPromise;
+    let table, idColumn;
+    const tipoNorm = tipo.toLowerCase();
+
+    if (tipoNorm === 'ramo' || tipoNorm === 'ramos') {
+      table = 'Ramos';
+      idColumn = 'Id_ramo';
+    } else if (tipoNorm === 'accesorio' || tipoNorm === 'accesorios') {
+      table = 'Accesorios';
+      idColumn = 'Id_accesorio';
+    } else if (tipoNorm === 'decorativo' || tipoNorm === 'decorativos') {
+      table = 'Decorativos';
+      idColumn = 'Id_decorativo';
+    } else {
+      return res.status(400).json({ error: 'Tipo de producto inválido' });
+    }
+
+    await pool.request()
+      .input('id', sql.Int, id)
+      .query(`DELETE FROM ${table} WHERE ${idColumn} = @id`);
+
+    res.json({ message: 'Producto eliminado' });
+  } catch (err) {
+    console.error('Error al eliminar producto:', err);
+    res.status(500).json({ error: 'Error al eliminar producto' });
   }
 });
 
@@ -223,6 +448,31 @@ app.post('/api/signup', async (req, res) => {
     console.error('Error en /api/signup:', err.message);
     res.status(500).json({ error: 'Error interno del servidor' });
   }
+});
+
+app.post ('/api/logout', (req, res) => {
+  const autoHeader = req.headers['authorization'];
+  const token = autoHeader && autoHeader.split(' ')[1];
+
+  if (token) {
+    blacklistTokens.add(token);
+  }
+res.json({message: 'Logout exitoso'})
+
+function verificarToken(req, res, next) {
+  const autoHeader = req.headers['authorization'];
+  const token = autoHeader && autoHeader.split(' ')[1];
+
+  if (!token || blacklistTokens.has(token)) {
+    return res.status(401).json({ error: 'Token inválido o expirado' });
+  }
+
+  jwt.verify(token, 'secreto', (err, user) => {
+    if (err) return res.status(403).json({ error: 'Token inválido' });
+    req.user = user;
+    next();
+  });
+}
 });
 
 // Iniciar servidor

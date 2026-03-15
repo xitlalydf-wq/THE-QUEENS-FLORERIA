@@ -49,15 +49,21 @@
             <!-- FILTROS -->
             <section class="admin-toolbar">
                 <div class="search-box">
-                    <input type="text" placeholder="Buscar producto...">
+                    <input type="text" id="search-input" placeholder="Buscar producto...">
                 </div>
 
                 <div class="filter-box">
-                    <select>
-                        <option>Todas las categorías</option>
-                        <option>Ramos</option>
-                        <option>Arreglos</option>
-                        <option>Accesorios</option>
+                    <select id="filter-categoria">
+                        <option value="todos">Todas las categorías</option>
+                        <option value="clasicos">Clásicos</option>
+                        <option value="premium">Premium</option>
+                        <option value="especiales">Especiales</option>
+                        <option value="vases">Jarrones</option>
+                        <option value="extras">Extras</option>
+                        <option value="regalos">Regalos</option>
+                        <option value="centros">Centros</option>
+                        <option value="eventos">Eventos</option>
+                        <option value="especial">Especial</option>
                     </select>
                 </div>
             </section>
@@ -70,7 +76,7 @@
                 </div>
 
                 <div class="table-box">
-                    <table>
+                    <table id="productos-table">
                         <thead>
                             <tr>
                                 <th>Imagen</th>
@@ -83,83 +89,7 @@
                             </tr>
                         </thead>
 
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="product-thumb">
-                                        <img src="/images/ramo1.png" alt="Ramo Dulzura">
-                                    </div>
-                                </td>
-                                <td>Ramo Dulzura</td>
-                                <td>Ramos</td>
-                                <td>$850 MXN</td>
-                                <td>12</td>
-                                <td><span class="status active">Activo</span></td>
-                                <td>
-                                    <div class="action-buttons">
-                                        <button class="btn-edit">Editar</button>
-                                        <button class="btn-delete">Eliminar</button>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <div class="product-thumb">
-                                        <img src="/images/decorativo3.png" alt="Centro Aurora">
-                                    </div>
-                                </td>
-                                <td>Centro Aurora</td>
-                                <td>Arreglos</td>
-                                <td>$720 MXN</td>
-                                <td>8</td>
-                                <td><span class="status active">Activo</span></td>
-                                <td>
-                                    <div class="action-buttons">
-                                        <button class="btn-edit">Editar</button>
-                                        <button class="btn-delete">Eliminar</button>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <div class="product-thumb">
-                                        <img src="/images/accesorio1.png" alt="Jarrón Cristal">
-                                    </div>
-                                </td>
-                                <td>Jarrón Cristal</td>
-                                <td>Accesorios</td>
-                                <td>$350 MXN</td>
-                                <td>5</td>
-                                <td><span class="status low">Bajo stock</span></td>
-                                <td>
-                                    <div class="action-buttons">
-                                        <button class="btn-edit">Editar</button>
-                                        <button class="btn-delete">Eliminar</button>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <div class="product-thumb">
-                                        <img src="/images/ramo6.png" alt="Ramo Encanto">
-                                    </div>
-                                </td>
-                                <td>Ramo Encanto</td>
-                                <td>Ramos</td>
-                                <td>$1,090 MXN</td>
-                                <td>0</td>
-                                <td><span class="status inactive">Agotado</span></td>
-                                <td>
-                                    <div class="action-buttons">
-                                        <button class="btn-edit">Editar</button>
-                                        <button class="btn-delete">Eliminar</button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
+                        <tbody></tbody>
                     </table>
                 </div>
             </section>
@@ -170,41 +100,54 @@
                     <h2>Agregar producto rápido</h2>
                 </div>
 
-                <form class="product-form">
+                <form class="product-form" id="add-product-form" enctype="multipart/form-data">
                     <div class="form-grid">
                         <div class="form-group">
+                            <label>Tipo</label>
+                            <select name="tipo" required id="tipo-select">
+                                <option value="">Selecciona tipo</option>
+                                <option value="Ramo">Ramo</option>
+                                <option value="Accesorio">Accesorio</option>
+                                <option value="Decorativo">Decorativo</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
                             <label>Nombre del producto</label>
-                            <input type="text" placeholder="Ej. Ramo Primavera">
+                            <input type="text" name="nombre" placeholder="Ej. Ramo Primavera" required>
                         </div>
 
                         <div class="form-group">
                             <label>Categoría</label>
-                            <select>
-                                <option>Selecciona una categoría</option>
-                                <option>Ramos</option>
-                                <option>Arreglos</option>
-                                <option>Accesorios</option>
+                            <select name="categoria" required id="categoria-select">
+                                <option value="">Selecciona categoría</option>
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label>Precio</label>
-                            <input type="text" placeholder="$0.00">
+                            <input type="number" step="0.01" name="precio" placeholder="0.00" required>
                         </div>
 
                         <div class="form-group">
                             <label>Stock</label>
-                            <input type="number" placeholder="0">
+                            <input type="number" name="stock" placeholder="0" required>
                         </div>
 
                         <div class="form-group full-width">
                             <label>Descripción</label>
-                            <textarea rows="4" placeholder="Escribe una breve descripción del producto..."></textarea>
+                            <textarea rows="4" name="descripcion" placeholder="Escribe una breve descripción del producto..."></textarea>
                         </div>
 
                         <div class="form-group full-width">
                             <label>Imagen</label>
-                            <input type="file">
+                            <input type="file" name="imagen" accept="image/*" id="imagen-input">
+                            <small style="color: #666;">O ingresa una URL de imagen abajo</small>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>URL de Imagen (opcional si subes archivo)</label>
+                            <input type="url" name="imagenURL" placeholder="https://...">
                         </div>
                     </div>
 
@@ -215,6 +158,8 @@
         </main>
 
     </div>
+    <script src="/public/js/admin-utils.js"></script>
+    <script src="/public/js/admin-productos.js"></script>
 <!--Probando 123-->
 
 </body>

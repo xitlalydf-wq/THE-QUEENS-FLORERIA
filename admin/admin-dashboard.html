@@ -53,23 +53,23 @@
             <!-- CARDS -->
             <section class="admin-cards">
                 <div class="admin-card">
-                    <h3>Ventas del día</h3>
-                    <p>$2,450 MXN</p>
+                    <h3>Productos totales</h3>
+                    <p id="stat-total-productos">—</p>
                 </div>
 
                 <div class="admin-card">
-                    <h3>Pedidos nuevos</h3>
-                    <p>12</p>
+                    <h3>Pedidos totales</h3>
+                    <p id="stat-total-pedidos">—</p>
                 </div>
 
                 <div class="admin-card">
-                    <h3>Clientes registrados</h3>
-                    <p>48</p>
+                    <h3>Pedidos últimos 30 días</h3>
+                    <p id="stat-pedidos-recientes">—</p>
                 </div>
 
                 <div class="admin-card">
-                    <h3>Productos activos</h3>
-                    <p>36</p>
+                    <h3>Ingresos totales</h3>
+                    <p id="stat-ingresos">—</p>
                 </div>
             </section>
 
@@ -77,43 +77,21 @@
             <section class="admin-section">
                 <div class="section-header">
                     <h2>Pedidos recientes</h2>
-                    <button>Ver todos</button>
+                    <button id="view-all-orders">Ver todos</button>
                 </div>
 
                 <div class="table-box">
-                    <table>
+                    <table id="recent-orders-table">
                         <thead>
                             <tr>
                                 <th>ID Pedido</th>
                                 <th>Cliente</th>
-                                <th>Producto</th>
                                 <th>Total</th>
+                                <th>Fecha</th>
                                 <th>Estado</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>#001</td>
-                                <td>María López</td>
-                                <td>Ramo Dulzura</td>
-                                <td>$850 MXN</td>
-                                <td><span class="status pending">Pendiente</span></td>
-                            </tr>
-                            <tr>
-                                <td>#002</td>
-                                <td>Ana Torres</td>
-                                <td>Decoración Gala</td>
-                                <td>$1,150 MXN</td>
-                                <td><span class="status process">En proceso</span></td>
-                            </tr>
-                            <tr>
-                                <td>#003</td>
-                                <td>Daniel Pérez</td>
-                                <td>Jarrón Cristal</td>
-                                <td>$350 MXN</td>
-                                <td><span class="status delivered">Entregado</span></td>
-                            </tr>
-                        </tbody>
+                        <tbody></tbody>
                     </table>
                 </div>
             </section>
@@ -122,30 +100,18 @@
             <section class="admin-section">
                 <div class="section-header">
                     <h2>Productos con poco stock</h2>
-                    <button>Gestionar inventario</button>
+                    <button id="manage-inventory">Gestionar inventario</button>
                 </div>
 
-                <div class="stock-list">
-                    <div class="stock-item">
-                        <span>Ramo Aurora</span>
-                        <span>3 disponibles</span>
-                    </div>
-
-                    <div class="stock-item">
-                        <span>Tarjeta Floral</span>
-                        <span>5 disponibles</span>
-                    </div>
-
-                    <div class="stock-item">
-                        <span>Decoración Primavera</span>
-                        <span>2 disponibles</span>
-                    </div>
+                <div class="stock-list" id="low-stock-list">
+                    <!-- Los productos con poco stock se cargan dinámicamente -->
                 </div>
             </section>
 
         </main>
 
     </div>
+    <script src="/public/js/admin-dashboard.js"></script>
 <!--Probando 123-->
 
 </body>

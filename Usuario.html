@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Usuario</title>
+    <link rel="stylesheet" href="/public/CSS/inicio.css">
+
+    <!-- Tipografías -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Estilos adicionales para el perfil */
+        .perfil-section {
+            padding: 120px 20px 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .perfil-container {
+            background: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .perfil-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .perfil-info p {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            color: #555;
+            margin: 15px 0;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+        
+        .perfil-info strong {
+            color: #ff4d8d;
+            display: inline-block;
+            width: 100px;
+        }
+        
+        .perfil-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .perfil-actions button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .edit-btn {
+            background: #ff4d8d;
+            color: white;
+        }
+        
+        .edit-btn:hover {
+            background: #e0437a;
+            transform: translateY(-2px);
+        }
+        
+        .orders-btn {
+            background: #b04cff;
+            color: white;
+        }
+        
+        .orders-btn:hover {
+            background: #9a3de0;
+            transform: translateY(-2px);
+        }
+        
+        .logout-btn {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .logout-btn:hover {
+            background: #c82333;
+            transform: translateY(-2px);
+        }
+        
+        .logout-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="topbar">
+    <div class="brand">THE QUEENS</div>
+
+    <nav class="menu">
+        <a href="/inicio.html">INICIO</a>
+        <a href="/productos/ramos.html">RAMOS</a>
+        <a href="/productos/decorativos.html">ARREGLOS</a>
+        <a href="/productos/accesorios.html">ACCESORIOS</a>
+        <a href="/sobre-nosotros.html">SOBRE NOSOTROS</a>
+        <a href="/contacto.html">CONTACTO</a>
+    </nav>
+
+    <div class="icons">
+        <a href="#">
+            <img src="/images/buscar.png" alt="Buscar">
+        </a>
+
+        <a href="Usuario.html">
+            <img src="/images/usuario.png" alt="Usuario">
+        </a>
+
+        <a href="/Compras/carrito.html">
+            <img src="/images/carrito.png" alt="Carrito">
+        </a>
+    </div>
+</header>
+
+<!-- SECCIÓN PERFIL DE USUARIO -->
+<section class="perfil-section">
+    <div class="perfil-container">
+        <h2 class="perfil-title">Mi Perfil</h2>
+        
+        <div class="perfil-info" id="perfilInfo">
+            <p><strong>Nombre:</strong> <span id="nombreUsuario">Cargando...</span></p>
+            <p><strong>Email:</strong> <span id="emailUsuario">Cargando...</span></p>
+            <p><strong>Dirección:</strong> <span id="direccionUsuario">No especificada</span></p>
+            <p><strong>Teléfono:</strong> <span id="telefonoUsuario">No especificado</span></p>
+        </div>
+        
+        <div class="perfil-actions">
+            <button class="edit-btn">Editar Perfil</button>
+            <button class="orders-btn">Mis Pedidos</button>
+            <button type="button" class="logout-btn" id="logoutBtn" onclick="cerrarSesion()">
+                Cerrar Sesión
+            </button>
+        </div>
+    </div>
+</section>
+
+<script>
+    // ==================== PROTECCIÓN DE RUTA ====================
+    (function protegerRuta() {
+        const token = localStorage.getItem('userToken');
+        if (!token) {
+            // No hay sesión, redirigir al login
+            window.location.replace('/Index.html');
+            return;
+        }
+    })();
+
+    // ==================== CARGAR DATOS DEL USUARIO ====================
+    function cargarDatosUsuario() {
+        const nombre = localStorage.getItem('userName');
+        const email = localStorage.getItem('userEmail') || 'No disponible';
+        
+        if (nombre) {
+            document.getElementById('nombreUsuario').textContent = nombre;
+            document.getElementById('emailUsuario').textContent = email;
+        } else {
+            // Si no hay datos, redirigir al login
+            window.location.replace('/index.html');
+        }
+    }
+
+    // Cargar datos al iniciar
+    cargarDatosUsuario();
+
+    // ==================== FUNCIÓN CERRAR SESIÓN ====================
+    async function cerrarSesion() {
+        // Confirmación
+        if (!confirm('¿Estás seguro de que deseas cerrar sesión?')) {
+            return;
+        }
+
+        const btn = document.getElementById('logoutBtn');
+        btn.disabled = true;
+        btn.textContent = 'Cerrando...';
+
+        try {
+            const token = localStorage.getItem('userToken');
+            const backendBase = window.location.origin.includes('5500')
+                ? 'http://localhost:3000'
+                : '';
+
+            // Notificar al backend (opcional pero recomendado)
+            if (token) {
+                await fetch(backendBase + '/api/logout', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + token
+                    }
+                });
+            }
+
+        } catch (err) {
+            console.log('Error al notificar logout:', err);
+            // Continuar de todos modos
+        }
+
+        // Limpiar TODO el almacenamiento del usuario
+        localStorage.removeItem('userToken');
+        localStorage.removeItem('userRole');
+        localStorage.removeItem('userName');
+        localStorage.removeItem('userEmail');
+        sessionStorage.clear();
+
+        // Redirigir al login (replace evita volver atrás)
+        window.location.replace('/index.html');
+    }
+</script>
+
+</body>
+</html>
