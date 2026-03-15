@@ -1,53 +1,16 @@
-.about{
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
     background:#f6f1f0;
-    padding:80px 0;
-}
-
-.about-container{
-    width:90%;
-    max-width:1200px;
-    margin:0 auto;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:80px;
-}
-
-/* IMAGEN */
-.about-image{
-    flex:1;
-    display:flex;
-    justify-content:center;
-}
-
-.about-image img{
-    width:100%;
-    max-width:520px;
-    height:auto;
-}
-
-/* TEXTO */
-.about-text{
-    flex:1;
-}
-
-.about-text h1{
-    font-family:'Cormorant Garamond', serif;
-    font-size:52px;
-    margin-bottom:25px;
+    font-family:'Poppins', sans-serif;
     color:#4b3b3f;
 }
 
-.about-text p{
-    font-family:'Poppins', sans-serif;
-    font-size:16px;
-    line-height:1.8;
-    margin-bottom:18px;
-    color:#6b555a;
-}
-/* ===== NAVBAR THE QUEENS ===== */
-
+/* ===== NAVBAR ===== */
 .topbar{
     display:flex;
     align-items:center;
@@ -74,116 +37,408 @@
     font-size:14px;
     letter-spacing:2px;
     color:#4b3b3f;
-    transition:0.3s;
+    transition:0.3s ease;
 }
 
 .menu a:hover{
     color:#b76e79;
 }
 
-/* ICONOS */
-
 .icons{
     display:flex;
     align-items:center;
-    gap:20px;
-}
-
-.icons img{
-    width:20px;
-    height:20px;
-    object-fit:contain;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    background: #f6f1f0;
-    font-family: 'Poppins', sans-serif;
-    color: #4b3b3f;
-}
-
-.icons img{
-    width: 22px;
-    height: 22px;
-    object-fit: contain;
-}
-
-.icons{
-    display: flex;
-    align-items: center;
-    gap: 18px;
+    gap:18px;
 }
 
 .icons a{
-    display: flex;
-    align-items: center;
+    display:flex;
+    align-items:center;
 }
+
+.icons img{
+    width:22px;
+    height:22px;
+    object-fit:contain;
+}
+
+/* ===== SOBRE NOSOTROS ===== */
 .about{
     background:#f6f1f0;
-    padding:80px 0;
+    padding:80px 0 40px;
 }
 
 .about-container{
     width:90%;
     max-width:1200px;
     margin:auto;
-
     display:flex;
     align-items:center;
     justify-content:space-between;
     gap:80px;
 }
 
-/* TEXTO */
 .about-text{
     flex:1;
+}
+
+.about-tag{
+    display:inline-block;
+    font-size:13px;
+    letter-spacing:3px;
+    color:#b98b93;
+    margin-bottom:18px;
 }
 
 .about-text h1{
     font-family:'Cormorant Garamond', serif;
     font-size:64px;
     color:#a8737a;
-    margin-bottom:25px;
+    margin-bottom:18px;
+    line-height:1;
+}
+
+.about-subtitle{
+    font-size:19px;
+    color:#b07d86;
+    margin-bottom:28px;
+    font-style:italic;
+    line-height:1.6;
+    max-width:540px;
 }
 
 .about-text p{
-    font-family:'Poppins', sans-serif;
     font-size:17px;
-    line-height:1.8;
+    line-height:1.9;
     color:#6b555a;
     margin-bottom:18px;
+    max-width:600px;
 }
 
-/* CONTENEDOR DE IMAGEN */
+.about-quote{
+    margin-top:28px;
+    padding-left:20px;
+    border-left:3px solid #d8b1b8;
+    font-family:'Cormorant Garamond', serif;
+    font-size:28px;
+    line-height:1.5;
+    color:#a8737a;
+    max-width:620px;
+}
+
 .about-image{
     flex:1;
     display:flex;
     justify-content:center;
+    position:relative;
 }
 
-/* MARCO */
 .about-image::before{
     content:"";
     position:absolute;
-    width:380px;
-    height:500px;
+    width:390px;
+    height:510px;
     border:2px solid #e6c7cc;
     border-radius:30px;
-    transform:translate(40px,40px);
-    z-Index:0;
-}
-
-/* TARJETA */
-.about-image{
-    position:relative;
+    transform:translate(38px,38px);
+    z-index:0;
 }
 
 .about-image img{
-    width:360px;
-    background:#f9f5f4;
-    padding:30px;
+    width:100%;
+    max-width:380px;
+    background:#fbf8f7;
+    padding:28px;
     border-radius:30px;
     position:relative;
-    z-Index:1;
+    z-index:1;
+    box-shadow:0 18px 35px rgba(123, 93, 101, 0.08);
+    transition:transform 0.4s ease, box-shadow 0.4s ease;
 }
+
+.about-image img:hover{
+    transform:scale(1.03);
+    box-shadow:0 24px 45px rgba(123, 93, 101, 0.14);
+}
+
+/* ===== VALORES ===== */
+.values-section{
+    width:90%;
+    max-width:1200px;
+    margin:40px auto 100px;
+    text-align:center;
+}
+
+.values-header{
+    max-width:700px;
+    margin:0 auto 45px;
+}
+
+.values-tag{
+    display:inline-block;
+    font-size:13px;
+    letter-spacing:3px;
+    color:#b98b93;
+    margin-bottom:15px;
+}
+
+.values-header h2{
+    font-family:'Cormorant Garamond', serif;
+    font-size:52px;
+    color:#4b3b3f;
+    margin-bottom:15px;
+}
+
+.values-header p{
+    font-size:16px;
+    line-height:1.8;
+    color:#7a666b;
+}
+
+.values-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:25px;
+}
+
+.value-card{
+    background:#fbf8f7;
+    border:1px solid #eadadd;
+    border-radius:28px;
+    padding:35px 28px;
+    transition:transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    box-shadow:0 10px 25px rgba(100, 78, 84, 0.04);
+}
+
+.value-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 18px 35px rgba(100, 78, 84, 0.10);
+    border-color:#dcb8bf;
+}
+
+.value-icon{
+    width:68px;
+    height:68px;
+    margin:0 auto 20px;
+    border-radius:50%;
+    background:#f7edef;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+    box-shadow:0 6px 14px rgba(183, 110, 121, 0.08);
+}
+
+.value-card h3{
+    font-family:'Cormorant Garamond', serif;
+    font-size:30px;
+    color:#a8737a;
+    margin-bottom:12px;
+}
+
+.value-card p{
+    font-size:15px;
+    line-height:1.8;
+    color:#6f5d62;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px){
+    .menu{
+        gap:22px;
+    }
+
+    .about-container{
+        gap:45px;
+    }
+
+    .about-text h1{
+        font-size:54px;
+    }
+
+    .values-grid{
+        grid-template-columns:repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px){
+    .topbar{
+        padding:20px 25px;
+        flex-direction:column;
+        gap:18px;
+    }
+
+    .menu{
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:16px;
+    }
+
+    .about{
+        padding:60px 0 20px;
+    }
+
+    .about-container{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .about-text p,
+    .about-subtitle,
+    .about-quote{
+        max-width:100%;
+    }
+
+    .about-quote{
+        padding-left:0;
+        border-left:none;
+        border-top:2px solid #d8b1b8;
+        padding-top:18px;
+    }
+
+    .about-image::before{
+        width:300px;
+        height:400px;
+        transform:translate(18px,18px);
+    }
+
+    .about-image img{
+        max-width:300px;
+        padding:20px;
+    }
+
+    .values-grid{
+        grid-template-columns:1fr;
+    }
+
+    .values-header h2{
+        font-size:42px;
+    }
+
+    .about-text h1{
+        font-size:48px;
+    }
+}
+
+@media (max-width: 480px){
+    .brand{
+        font-size:16px;
+    }
+
+    .menu a{
+        font-size:12px;
+        letter-spacing:1px;
+    }
+
+    .about-text h1{
+        font-size:40px;
+    }
+
+    .about-subtitle{
+        font-size:17px;
+    }
+
+    .values-header h2{
+        font-size:36px;
+    }
+
+    .value-card{
+        padding:28px 22px;
+    }
+}
+
+.value-icon img{
+    width:30px;
+    height:30px;
+    object-fit:contain;
+}
+
+.value-icon img{
+    width:35px;
+    height:35px;
+    object-fit:contain;
+}
+
+/* ===== MISIÓN ===== */
+
+.mission{
+    background:#fbf8f7;
+    padding:90px 20px;
+    text-align:center;
+}
+
+.mission-container{
+    max-width:800px;
+    margin:auto;
+}
+
+.mission-tag{
+    font-size:13px;
+    letter-spacing:3px;
+    color:#b98b93;
+    display:block;
+    margin-bottom:18px;
+}
+
+.mission h2{
+    font-family:'Cormorant Garamond', serif;
+    font-size:48px;
+    color:#4b3b3f;
+    margin-bottom:20px;
+}
+
+.mission p{
+    font-size:18px;
+    line-height:1.9;
+    color:#6b555a;
+}
+
+/* ===== BANNER FINAL ===== */
+
+.cta-banner{
+    background:linear-gradient(
+        rgba(75,59,63,0.6),
+        rgba(75,59,63,0.6)
+    ),
+    url("/images/banner-flores.jpg");
+
+    background-size:cover;
+    background-position:center;
+
+    padding:120px 20px;
+    text-align:center;
+    color:white;
+}
+
+.cta-content{
+    max-width:700px;
+    margin:auto;
+}
+
+.cta-banner h2{
+    font-family:'Cormorant Garamond', serif;
+    font-size:48px;
+    margin-bottom:20px;
+}
+
+.cta-banner p{
+    font-size:18px;
+    margin-bottom:35px;
+    line-height:1.8;
+}
+
+.cta-button{
+    display:inline-block;
+    padding:14px 32px;
+    background:#b76e79;
+    color:white;
+    text-decoration:none;
+    border-radius:30px;
+    font-size:15px;
+    letter-spacing:1px;
+    transition:0.3s;
+}
+
+.cta-button:hover{
+    background:#9f5e68;
+}
+

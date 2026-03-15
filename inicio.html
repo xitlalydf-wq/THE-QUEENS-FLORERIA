@@ -1,141 +1,345 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Queens</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Queens</title>
 
-<link rel="stylesheet" href="/public/CSS/inicio.css">
+  <link rel="stylesheet" href="/public/CSS/inicio.css">
 
-<!-- Tipografías -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
+  <!-- Tipografías -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
 <body>
 
+  <!-- PRELOADER -->
+  <div class="loader" id="loader">
+    <div class="loader-content">
+      <div class="flower-loader">
+        <span class="petal petal-1"></span>
+        <span class="petal petal-2"></span>
+        <span class="petal petal-3"></span>
+        <span class="petal petal-4"></span>
+        <span class="petal petal-5"></span>
+        <span class="petal petal-6"></span>
+        <span class="flower-center"></span>
+      </div>
 
-<!-- NAV -->
-<header class="topbar">
-
-<div class="brand">THE QUEENS</div>
-
-<nav class="menu">
-
-<a href="/inicio.html" id="btnInicio">INICIO</a>
-
-<a href="/productos/ramos.html">RAMOS</a>
-
-<a href="/productos/decorativos.html">ARREGLOS</a>
-
-<a href="/productos/accesorios.html">ACCESORIOS</a>
-
-<a href="/sobre-nosotros.html">SOBRE NOSOTROS</a>
-
-<a href="/contacto.html">CONTACTO</a>
-
-</nav>
-
-<div class="icons">
-        <a href="#">
-            <img src="/images/buscar.png" alt="Buscar">
-        </a>
-<a href="#">
-<img src="/images/usuario.png" alt="Usuario">
-</a>
-
-<a href="/Compras/carrito.html">
-<img src="/images/carrito.png" alt="Carrito">
-</a>
-
-</div>
-
-</header>
-
-
-<!-- HERO INICIO -->
-
-<section class="hero-inicio">
-
-<div class="hero-contenido">
-
-<p class="hero-subtitle">
-COLECCIÓN FLORAL
-</p>
-
-<h1 class="hero-title">
-THE QUEENS FLORERÍA
-</h1>
-
-<h2 class="hero-title-sec">
-Arte Floral
-</h2>
-
-
-<div class="hero-imagen" id="heroImagen">
-
-<!--  -->
-
-<img src="/images/flor.png  " alt="The Queens Florería">
-
-</div>
-
-</div>
-
-<section class="inicio-categorias">
-
-    <div class="categorias-grid">
-
-        <a href="/productos/ramos.html" class="categoria-card">
-            <img src="images/cat-ramos.jpg" alt="Ramos">
-            <span>RAMOS</span>
-        </a>
-
-        <a href="/productos/decorativos.html" class="categoria-card">
-            <img src="images/cat-arreglos.jpg" alt="Arreglos">
-            <span>ARREGLOS</span>
-        </a>
-
-        <a href="/productos/accesorios.html" class="categoria-card">
-            <img src="images/cat-accesorios.jpg" alt="Accesorios">
-            <span>ACCESORIOS</span>
-        </a>
-
-        <a href="#" class="categoria-card">
-            <img src="images/cat-extra.jpg" alt="">
-            <span></span>
-        </a>
-
+      <h1 class="loader-title">THE QUEENS</h1>
+      <p class="loader-subtitle">Arte floral</p>
     </div>
 
+    <div class="loader-door"></div>
+  </div>
+
+  <!-- NAV -->
+  <header class="topbar">
+    <a href="/inicio.html" class="brand">THE QUEENS</a>
+
+    <nav class="menu">
+      <a href="/inicio.html" id="btnInicio">INICIO</a>
+      <a href="/productos/ramos.html">RAMOS</a>
+      <a href="/productos/decorativos.html">ARREGLOS</a>
+      <a href="/productos/accesorios.html">ACCESORIOS</a>
+      <a href="/sobre-nosotros.html">SOBRE NOSOTROS</a>
+      <a href="/contacto.html">CONTACTO</a>
+    </nav>
+
+    <div class="icons">
+      <a href="#">
+        <img src="/images/buscar.png" alt="Buscar">
+      </a>
+
+      <a href="#">
+        <img src="/images/usuario.png" alt="Usuario">
+      </a>
+
+      <a href="/Compras/carrito.html">
+        <img src="/images/carrito.png" alt="Carrito">
+      </a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero-inicio reveal">
+  <div class="hero-contenido">
+    <p class="hero-subtitle">COLECCIÓN FLORAL</p>
+    <h1 class="hero-title">THE QUEENS FLORERÍA</h1>
+    <h2 class="hero-title-sec">Arte Floral</h2>
+    <a href="#colecciones" class="btn-colecciones">
+    Colecciones
+</a>
+  </div>
 </section>
-<script>
 
-document.addEventListener("DOMContentLoaded", function () {
 
-const btnInicio = document.getElementById("btnInicio");
+  <!-- POR QUE COMPRAR -->
+  <section class="why-queens reveal">
+    <h2>¿Por qué comprar en The Queens Florería?</h2>
 
-const heroImagen = document.getElementById("heroImagen");
+    <div class="why-container">
+      <div class="why-card">
+        <img src="images/ubicacion.png" alt="Ubicación">
+        <h3>Local Store</h3>
+        <p>Encuéntranos en nuestra tienda en línea o visita nuestro local.</p>
+      </div>
 
-if (btnInicio && heroImagen) {
+      <div class="why-card">
+        <img src="images/flores (1).png" alt="Personalizados">
+        <h3>Personalizados</h3>
+        <p>Arreglos únicos diseñados especialmente para ti.</p>
+      </div>
 
-btnInicio.addEventListener("click", function () {
+      <div class="why-card">
+        <img src="images/entrega-rapida.png" alt="Envío rápido">
+        <h3>Envío rápido</h3>
+        <p>Entregas rápidas y seguras a tu ubicación.</p>
+      </div>
 
-heroImagen.classList.remove("animar-hero");
+      <div class="why-card">
+        <img src="/images/fresca.png" alt="Flores frescas">
+        <h3>Flores frescas</h3>
+        <p>Flores frescas seleccionadas con la mejor calidad.</p>
+      </div>
+    </div>
+  </section>
 
-void heroImagen.offsetWidth;
+  <!-- PRODUCTOS -->
+   <section id="colecciones"></section>
+  <section class="ocasiones">
+  <h2 class="titulo-ocasiones">Colecciones para cada ocasión</h2>
+ <p class="texto-ocasiones">Descubre el ramo perfecto para cada momento especial.</p>
+  <div class="ocasiones-container">
 
-heroImagen.classList.add("animar-hero");
+    <div class="ocasion-card">
+      <div class="ocasion-card-inner">
 
-});
+        <div class="ocasion-front">
+          <div class="ocasion-portada">
+            <span>Portada</span>
+          </div>
 
-}
+          <div class="ocasion-front-info">
+            <p class="ocasion-fecha">14 febrero</p>
+            <h3 class="ocasion-titulo">San Valentín</h3>
+            <p class="ocasion-sub">Portada principal de la ocasión.</p>
+          </div>
+        </div>
 
-});
+        <div class="ocasion-back">
+          <div class="ocasion-back-imagen">
+            <span>Ramo</span>
+          </div>
 
-</script>
+          <div class="ocasion-back-info">
+            <h3 class="ocasion-back-titulo">San Valentín</h3>
+            <p class="ocasion-back-texto">Aquí irá el ramo para esta ocasión.</p>
+            <a href="#" class="ocasion-btn">Ver más</a>
+          </div>
+        </div>
 
+      </div>
+    </div>
+
+    <div class="ocasion-card">
+      <div class="ocasion-card-inner">
+
+        <div class="ocasion-front">
+          <div class="ocasion-portada">
+            <span>Portada</span>
+          </div>
+
+          <div class="ocasion-front-info">
+            <p class="ocasion-fecha">21 marzo</p>
+            <h3 class="ocasion-titulo">Flores Amarillas</h3>
+            <p class="ocasion-sub">Portada principal de la ocasión.</p>
+          </div>
+        </div>
+
+        <div class="ocasion-back">
+          <div class="ocasion-back-imagen">
+            <span>Ramo</span>
+          </div>
+
+          <div class="ocasion-back-info">
+            <h3 class="ocasion-back-titulo">Flores Amarillas</h3>
+            <p class="ocasion-back-texto">Aquí irá el ramo para esta ocasión.</p>
+            <a href="#" class="ocasion-btn">Ver más</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="ocasion-card">
+      <div class="ocasion-card-inner">
+
+        <div class="ocasion-front">
+          <div class="ocasion-portada">
+            <span>Portada</span>
+          </div>
+
+          <div class="ocasion-front-info">
+            <p class="ocasion-fecha">10 mayo</p>
+            <h3 class="ocasion-titulo">Día de las Madres</h3>
+            <p class="ocasion-sub">Portada principal de la ocasión.</p>
+          </div>
+        </div>
+
+        <div class="ocasion-back">
+          <div class="ocasion-back-imagen">
+            <span>Ramo</span>
+          </div>
+
+          <div class="ocasion-back-info">
+            <h3 class="ocasion-back-titulo">Día de las Madres</h3>
+            <p class="ocasion-back-texto">Aquí irá el ramo para esta ocasión.</p>
+            <a href="#" class="ocasion-btn">Ver más</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="ocasion-card">
+      <div class="ocasion-card-inner">
+
+        <div class="ocasion-front">
+          <div class="ocasion-portada">
+            <span>Portada</span>
+          </div>
+
+          <div class="ocasion-front-info">
+            <p class="ocasion-fecha">Temporada</p>
+            <h3 class="ocasion-titulo">Graduación</h3>
+            <p class="ocasion-sub">Portada principal de la ocasión.</p>
+          </div>
+        </div>
+
+        <div class="ocasion-back">
+          <div class="ocasion-back-imagen">
+            <span>Ramo</span>
+          </div>
+
+          <div class="ocasion-back-info">
+            <h3 class="ocasion-back-titulo">Graduación</h3>
+            <p class="ocasion-back-texto">Aquí irá el ramo para esta ocasión.</p>
+            <a href="#" class="ocasion-btn">Ver más</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+<section class="promo-fecha-especial">
+  <div class="promo-fecha-contenido">
+
+    <div class="promo-fecha-img">
+      <img src="images/floramarilla.png" alt="Ramo de flores amarillas">
+    </div>
+
+    <div class="promo-fecha-texto">
+      <span class="promo-etiqueta">Fecha especial</span>
+      <h2>21 de Marzo, flores que hablan por ti</h2>
+      <p>
+        Haz tu pedido con anticipación y asegura ese ramo especial de flores amarillas.
+        En fechas importantes, los detalles se vuelven inolvidables.
+      </p>
+
+      <div class="promo-fecha-botones">
+        <a href="#" class="btn-promo-principal">Apartar ramo</a>
+        <a href="#" class="btn-promo-secundario">Ver colección</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+  </div>
+
+</section>
+
+</section>
+
+    </section>
+
+    <!-- Otras secciones de tu página -->
+
+    <!-- BOTON VOLVER ARRIBA -->
+   <button id="btnArriba">
+  <i class="fa-solid fa-arrow-up"></i>
+</button>
+
+    <!-- SCRIPT -->
+    <script>
+        const btn = document.getElementById("btnArriba");
+
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 500) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        });
+
+        btn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+    </script>
+
+
+
+  <script>
+    window.addEventListener("load", () => {
+      const loader = document.getElementById("loader");
+
+      if (loader) {
+        setTimeout(() => {
+          loader.classList.add("slide-out");
+          document.body.classList.add("page-ready");
+
+          setTimeout(() => {
+            loader.style.display = "none";
+          }, 1100);
+        }, 3200);
+      }
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+        }
+      });
+    });
+
+    document.querySelectorAll(".reveal").forEach((section) => {
+      observer.observe(section);
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const btnInicio = document.getElementById("btnInicio");
+      const heroImagen = document.getElementById("heroImagen");
+
+      if (btnInicio && heroImagen) {
+        btnInicio.addEventListener("click", function (e) {
+          if (window.location.pathname.includes("inicio.html") || window.location.pathname === "/") {
+            e.preventDefault();
+            heroImagen.classList.remove("animar-hero");
+            void heroImagen.offsetWidth;
+            heroImagen.classList.add("animar-hero");
+          }
+        });
+      }
+    });
+  </script>
 
 </body>
-
 </html>

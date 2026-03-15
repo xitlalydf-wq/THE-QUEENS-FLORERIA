@@ -1,40 +1,211 @@
-<!DOCTYPE html> 
-<html lang="es"> 
-    <head> 
-        <meta charset="UTF-8"> 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-         <title>Decorativos</title> 
-         <link rel="stylesheet" href="/public/CSS/Decorativos.css"> 
-         <!-- Tipografías --> <link rel="preconnect" href="https://fonts.googleapis.com"> 
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-          <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet"> 
-        </head> <body> <!-- NAV --> <header class="topbar"> <div class="brand">THE QUEENS</div> 
-            <nav class="menu"> <a href="/inicio.html">INICIO</a> 
-                <a href="/productos/ramos.html">RAMOS</a> 
-                <a href="/productos/decorativos.html">ARREGLOS</a>
-                 <a href="/productos/accesorios.html">ACCESORIOS</a>
-                  <a href="/sobre-nosotros.html">SOBRE NOSOTROS</a> 
-                  <a href="/contacto.html">CONTACTO</a> </nav> 
-                  <div class="icons"> <a href="#"> 
-                    <img src="/images/buscar.png" alt="Buscar"> </a> 
-                    <a href="#"> <img src="/images/usuario.png" alt="Usuario"> </a> 
-                    <a href="/Compras/carrito.html"> 
-                        <img src="/images/carrito.png" alt="Carrito"> </a>
+<!DOCTYPE html>
+<html lang="es">
 
-                     </div> </header> 
-    <!-- NUEVA SECCIÓN DECORATIVOS -->
-    <section class="ramos-section"> 
-    <div class="ramos-container">
-            <div class="ramos-header">
-                <p class="ramos-subtitle">Colección decorativa</p> 
-                <h2 class="ramos-title">Decorativos</h2>
-                <div class="ramos-tabs"> 
-                <a href="#" class="tab-link active" data-filter="centros">Centros</a> 
-                <a href="#" class="tab-link" data-filter="eventos">Eventos</a>
-                    <a href="#" class="tab-link" data-filter="especial">Especiales</a> 
-                    <a href="#" class="tab-link" data-filter="todos">Todos</a> </div> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decorativos</title>
+    <link rel="stylesheet" href="/public/CSS/Decorativos.css">
+    
 
-                <div class="decorativos-grid" id="decorativos-container">
-                    
-//<!--Probando 123-->
+    <!-- Tipografías -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    
+    <!-- NAV -->
+    <header class="topbar">
+        <div class="brand">THE QUEENS</div>
+
+        <nav class="menu">
+            <a href="/inicio.html">INICIO</a>
+            <a href="/productos/ramos.html">RAMOS</a>
+            <a href="/productos/decorativos.html">ARREGLOS</a>
+            <a href="/productos/accesorios.html">ACCESORIOS</a>
+            <a href="/sobre-nosotros.html">SOBRE NOSOTROS</a>
+            <a href="/contacto.html">CONTACTO</a>
+        </nav>
+
+        <div class="icons">
+            <a href="#">
+                <img src="/images/buscar.png" alt="Buscar">
+            </a>
+
+            <a href="#">
+                <img src="/images/usuario.png" alt="Usuario">
+            </a>
+
+            <a href="/Compras/carrito.html">
+                <img src="/images/carrito.png" alt="Carrito">
+            </a>
+        </div>
+    </header>
+
+    <!-- SECCIÓN DECORATIVOS -->
+    <section class="decorativos-section">
+        <div class="decorativos-container">
+
+            <div class="decorativos-header">
+                <p class="decorativos-subtitle">Colección floral</p>
+                <h2 class="decorativos-title">Decorativos</h2>
+
+                <div class="decorativos-tabs">
+                    <a href="#" class="tab-link active" data-filter="clasicos">Clásicos</a>
+                    <a href="#" class="tab-link" data-filter="premium">Premium</a>
+                    <a href="#" class="tab-link" data-filter="especiales">Especiales</a>
+                    <a href="#" class="tab-link" data-filter="todos">Todos</a>
+                </div>
+            </div>
+
+            <div class="decorativos-grid">
+
+                <div class="decorativo-card" data-category="clasicos">
+                    <button class="btn-fav">♡</button>
+
+                    <div class="decorativo-img-box">
+                        <img src="../images/ramo1.png" alt="Ramo Dulzura">
+                    </div>
+
+                    <h3>Decorativo “Dulzura”</h3>
+                    <p class="stock">• Disponible</p>
+                    <p class="precio">$850 MXN</p>
+
+                    <a href="../Compras/carrito.html" class="btn-ramo btn-carrito">
+                        Añadir al carrito
+                    </a>
+                </div>
+
+                <div class="decorativo-card" data-category="premium">
+                    <button class="btn-fav">♡</button>
+
+                    <div class="decorativo-img-box">
+                        <img src="../images/ramo2.png" alt="Decorativo Romance">
+                    </div>
+
+                    <h3>Decorativo “Romance”</h3>
+                    <p class="stock">• Disponible</p>
+                    <p class="precio">$1,150 MXN</p>
+
+                    <a href="../Compras/carrito.html" class="btn-decorativo btn-carrito">
+                        Añadir al carrito
+                    </a>
+                </div>
+
+                <div class="decorativo-card" data-category="especiales">
+                    <button class="btn-fav">♡</button>
+
+                    <div class="decorativo-img-box">
+                        <img src="../images/ramo3.png" alt="Decorativo Aurora">
+                    </div>
+
+                    <h3>Decorativo “Aurora”</h3>
+                    <p class="stock">• Disponible</p>
+                    <p class="precio">$990 MXN</p>
+
+                    <a href="../Compras/carrito.html" class="btn-decorativo btn-carrito">
+                        Añadir al carrito
+                    </a>
+                </div>
+
+                <div class="decorativo-card" data-category="clasicos">
+                    <button class="btn-fav">♡</button>
+
+                    <div class="decorativo-img-box">
+                        <img src="../images/ramo4.png" alt="Decorativo Primavera">
+                    </div>
+
+                    <h3>Decorativo “Primavera”</h3>
+                    <p class="stock">• Disponible</p>
+                    <p class="precio">$1,250 MXN</p>
+
+                    <a href="../Compras/carrito.html" class="btn-decorativo btn-carrito">
+                        Añadir al carrito
+                    </a>
+                </div>
+
+                <div class="decorativo-card" data-category="especiales">
+                    <button class="btn-fav">♡</button>
+
+                    <div class="decorativo-img-box">
+                        <img src="../images/ramo5.png" alt="Decorativo Nube">
+                    </div>
+
+                    <h3>Decorativo “Nube”</h3>
+                    <p class="stock">• Disponible</p>
+                    <p class="precio">$780 MXN</p>
+
+                    <a href="../Compras/carrito.html" class="btn-decorativo btn-carrito">
+                        Añadir al carrito
+                    </a>
+                </div>
+
+                <div class="decorativo-card" data-category="premium">
+                    <button class="btn-fav">♡</button>
+
+                    <div class="decorativo-img-box">
+                        <img src="../images/ramo6.png" alt="Decorativo Encanto">
+                    </div>
+
+                    <h3>Decorativo “Encanto”</h3>
+                    <p class="stock">• Disponible</p>
+                    <p class="precio">$1,090 MXN</p>
+
+                    <a href="../Compras/carrito.html" class="btn-decorativo btn-carrito">
+                        Añadir al carrito
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FILTROS -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const tabLinks = document.querySelectorAll('.tab-link');
+        const cards = document.querySelectorAll('.ramo-card');
+
+        tabLinks.forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const filter = this.getAttribute('data-filter');
+
+                tabLinks.forEach(tab => tab.classList.remove('active'));
+                this.classList.add('active');
+
+                cards.forEach(card => {
+                    const category = card.getAttribute('data-category');
+
+                    if (filter === 'todos' || category === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    });
+    </script>
+
+    <!-- FAVORITOS -->
+    <script>
+    document.querySelectorAll(".btn-fav").forEach(boton => {
+        boton.addEventListener("click", function(){
+            if(this.classList.contains("active")){
+                this.classList.remove("active");
+                this.innerHTML = "♡";
+            }else{
+                this.classList.add("active");
+                this.innerHTML = "♥";
+            }
+        });
+    });
+    </script>
 </body>
+//<!--Probando 123-->
+</html>
