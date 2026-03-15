@@ -329,3 +329,74 @@ transform:scale(1.05);
     align-items:flex-end;
     padding:30px;
 }
+
+.hero-floral{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* carrusel */
+
+.carousel-background{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-slide{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+}
+
+.carousel-slide img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(2px);
+    transform: scale(1.05);
+}
+
+.carousel-slide.active{
+    opacity: 1;
+}
+
+/* overlay */
+
+.hero-overlay{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(245,240,240,0.6);
+}
+
+/* texto */
+
+.hero-content{
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.hero-title{
+    font-size: 70px;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+.hero-text{
+    font-size: 40px;
+}
+
+.btn-floral{
+    margin-top: 25px;
+    padding: 14px 34px;
+    border: 1px solid #5b474d;
+    border-radius: 40px;
+    text-decoration: none;
+}
