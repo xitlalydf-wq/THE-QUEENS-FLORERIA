@@ -952,3 +952,150 @@ body {
     font-size: 28px;
   }
 }
+
+.texto-ocasiones {
+  font-size: 1rem;
+  color: #6d6d6d;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 35px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.promo-fecha-especial {
+  padding: 80px 8%;
+  background: linear-gradient(180deg, #fffafa 0%, #fdf3f6 100%);
+}
+
+.promo-fecha-contenido {
+  max-width: 1200px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(226, 196, 205, 0.6);
+  border-radius: 28px;
+  box-shadow: 0 15px 40px rgba(180, 140, 150, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+  padding: 50px;
+  overflow: hidden;
+  position: relative;
+}
+
+.promo-fecha-contenido::before {
+  content: "";
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 180px;
+  height: 180px;
+  background: rgba(245, 214, 221, 0.35);
+  border-radius: 50%;
+}
+
+.promo-fecha-contenido::after {
+  content: "";
+  position: absolute;
+  bottom: -50px;
+  left: -50px;
+  width: 140px;
+  height: 140px;
+  background: rgba(248, 228, 233, 0.45);
+  border-radius: 50%;
+}
+
+.promo-fecha-img {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.promo-fecha-img img {
+  width: 100%;
+  max-width: 340px;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 30px rgba(0, 0, 0, 0.12));
+  transition: transform 0.4s ease;
+}
+
+.promo-fecha-img img:hover {
+  transform: scale(1.04);
+}
+
+.promo-fecha-texto {
+  flex: 1.2;
+  position: relative;
+  z-index: 2;
+}
+
+.promo-etiqueta {
+  display: inline-block;
+  padding: 8px 16px;
+  background: #f8e3e8;
+  color: #b46a7d;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 999px;
+  margin-bottom: 18px;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.promo-fecha-texto h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3rem;
+  line-height: 1.1;
+  color: #3f2b33;
+  margin-bottom: 18px;
+}
+
+.promo-fecha-texto p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #6d5a61;
+  margin-bottom: 28px;
+  max-width: 540px;
+}
+
+.promo-fecha-botones {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn-promo-principal,
+.btn-promo-secundario {
+  padding: 13px 26px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-promo-principal {
+  background: #d98fa3;
+  color: #fff;
+  box-shadow: 0 10px 25px rgba(217, 143, 163, 0.28);
+}
+
+.btn-promo-principal:hover {
+  background: #c97b91;
+  transform: translateY(-2px);
+}
+
+.btn-promo-secundario {
+  border: 1.5px solid #d7a4b2;
+  color: #b46a7d;
+  background: transparent;
+}
+
+.btn-promo-secundario:hover {
+  background: #f8e3e8;
+  transform: translateY(-2px);
+}
