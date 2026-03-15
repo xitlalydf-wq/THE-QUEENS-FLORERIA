@@ -48,7 +48,7 @@ const config = {
 const poolPromise = new sql.ConnectionPool(config)
   .connect()
   .then(pool => {
-    console.log('Conectado a SQL Server exitosamente 🌸');
+    console.log('Conectado a SQL Server exitosamente ');
     return pool;
   })
   .catch(err => {
