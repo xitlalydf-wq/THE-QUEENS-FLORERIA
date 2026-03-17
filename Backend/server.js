@@ -1,4 +1,5 @@
 const path = require('path');
+require('dotenv').config();
 
 const express = require('express');
 const sql = require('mssql');
@@ -11,10 +12,14 @@ const blacklistTokens = new Set();
 const app = express();
 
 app.use(cors({
-  origin: true,               // permite cualquier origen (dev)
-  methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type'],
-  credentials: true
+  origin: function (origin, callback) {
+    // Permite cualquier origen en desarrollo
+    callback(null, true);
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With'],
+  credentials: true,
+  optionsSuccessStatus: 200 // Para navegadores legacy
 }));
 app.use(express.json());
 
@@ -56,14 +61,16 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'Index.html'));
 });
 
-// Configuración de conexión (ajusta si es necesario)
+
+  // Configuración de conexión (ajusta si es necesario)
 const config = {
-  user: 'floreria_node',
-  password: 'test1234',
-  server: 'CHALDEAP\\SQLEXPRESS',
-  database: 'DB_THE_QUEENS_FLORERIA',
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  server: process.env.DB_SERVER,
+  database: process.env.DB_DATABASE,
+  port: parseInt(process.env.DB_PORT),
   options: {
-    encrypt: true,
+    encrypt: true,  // o process.env.DB_ENCRYPT === 'true'
     trustServerCertificate: true
   },
   pool: {

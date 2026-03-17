@@ -74,9 +74,10 @@
                 <h2 class="ramos-title">Ramos</h2>
 
                 <div class="ramos-tabs">
-                    <a href="#" class="tab-link active" data-filter="clasicos">Clásicos</a>
-                    <a href="#" class="tab-link" data-filter="premium">Premium</a>
-                    <a href="#" class="tab-link" data-filter="especiales">Especiales</a>
+                   <a href="#" class="tab-link active" data-filter="rosas_rojas">Rosas rojas</a>
+                    <a href="#" class="tab-link" data-filter="rosas_amarillas">Rosas amarillas</a>
+                    <a href="#" class="tab-link" data-filter="tulipanes">Tulipanes</a>
+                    <a href="#" class="tab-link" data-filter="lirios">Lirios</a>
                     <a href="#" class="tab-link" data-filter="todos">Todos</a>
                 </div>
             </div>
@@ -90,8 +91,10 @@
 
     <!-- LOAD PRODUCTS -->
     <script>
+    const API_BASE = 'http://localhost:3000';
+
     document.addEventListener('DOMContentLoaded', () => {
-        fetch('/api/productos')
+        fetch(`${API_BASE}/api/productos`)
             .then(res => {
                 if (!res.ok) {
                     throw new Error(`HTTP error! status: ${res.status}`);

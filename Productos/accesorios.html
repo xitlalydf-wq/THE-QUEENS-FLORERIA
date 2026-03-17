@@ -73,9 +73,9 @@
 <h2 class="accesorios-title">Accesorios</h2>
 
 <div class="accesorios-tabs">
-<a href="#" class="tab-link active" data-filter="vases">Jarrones</a>
-<a href="#" class="tab-link" data-filter="extras">Extras</a>
-<a href="#" class="tab-link" data-filter="regalos">Regalos</a>
+<a href="#" class="tab-link active" data-filter="peluches">Peluches</a>
+<a href="#" class="tab-link" data-filter="globos_burbuja">Globos burbuja</a>
+<a href="#" class="tab-link" data-filter="coronas">Coronas</a>
 <a href="#" class="tab-link" data-filter="todos">Todos</a>
 </div>
 </div>
@@ -88,8 +88,10 @@
 
 <!-- Carga dinámica de accesorios -->
 <script>
+const API_BASE = 'http://localhost:3000';
+
 document.addEventListener('DOMContentLoaded', () => {
-    fetch('/api/productos')
+    fetch(`${API_BASE}/api/productos`)
         .then(res => {
             if (!res.ok) {
                 throw new Error(`HTTP error! status: ${res.status}`);

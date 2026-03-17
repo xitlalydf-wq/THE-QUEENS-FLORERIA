@@ -1,3 +1,5 @@
+const API_BASE = 'http://localhost:3000';
+
 document.addEventListener('DOMContentLoaded', () => {
     loadProductos();
     setupForm();
@@ -7,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function loadProductos() {
     try {
-        const response = await fetch('/api/productos');
+        const response = await fetch(`${API_BASE}/api/productos`);
         const productos = await response.json();
         renderProductos(productos);
     } catch (error) {
@@ -47,9 +49,9 @@ function setupForm() {
     const categoriaSelect = document.getElementById('categoria-select');
 
     const categoriasPorTipo = {
-        'Ramo': ['clasicos', 'premium', 'especiales', 'eventos', 'especial'],
-        'Accesorio': ['vases', 'regalos', 'extras'],
-        'Decorativo': ['centros', 'regalos', 'eventos']
+         'Ramo': ['rosas_rojas', 'rosas_amarillas', 'tulipanes', 'lirios'],
+         'Accesorio': ['peluches', 'globos_burbuja', 'coronas'],
+         'Decorativo': ['graduaciones', 'arreglos', 'arreglo_de_carro']
     };
 
     tipoSelect.addEventListener('change', () => {
@@ -72,7 +74,7 @@ function setupForm() {
         const formData = new FormData(form);
 
         try {
-            const response = await fetch('/api/productos', {
+            const response = await fetch(`${API_BASE}/api/productos`, {
                 method: 'POST',
                 body: formData // Enviar FormData para archivos
             });
@@ -94,7 +96,7 @@ function setupForm() {
 async function editProducto(tipo, id) {
     try {
         // Fetch current product data
-        const response = await fetch(`/api/productos/${tipo}/${id}`);
+        const response = await fetch(`${API_BASE}/api/productos/${tipo}/${id}`);
         if (!response.ok) {
             showNotification('Error al cargar datos del producto', 'error');
             return;
@@ -104,7 +106,7 @@ async function editProducto(tipo, id) {
         // Show edit modal
         showEditProductModal(product, async (updatedProduct) => {
             try {
-                const updateResponse = await fetch(`/api/productos/${tipo}/${id}`, {
+                const updateResponse = await fetch(`${API_BASE}/api/productos/${tipo}/${id}`, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -136,7 +138,7 @@ async function editProducto(tipo, id) {
 async function deleteProducto(tipo, id) {
     showConfirmModal('¿Está seguro de que desea eliminar este producto?', async () => {
         try {
-            const response = await fetch(`/api/productos/${tipo}/${id}`, {
+            const response = await fetch(`${API_BASE}/api/productos/${tipo}/${id}`, {
                 method: 'DELETE'
             });
             if (response.ok) {
