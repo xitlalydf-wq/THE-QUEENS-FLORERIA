@@ -1,52 +1,47 @@
 const path = require('path');
-require('dotenv').config();
-
 const express = require('express');
-const sql = require('mssql');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const multer = require('multer');
+require('dotenv').config();
+
+const pool = require('./db');
 
 const blacklistTokens = new Set();
-
 const app = express();
 
 app.use(cors({
-  origin: function (origin, callback) {
-    // Permite cualquier origen en desarrollo
-    callback(null, true);
-  },
+  origin: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'Origin', 'X-Requested-With'],
-  credentials: true,
-  optionsSuccessStatus: 200 // Para navegadores legacy
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
 }));
+
 app.use(express.json());
 
 app.use(express.static(path.join(__dirname, '..', 'public')));
 app.use(express.static(path.join(__dirname, '..')));
 
-// Servir carpetas específicas para navegación
 app.use('/admin', express.static(path.join(__dirname, '..', 'admin')));
 app.use('/Productos', express.static(path.join(__dirname, '..', 'Productos')));
 app.use('/Compras', express.static(path.join(__dirname, '..', 'Compras')));
 app.use('/images', express.static(path.join(__dirname, '..', 'images')));
 
-// Configuración de multer para subida de imágenes
+// Multer para imágenes
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, '..', 'images')); // Guardar en la carpeta images
+    cb(null, path.join(__dirname, '..', 'images'));
   },
   filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
     cb(null, uniqueSuffix + path.extname(file.originalname));
   }
 });
 
 const upload = multer({
-  storage: storage,
+  storage,
   limits: {
-    fileSize: 5 * 1024 * 1024 // 5MB límite
+    fileSize: 5 * 1024 * 1024
   },
   fileFilter: (req, file, cb) => {
     if (file.mimetype.startsWith('image/')) {
@@ -57,161 +52,129 @@ const upload = multer({
   }
 });
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '..', 'public', 'Index.html'));
-});
-
-
-  // Configuración de conexión (ajusta si es necesario)
-const config = {
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  server: process.env.DB_SERVER,
-  database: process.env.DB_DATABASE,
-  port: parseInt(process.env.DB_PORT),
-  options: {
-    encrypt: true,  // o process.env.DB_ENCRYPT === 'true'
-    trustServerCertificate: true
-  },
-  pool: {
-    max: 10,
-    min: 0,
-    idleTimeoutMillis: 30000
-  }
+const PRODUCT_TABLES = {
+  ramo: { table: 'ramos', idColumn: 'Id_ramo' },
+  ramos: { table: 'ramos', idColumn: 'Id_ramo' },
+  accesorio: { table: 'accesorios', idColumn: 'Id_accesorio' },
+  accesorios: { table: 'accesorios', idColumn: 'Id_accesorio' },
+  decorativo: { table: 'decorativos', idColumn: 'Id_decorativo' },
+  decorativos: { table: 'decorativos', idColumn: 'Id_decorativo' }
 };
 
-const poolPromise = new sql.ConnectionPool(config)
-  .connect()
-  .then(pool => {
-    console.log('Conectado a SQL Server exitosamente ');
-    return pool;
-  })
-  .catch(err => {
-    console.error('¡FALLO CRÍTICO! No se pudo conectar a la base de datos:', err);
-    process.exit(1);
-  });
+function getProductTableInfo(tipo) {
+  return PRODUCT_TABLES[(tipo || '').toLowerCase()] || null;
+}
 
-// Logging middleware para comprobar que las peticiones a /api/productos llegan
+// Inicio
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'Index.html'));
+});
+
+// Log para productos
 app.use('/api/productos', (req, res, next) => {
   console.log('[API] request to /api/productos', req.method, req.url);
   next();
 });
 
-// Ruta para obtener productos (ajusta la query si tu tabla no es "Productos")
+// Obtener productos
 app.get('/api/productos', async (req, res) => {
   try {
-    const pool = await poolPromise;
-    const result = await pool.request().query(`
-      SELECT 'ramos' AS tipo, Id_ramo AS id, Nombre, Precio, Descripción, Stock, ISNULL(ImagenURL, '') AS ImagenURL, ISNULL(Categoria, 'Ramos') AS Categoria
-      FROM Ramos
+    const [rows] = await pool.query(`
+      SELECT 'ramos' AS tipo, Id_ramo AS id, Nombre, Precio, Descripcion, Stock,
+             IFNULL(ImagenURL, '') AS ImagenURL,
+             IFNULL(Categoria, 'Ramos') AS Categoria
+      FROM ramos
       UNION ALL
-      SELECT 'accesorios' AS tipo, Id_accesorio AS id, Nombre, Precio, Descripción, Stock, ISNULL(ImagenURL, '') AS ImagenURL, ISNULL(Categoria, 'Accesorios') AS Categoria
-      FROM Accesorios
+      SELECT 'accesorios' AS tipo, Id_accesorio AS id, Nombre, Precio, Descripcion, Stock,
+             IFNULL(ImagenURL, '') AS ImagenURL,
+             IFNULL(Categoria, 'Accesorios') AS Categoria
+      FROM accesorios
       UNION ALL
-      SELECT 'decorativos' AS tipo, Id_decorativo AS id, Nombre, Precio, Descripción, Stock, ISNULL(ImagenURL, '') AS ImagenURL, ISNULL(Categoria, 'Decorativos') AS Categoria
-      FROM Decorativos
+      SELECT 'decorativos' AS tipo, Id_decorativo AS id, Nombre, Precio, Descripcion, Stock,
+             IFNULL(ImagenURL, '') AS ImagenURL,
+             IFNULL(Categoria, 'Decorativos') AS Categoria
+      FROM decorativos
       ORDER BY Nombre
     `);
-    res.json(result.recordset);
+
+    res.json(rows);
   } catch (err) {
     console.error('Error al obtener productos:', err);
     res.status(500).json({ error: 'Error al obtener productos' });
   }
 });
 
-// Ruta para obtener clientes
+// Obtener clientes
 app.get('/api/clientes', async (req, res) => {
   try {
-    const pool = await poolPromise;
     let query = `
       SELECT c.Id_cliente, c.Nombre, c.Correo, c.Telefono,
              COUNT(p.Id_pedido) AS Pedidos,
-             ISNULL(SUM(p.Total), 0) AS TotalComprado,
+             IFNULL(SUM(p.Total), 0) AS TotalComprado,
              MAX(p.Fecha) AS UltimaCompra
-      FROM Clientes c
-      LEFT JOIN Pedidos p ON c.Id_cliente = p.Id_cliente
+      FROM clientes c
+      LEFT JOIN pedidos p ON c.Id_cliente = p.Id_cliente
       GROUP BY c.Id_cliente, c.Nombre, c.Correo, c.Telefono
     `;
 
     const filter = req.query.filter;
-    if (filter) {
-      if (filter === 'frecuentes') {
-        query += ` HAVING COUNT(p.Id_pedido) > 5`;
-      } else if (filter === 'nuevos') {
-        query += ` HAVING c.Id_cliente IN (SELECT Id_cliente FROM Clientes WHERE DATEDIFF(MONTH, GETDATE(), FechaRegistro) <= 1)`;
-        // Assuming FechaRegistro exists, if not, we might need to add it or use another logic
-      } else if (filter === 'recientes') {
-        query += ` HAVING MAX(p.Fecha) >= DATEADD(MONTH, -1, GETDATE())`;
-      }
+
+    if (filter === 'frecuentes') {
+      query += ` HAVING COUNT(p.Id_pedido) > 5`;
+    } else if (filter === 'recientes') {
+      query += ` HAVING MAX(p.Fecha) >= DATE_SUB(NOW(), INTERVAL 1 MONTH)`;
     }
 
     query += ` ORDER BY c.Nombre`;
 
-    const result = await pool.request().query(query);
-    res.json(result.recordset);
+    const [rows] = await pool.query(query);
+    res.json(rows);
   } catch (err) {
     console.error('Error al obtener clientes:', err);
     res.status(500).json({ error: 'Error al obtener clientes' });
   }
 });
 
-// Ruta para obtener pedidos
+// Obtener pedidos
 app.get('/api/pedidos', async (req, res) => {
   try {
-    const pool = await poolPromise;
-    const result = await pool.request().query(`
+    const [rows] = await pool.query(`
       SELECT p.Id_pedido, p.Id_cliente, c.Nombre AS Cliente, p.Fecha, p.Estado, p.Total, p.Notas
-      FROM Pedidos p
-      JOIN Clientes c ON p.Id_cliente = c.Id_cliente
+      FROM pedidos p
+      JOIN clientes c ON p.Id_cliente = c.Id_cliente
       ORDER BY p.Fecha DESC
     `);
-    res.json(result.recordset);
+
+    res.json(rows);
   } catch (err) {
     console.error('Error al obtener pedidos:', err);
     res.status(500).json({ error: 'Error al obtener pedidos' });
   }
 });
 
-// CRUD para productos
 // Obtener producto individual
 app.get('/api/productos/:tipo/:id', async (req, res) => {
   try {
     const { tipo, id } = req.params;
-    const pool = await poolPromise;
-    let table, idColumn;
-    const tipoNorm = tipo.toLowerCase();
+    const info = getProductTableInfo(tipo);
 
-    switch (tipoNorm) {
-      case 'ramo':
-      case 'ramos':
-        table = 'Ramos';
-        idColumn = 'ID_Ramo';
-        break;
-      case 'accesorio':
-      case 'accesorios':
-        table = 'Accesorios';
-        idColumn = 'ID_Accesorio';
-        break;
-      case 'decorativo':
-      case 'decorativos':
-        table = 'Decorativos';
-        idColumn = 'ID_Decorativo';
-        break;
-      default:
-        return res.status(400).json({ error: 'Tipo de producto inválido' });
+    if (!info) {
+      return res.status(400).json({ error: 'Tipo de producto inválido' });
     }
 
-    const result = await pool.request()
-      .input('id', sql.Int, id)
-      .query(`SELECT * FROM ${table} WHERE ${idColumn} = @id`);
+    const [rows] = await pool.query(
+      `SELECT * FROM ${info.table} WHERE ${info.idColumn} = ?`,
+      [id]
+    );
 
-    if (result.recordset.length === 0) {
+    if (rows.length === 0) {
       return res.status(404).json({ error: 'Producto no encontrado' });
     }
 
-    const producto = result.recordset[0];
+    const producto = rows[0];
+
     res.json({
-      id: producto[idColumn],
+      id: producto[info.idColumn],
       tipo,
       nombre: producto.Nombre,
       descripcion: producto.Descripcion,
@@ -230,38 +193,24 @@ app.get('/api/productos/:tipo/:id', async (req, res) => {
 app.post('/api/productos', upload.single('imagen'), async (req, res) => {
   try {
     const { tipo, nombre, precio, stock, descripcion, imagenURL, categoria } = req.body;
-    const pool = await poolPromise;
-    let table, idColumn;
 
-    // Determinar imagenURL: usar archivo subido si existe, sino usar URL proporcionada
     let finalImagenURL = imagenURL;
     if (req.file) {
       finalImagenURL = `/images/${req.file.filename}`;
     }
 
-    if (tipo === 'Ramo') {
-      table = 'Ramos';
-      idColumn = 'Id_ramo';
-    } else if (tipo === 'Accesorio') {
-      table = 'Accesorios';
-      idColumn = 'Id_accesorio';
-    } else if (tipo === 'Decorativo') {
-      table = 'Decorativos';
-      idColumn = 'Id_decorativo';
-    } else {
+    const info = getProductTableInfo(tipo);
+    if (!info) {
       return res.status(400).json({ error: 'Tipo de producto inválido' });
     }
 
-    const result = await pool.request()
-      .input('nombre', sql.VarChar, nombre)
-      .input('precio', sql.Decimal(10,2), precio)
-      .input('stock', sql.Int, stock)
-      .input('descripcion', sql.Text, descripcion)
-      .input('imagenURL', sql.VarChar, finalImagenURL)
-      .input('categoria', sql.VarChar, categoria)
-      .query(`INSERT INTO ${table} (Nombre, Precio, Stock, Descripción, ImagenURL, Categoria) OUTPUT INSERTED.${idColumn} AS id VALUES (@nombre, @precio, @stock, @descripcion, @imagenURL, @categoria)`);
+    const [result] = await pool.query(
+      `INSERT INTO ${info.table} (Nombre, Precio, Stock, Descripcion, ImagenURL, Categoria)
+       VALUES (?, ?, ?, ?, ?, ?)`,
+      [nombre, precio, stock, descripcion, finalImagenURL, categoria]
+    );
 
-    res.json({ id: result.recordset[0].id, tipo });
+    res.json({ id: result.insertId, tipo });
   } catch (err) {
     console.error('Error al crear producto:', err);
     res.status(500).json({ error: 'Error al crear producto' });
@@ -273,32 +222,18 @@ app.put('/api/productos/:tipo/:id', async (req, res) => {
   try {
     const { tipo, id } = req.params;
     const { nombre, precio, stock, descripcion, imagenURL, categoria } = req.body;
-    const pool = await poolPromise;
-    let table, idColumn;
-    const tipoNorm = tipo.toLowerCase();
 
-    if (tipoNorm === 'ramo' || tipoNorm === 'ramos') {
-      table = 'Ramos';
-      idColumn = 'Id_ramo';
-    } else if (tipoNorm === 'accesorio' || tipoNorm === 'accesorios') {
-      table = 'Accesorios';
-      idColumn = 'Id_accesorio';
-    } else if (tipoNorm === 'decorativo' || tipoNorm === 'decorativos') {
-      table = 'Decorativos';
-      idColumn = 'Id_decorativo';
-    } else {
+    const info = getProductTableInfo(tipo);
+    if (!info) {
       return res.status(400).json({ error: 'Tipo de producto inválido' });
     }
 
-    await pool.request()
-      .input('id', sql.Int, id)
-      .input('nombre', sql.VarChar, nombre)
-      .input('precio', sql.Decimal(10,2), precio)
-      .input('stock', sql.Int, stock)
-      .input('descripcion', sql.Text, descripcion)
-      .input('imagenURL', sql.VarChar, imagenURL)
-      .input('categoria', sql.VarChar, categoria)
-      .query(`UPDATE ${table} SET Nombre = @nombre, Precio = @precio, Stock = @stock, Descripción = @descripcion, ImagenURL = @imagenURL, Categoria = @categoria WHERE ${idColumn} = @id`);
+    await pool.query(
+      `UPDATE ${info.table}
+       SET Nombre = ?, Precio = ?, Stock = ?, Descripcion = ?, ImagenURL = ?, Categoria = ?
+       WHERE ${info.idColumn} = ?`,
+      [nombre, precio, stock, descripcion, imagenURL, categoria, id]
+    );
 
     res.json({ message: 'Producto actualizado' });
   } catch (err) {
@@ -311,26 +246,16 @@ app.put('/api/productos/:tipo/:id', async (req, res) => {
 app.delete('/api/productos/:tipo/:id', async (req, res) => {
   try {
     const { tipo, id } = req.params;
-    const pool = await poolPromise;
-    let table, idColumn;
-    const tipoNorm = tipo.toLowerCase();
 
-    if (tipoNorm === 'ramo' || tipoNorm === 'ramos') {
-      table = 'Ramos';
-      idColumn = 'Id_ramo';
-    } else if (tipoNorm === 'accesorio' || tipoNorm === 'accesorios') {
-      table = 'Accesorios';
-      idColumn = 'Id_accesorio';
-    } else if (tipoNorm === 'decorativo' || tipoNorm === 'decorativos') {
-      table = 'Decorativos';
-      idColumn = 'Id_decorativo';
-    } else {
+    const info = getProductTableInfo(tipo);
+    if (!info) {
       return res.status(400).json({ error: 'Tipo de producto inválido' });
     }
 
-    await pool.request()
-      .input('id', sql.Int, id)
-      .query(`DELETE FROM ${table} WHERE ${idColumn} = @id`);
+    await pool.query(
+      `DELETE FROM ${info.table} WHERE ${info.idColumn} = ?`,
+      [id]
+    );
 
     res.json({ message: 'Producto eliminado' });
   } catch (err) {
@@ -339,19 +264,20 @@ app.delete('/api/productos/:tipo/:id', async (req, res) => {
   }
 });
 
-// Ruta para obtener administradores
+// Obtener administradores
 app.get('/api/administradores', async (req, res) => {
   try {
-    const pool = await poolPromise;
-    const result = await pool.request().query('SELECT Id_admin, Nombre, Correo FROM Administradores');
-    res.json(result.recordset);
+    const [rows] = await pool.query(
+      'SELECT Id_admin, Nombre, Correo FROM administradores'
+    );
+    res.json(rows);
   } catch (err) {
     console.error('Error al obtener administradores:', err);
     res.status(500).json({ error: 'Error al obtener administradores' });
   }
 });
 
-// Ruta de login
+// Login
 app.post('/api/login', async (req, res) => {
   const { correo, contrasena } = req.body;
 
@@ -360,42 +286,36 @@ app.post('/api/login', async (req, res) => {
   }
 
   try {
-    const pool = await poolPromise;
+    let [rows] = await pool.query(
+      `SELECT Id_cliente AS id, Nombre, Contrasena, 'cliente' AS role
+       FROM clientes
+       WHERE Correo = ?`,
+      [correo]
+    );
 
-    // Buscar en Clientes
-    let result = await pool.request()
-      .input('correo', sql.NVarChar(255), correo)
-      .query(`
-        SELECT Id_cliente AS id, Nombre, Contraseña, 'cliente' AS role 
-        FROM Clientes 
-        WHERE Correo = @correo
-      `);
+    let user = rows[0];
 
-    let user = result.recordset[0];
-
-    // Si no es cliente, buscar en Administradores
     if (!user) {
-      result = await pool.request()
-        .input('correo', sql.NVarChar(255), correo)
-        .query(`
-          SELECT Id_admin AS id, Nombre, Contraseña, 'admin' AS role 
-          FROM Administradores 
-          WHERE Correo = @correo
-        `);
-      user = result.recordset[0];
+      [rows] = await pool.query(
+        `SELECT Id_admin AS id, Nombre, Contrasena, 'admin' AS role
+         FROM administradores
+         WHERE Correo = ?`,
+        [correo]
+      );
+      user = rows[0];
     }
 
     if (!user) {
       return res.status(401).json({ error: 'Correo o contraseña incorrectos' });
     }
 
-    const match = await bcrypt.compare(contrasena, user.Contraseña.trim());
-    if (match) {
-  console.log(`Login exitoso: ${correo} (${user.role})`);
-}
+    const match = await bcrypt.compare(contrasena, String(user.Contrasena).trim());
+
     if (!match) {
       return res.status(401).json({ error: 'Correo o contraseña incorrectos' });
     }
+
+    console.log(`Login exitoso: ${correo} (${user.role})`);
 
     res.json({
       success: true,
@@ -410,7 +330,7 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-// Ruta de registro
+// Registro
 app.post('/api/signup', async (req, res) => {
   const { nombre, correo, contrasena } = req.body;
 
@@ -419,35 +339,30 @@ app.post('/api/signup', async (req, res) => {
   }
 
   try {
-    const pool = await poolPromise;
+    let [rows] = await pool.query(
+      'SELECT Id_cliente FROM clientes WHERE Correo = ?',
+      [correo]
+    );
 
-    // Verificar si el correo ya existe en Clientes
-    let result = await pool.request()
-      .input('correo', sql.NVarChar(255), correo)
-      .query('SELECT Id_cliente FROM Clientes WHERE Correo = @correo');
-
-    if (result.recordset.length > 0) {
+    if (rows.length > 0) {
       return res.status(409).json({ error: 'El correo ya está registrado' });
     }
 
-    // Verificar en Administradores (por si acaso)
-    result = await pool.request()
-      .input('correo', sql.NVarChar(255), correo)
-      .query('SELECT Id_admin FROM Administradores WHERE Correo = @correo');
+    [rows] = await pool.query(
+      'SELECT Id_admin FROM administradores WHERE Correo = ?',
+      [correo]
+    );
 
-    if (result.recordset.length > 0) {
+    if (rows.length > 0) {
       return res.status(409).json({ error: 'El correo ya está registrado' });
     }
 
-    // Hashear la contraseña
     const hashedPassword = await bcrypt.hash(contrasena, 10);
 
-    // Insertar nuevo cliente
-    await pool.request()
-      .input('nombre', sql.NVarChar(255), nombre)
-      .input('correo', sql.NVarChar(255), correo)
-      .input('contrasena', sql.NVarChar(256), hashedPassword)
-      .query('INSERT INTO Clientes (Nombre, Correo, Contraseña) VALUES (@nombre, @correo, @contrasena)');
+    await pool.query(
+      'INSERT INTO clientes (Nombre, Correo, Contrasena) VALUES (?, ?, ?)',
+      [nombre, correo, hashedPassword]
+    );
 
     console.log(`Usuario registrado: ${correo}`);
     res.json({ success: true, message: 'Cuenta creada exitosamente' });
@@ -457,35 +372,20 @@ app.post('/api/signup', async (req, res) => {
   }
 });
 
-app.post ('/api/logout', (req, res) => {
+// Logout
+app.post('/api/logout', (req, res) => {
   const autoHeader = req.headers['authorization'];
   const token = autoHeader && autoHeader.split(' ')[1];
 
   if (token) {
     blacklistTokens.add(token);
   }
-res.json({message: 'Logout exitoso'})
 
-function verificarToken(req, res, next) {
-  const autoHeader = req.headers['authorization'];
-  const token = autoHeader && autoHeader.split(' ')[1];
-
-  if (!token || blacklistTokens.has(token)) {
-    return res.status(401).json({ error: 'Token inválido o expirado' });
-  }
-
-  jwt.verify(token, 'secreto', (err, user) => {
-    if (err) return res.status(403).json({ error: 'Token inválido' });
-    req.user = user;
-    next();
-  });
-}
+  res.json({ message: 'Logout exitoso' });
 });
 
 // Iniciar servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
+  console.log(`Servidor corriendo en puerto ${PORT}`);
 });
-
-//<!--Probando 123-->
