@@ -60,7 +60,7 @@ app.get('/', (req, res) => {
 const config = {
   user: 'floreria_node',
   password: 'test1234',
-  server: 'CHALDEAP\\SQLEXPRESS',
+  server: 'XITLALY\\SQLEXPRESS',
   database: 'DB_THE_QUEENS_FLORERIA',
   options: {
     encrypt: true,
