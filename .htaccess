@@ -1,0 +1,9 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Redirige /api/endpoint/... a /api/endpoint.php (mantiene query string y PATH_INFO)
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^api/([^/]+)(/.*)?$ api/$1.php$2 [L,QSA]
+</IfModule>

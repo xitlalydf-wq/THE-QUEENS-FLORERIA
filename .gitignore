@@ -1,0 +1,13 @@
+# Environment
+.env
+
+# Node artifacts (no usados si solo corremos PHP)
+Backend/
+node_modules/
+package-lock.json
+package.json
+
+# Editor / OS
+.vs/
+.DS_Store
+Thumbs.db
