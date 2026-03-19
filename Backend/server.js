@@ -58,13 +58,14 @@ app.get('/', (req, res) => {
 
 // Configuración de conexión (ajusta si es necesario)
 const config = {
-  user: 'floreria_node',
-  password: 'test1234',
-  server: 'CHALDEAP\\SQLEXPRESS',
-  database: 'DB_THE_QUEENS_FLORERIA',
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  server: process.env.DB_SERVER,
+  database: process.env.DB_DATABASE,
+  port: parseInt(process.env.DB_PORT) || 1433,
   options: {
-    encrypt: true,
-    trustServerCertificate: true
+    encrypt: process.env.DB_ENCRYPT === 'true',
+    trustServerCertificate: process.env.DB_TRUST_CERT === 'true'
   },
   pool: {
     max: 10,
