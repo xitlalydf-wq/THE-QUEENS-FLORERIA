@@ -5,8 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ramos</title>
-    <link rel="stylesheet" href="/public/CSS/Ramos.css">
-    <link rel="stylesheet" href="/public/CSS/Contacto.css">
+    <link rel="stylesheet" href="../public/CSS/Ramos.css">
     
 
     <!-- Tipografías -->
@@ -16,16 +15,34 @@
 </head>
 
 <body>
-    
+    <!-- PRELOADER RAMOS -->
+<div class="loader-ramos" id="loaderRamos">
+  <div class="loader-ramos-content">
+    <div class="flower-loader-ramos">
+      <span class="petal-r petal-r-1"></span>
+      <span class="petal-r petal-r-2"></span>
+      <span class="petal-r petal-r-3"></span>
+      <span class="petal-r petal-r-4"></span>
+      <span class="petal-r petal-r-5"></span>
+      <span class="petal-r petal-r-6"></span>
+      <span class="flower-center-r"></span>
+    </div>
+
+    <h1 class="loader-ramos-title">RAMOS</h1>
+    <p class="loader-ramos-subtitle">Colección floral</p>
+  </div>
+
+  <div class="loader-ramos-door"></div>
+</div>
     <!-- NAV -->
     <header class="topbar">
-        <div class="brand">THE QUEENS</div>
+        <a href="/inicio.html" class="brand">THE QUEENS</a>
 
         <nav class="menu">
             <a href="/inicio.html">INICIO</a>
-            <a href="/productos/ramos.html">RAMOS</a>
-            <a href="/productos/decorativos.html">ARREGLOS</a>
-            <a href="/productos/accesorios.html">ACCESORIOS</a>
+            <a href="/productos/ramospruebas.html" class="active">RAMOS</a>
+            <a href="/productos/decorativospruebas.html">ARREGLOS</a>
+            <a href="/productos/accesoriospruebas.html">ACCESORIOS</a>
             <a href="/sobre-nosotros.html">SOBRE NOSOTROS</a>
             <a href="/contacto.html">CONTACTO</a>
         </nav>
@@ -54,16 +71,23 @@
                 <h2 class="ramos-title">Ramos</h2>
 
                 <div class="ramos-tabs">
-                    <a href="#" class="tab-link active" data-filter="clasicos">Clásicos</a>
-                    <a href="#" class="tab-link" data-filter="premium">Premium</a>
-                    <a href="#" class="tab-link" data-filter="especiales">Especiales</a>
+                    <a href="#" class="tab-link active" data-filter="clasicos">Tulipanes</a>
+                    <a href="#" class="tab-link" data-filter="premium">Rosas</a>
+                    <a href="#" class="tab-link" data-filter="especiales">Gerberas</a>
+                    <a href="#" class="tab-link" data-filter="especiales">Lirios</a>
                     <a href="#" class="tab-link" data-filter="todos">Todos</a>
                 </div>
             </div>
-
+  <div class="ramos-filtros-precio">
+    <button class="precio-btn active" data-precio="todos">Todos</button>
+    <button class="precio-btn" data-precio="bajo">Esenciales</button>
+    <button class="precio-btn" data-precio="medio">Favoritos</button>
+    <button class="precio-btn" data-precio="alto">Exclusivos</button>
+</div>
             <div class="ramos-grid" id="ramos-container">
                 <!-- Cards will be loaded dynamically -->
             </div>
+
 
         </div>
     </section>
@@ -132,23 +156,62 @@
             });
         });
     }
-  </script>  
 
-<script>
-    function setupFavorites() {
-        document.querySelectorAll(".btn-fav").forEach(boton => {
-            boton.addEventListener("click", function(){
-                if(this.classList.contains("active")){
-                    this.classList.remove("active");
-                    this.innerHTML = "♡";
-                }else{
-                    this.classList.add("active");
-                    this.innerHTML = "♥";
+    function setupPrecioFilter() {
+    const botones = document.querySelectorAll('.precio-btn');
+    const cards = document.querySelectorAll('.ramo-card');
+
+    botones.forEach(btn => {
+        btn.addEventListener('click', () => {
+
+            botones.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const tipo = btn.dataset.precio;
+
+            cards.forEach(card => {
+                const precioTexto = card.querySelector('.precio').innerText;
+                const precio = parseFloat(precioTexto.replace('$',''));
+
+                if (tipo === 'todos') {
+                    card.style.display = 'block';
+                } 
+                else if (tipo === 'bajo' && precio < 500) {
+                    card.style.display = 'block';
+                } 
+                else if (tipo === 'medio' && precio >= 500 && precio < 1000) {
+                    card.style.display = 'block';
+                } 
+                else if (tipo === 'alto' && precio >= 1000) {
+                    card.style.display = 'block';
+                } 
+                else {
+                    card.style.display = 'none';
                 }
             });
+
         });
-    }
-    </script>
+    });
+}
+
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const loaderRamos = document.getElementById("loaderRamos");
+
+    if (!loaderRamos) return;
+
+    setTimeout(() => {
+      loaderRamos.classList.add("slide-out");
+      document.body.classList.add("page-ramos-ready");
+
+      setTimeout(() => {
+        loaderRamos.style.display = "none";
+      }, 1000);
+    }, 2200);
+  });
+
+  </script>  
+
+
 </body>
-//<!--Probando 123-->
-</html>
+
