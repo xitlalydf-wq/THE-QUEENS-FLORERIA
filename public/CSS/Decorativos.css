@@ -312,49 +312,140 @@ body {
 
 /* ===== NAVBAR THE QUEENS ===== */
 
-.topbar{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:20px 60px;
-    background:#f6f1f0;
+/* ===== NAV IGUAL AL DE INICIO ===== */
+* {
+    box-sizing: border-box;
 }
 
-.brand{
-    font-family:'Cormorant Garamond', serif;
-    letter-spacing:3px;
-    font-size:18px;
-    color:#b76e79;
+html {
+    scroll-behavior: smooth;
 }
 
-.menu{
-    display:flex;
-    gap:40px;
+body {
+    margin: 0;
+    padding: 0;
+    background: radial-gradient(circle at top, #fffdfd 0%, #f8f2f1 35%, #f6f1f0 70%, #f3eceb 100%);
+    font-family: 'Poppins', sans-serif;
+    color: #4b3b3f;
+    overflow-x: hidden;
+    line-height: 1.5;
 }
 
-.menu a{
-    text-decoration:none;
-    font-family:'Poppins', sans-serif;
-    font-size:14px;
-    letter-spacing:2px;
-    color:#4b3b3f;
-    transition:0.3s;
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 60px;
+    background: rgba(246, 241, 240, 0.78);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(183, 110, 121, 0.08);
 }
 
-.menu a:hover{
-    color:#b76e79;
+.brand {
+    font-family: 'Cormorant Garamond', serif;
+    letter-spacing: 4px;
+    font-size: 20px;
+    color: #b76e79;
+    text-decoration: none;
+    white-space: nowrap;
 }
 
-/* ICONOS */
-
-.icons{
-    display:flex;
-    align-items:center;
-    gap:20px;
+.menu {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-.icons img{
-    width:20px;
-    height:20px;
-    object-fit:contain;
+.menu a {
+    position: relative;
+    text-decoration: none;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: #4b3b3f;
+    transition: 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.menu a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: 0;
+    height: 1.5px;
+    background: #b76e79;
+    transition: width 0.3s ease;
+}
+
+.menu a:hover {
+    color: #b76e79;
+}
+
+.menu a:hover::after {
+    width: 100%;
+}
+
+.icons {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.icons a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.icons a:hover {
+    transform: translateY(-2px) scale(1.06);
+    opacity: 0.75;
+}
+
+.icons img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+/* RESPONSIVE NAV */
+@media (max-width: 992px) {
+    .topbar {
+        padding: 20px 30px;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .topbar {
+        padding: 16px 18px;
+    }
+
+    .brand {
+        font-size: 16px;
+        letter-spacing: 3px;
+    }
+
+    .menu {
+        gap: 14px;
+    }
+
+    .menu a {
+        font-size: 12px;
+        letter-spacing: 1px;
+    }
 }
