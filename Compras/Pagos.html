@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagos | The Queens</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/public/css/pago.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,10 +42,9 @@
 
         <section class="pagos-hero">
             <p class="pagos-subtitle">Confirmación de compra</p>
-            <h1 class="pagos-title">Generar Ticket de Compra</h1>
+            <h1 class="pagos-title">Finalizar Compra</h1>
             <p class="pagos-text">
-                Confirma tu dirección, revisa tu pedido y sube el comprobante de pago
-                para generar tu ticket de compra.
+                Confirma tu dirección y revisa el total; esto se registrará como pedido para administración.
             </p>
         </section>
 
@@ -54,22 +54,12 @@
                 <div class="cart-summary">
                     <h3>Resumen del Carrito</h3>
 
-                    <div class="cart-item">
-                        <span>Ramo de Rosas</span>
-                        <span>$25.00</span>
-                    </div>
-
-                    <div class="cart-item">
-                        <span>Decoración Floral</span>
-                        <span>$15.00</span>
-                    </div>
-
                     <div class="cart-total">
-                        Total: $40.00
+                        Total: <span id="cart-total-amount">$0.00</span>
                     </div>
 
                     <p class="cart-note">
-                        *Estos datos se cargarán automáticamente desde el carrito en futuras actualizaciones.
+                        *El total se calcula a partir del carrito y se enviará al administrador como pedido.
                     </p>
                 </div>
 
@@ -86,17 +76,7 @@
                         </select>
                     </div>
 
-                    <div class="form-group">
-                        <label for="comprobante">Subir Comprobante de Depósito</label>
-                        <input type="file" id="comprobante" name="comprobante" accept="image/*" required>
-                    </div>
-
-                    <div class="whatsapp-option">
-                        <input type="checkbox" id="whatsapp" name="whatsapp" checked>
-                        <label for="whatsapp">Enviar ticket y comprobante por WhatsApp</label>
-                    </div>
-
-                    <button type="submit" class="btn-generate">Generar Ticket</button>
+                    <button type="submit" class="btn-generate">Confirmar Compra</button>
                 </form>
 
                 <div class="ticket-info">
@@ -111,26 +91,58 @@
 
     </main>
 
+    <script src="/public/js/cart.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const form = document.getElementById('ticketForm');
+        const totalSpan = document.getElementById('cart-total-amount');
+        const cartTotal = cartManager.getTotalPrice();
+        totalSpan.textContent = `$${cartTotal.toFixed(2)}`;
 
         if (form) {
-            form.addEventListener('submit', function(e) {
+            form.addEventListener('submit', async function(e) {
                 e.preventDefault();
 
-                const whatsappChecked = document.getElementById('whatsapp').checked;
-                const comprobante = document.getElementById('comprobante').files[0];
-
-                let message = '¡Ticket generado exitosamente!';
-                if (comprobante) {
-                    message += ' Comprobante subido correctamente.';
-                }
-                if (whatsappChecked) {
-                    message += ' Se enviará por WhatsApp.';
+                const direccion = document.getElementById('direccion').value.trim();
+                if (!direccion) {
+                    alert('Por favor ingresa tu dirección de entrega.');
+                    return;
                 }
 
-                alert(message);
+                const total = cartManager.getTotalPrice();
+                if (total <= 0) {
+                    alert('El carrito está vacío. Agrega productos antes de continuar.');
+                    return;
+                }
+
+                try {
+                    const response = await fetch('/api/pedidos', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            total: total,
+                            id_cliente: 1,
+                            estado: 'Pendiente',
+                            notas: `Dirección: ${direccion}`
+                        })
+                    });
+
+                    if (!response.ok) {
+                        const error = await response.json();
+                        throw new Error(error.error || 'Error en el servidor');
+                    }
+
+                    const data = await response.json();
+                    cartManager.clearCart();
+                    cartManager.updateCartCounter();
+
+                    alert(`Pedido registrado con éxito (ID: ${data.Id_pedido}).
+Total: $${total.toFixed(2)}.`);
+                    window.location.href = '/admin/admin-pedidos.html';
+                } catch (error) {
+                    console.error('Error al crear pedido:', error);
+                    alert(`No se pudo crear el pedido: ${error.message}`);
+                }
             });
         }
     });

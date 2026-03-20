@@ -8,8 +8,31 @@ async function loadDashboardStats() {
             fetch('/api/productos'),
             fetch('/api/pedidos')
         ]);
-        const productos = await productosRes.json();
-        const pedidos = await pedidosRes.json();
+
+        if (!productosRes.ok) {
+            const text = await productosRes.text();
+            throw new Error(`Productos API error ${productosRes.status}: ${text}`);
+        }
+
+        if (!pedidosRes.ok) {
+            const text = await pedidosRes.text();
+            throw new Error(`Pedidos API error ${pedidosRes.status}: ${text}`);
+        }
+
+        let productos;
+        let pedidos;
+
+        try {
+            productos = await productosRes.json();
+        } catch (jsonError) {
+            throw new Error(`JSON inválido en /api/productos: ${jsonError.message}`);
+        }
+
+        try {
+            pedidos = await pedidosRes.json();
+        } catch (jsonError) {
+            throw new Error(`JSON inválido en /api/pedidos: ${jsonError.message}`);
+        }
 
         // Calculate stats
         const totalProductos = productos.length;

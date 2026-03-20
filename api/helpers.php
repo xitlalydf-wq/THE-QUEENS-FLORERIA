@@ -45,9 +45,18 @@ function getPathParts(): array {
     $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     $script = $_SERVER['SCRIPT_NAME'];
 
-    // Elimina la parte del script de la URI
+    // Elimina la parte del script de la URI, incluyendo casos de mod_rewrite api/endpoint -> api/endpoint.php
     if (strpos($uri, $script) === 0) {
         $uri = substr($uri, strlen($script));
+    } else {
+        // Si la ruta es /api/endpoint y se está ejecutando api/endpoint.php, ajusta consistentemente
+        $scriptBase = dirname($script);
+        $scriptName = basename($script, '.php');
+        $prefix = rtrim($scriptBase, '/') . '/' . $scriptName;
+
+        if (strpos($uri, $prefix) === 0) {
+            $uri = substr($uri, strlen($prefix));
+        }
     }
 
     return array_values(array_filter(explode('/', trim($uri, '/'))));
