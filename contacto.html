@@ -1,118 +1,176 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <title>Contacto</title>
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/public/css/Ramos.css">
     <link rel="stylesheet" href="/public/css/Contacto.css">
+=======
+    <title>Contacto | The Queens</title>
+
+>>>>>>> 9c33688454e8f1cdc511c72c7c86d7018d8687dd
     <link rel="stylesheet" href="/public/css/base/navbar.css">
+    <link rel="stylesheet" href="/public/css/Contacto.css">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <!-- Tipografías -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-         <style>
-        #map {
-            height: 400px;
-            width: 100%;
-        }
-    </style>
 </head>
-
 <body>
 
-<!-- NAV -->
-<header class="topbar">
-    <div class="brand">THE QUEENS</div>
+    <!-- NAV -->
+    <header class="topbar">
+        <a href="/inicio.html" class="brand">THE QUEENS</a>
 
-    <nav class="menu">
-        <a href="/inicio.html">INICIO</a>
-        <a href="/productos/ramos.html">RAMOS</a>
-        <a href="/productos/decorativos.html">ARREGLOS</a>
-        <a href="/productos/accesorios.html">ACCESORIOS</a>
-        <a href="/sobre-nosotros.html">SOBRE NOSOTROS</a>
-        <a href="/contacto.html">CONTACTO</a>
-    </nav>
+        <nav class="menu">
+            <a href="/inicio.html">INICIO</a>
+            <a href="/productos/ramos.html">RAMOS</a>
+            <a href="/productos/decorativos.html">ARREGLOS</a>
+            <a href="/productos/accesorios.html">ACCESORIOS</a>
+            <a href="/sobre-nosotros.html">SOBRE NOSOTROS</a>
+            <a href="/contacto.html" class="active">CONTACTO</a>
+        </nav>
 
-    <div class="icons">
-        <a href="#">
-            <img src="/images/usuario.png" alt="Usuario">
-        </a>
-
-        <a href="/Compras/carrito.html">
-            <img src="/images/carrito.png" alt="Carrito">
-        </a>
-    </div>
-</header>
-
-
-
-
-    <!-- DATOS DE CONTACTO -->
-    <div class="contacto-cards">
-        <div class="contact-card">
-            <h1><strong>Telefono</strong></h1>
-            <p>
-                <li>
-                    <strong>Telefono</strong>
-                    <a href="tel:+521234567890">(+52) 123 456 7890</a>
-                </li>
-            </p>
+        <div class="icons">
+            <a href="/Usuario.html">
+                <img src="/images/usuario.png" alt="Usuario">
+            </a>
+            <a href="/Compras/carrito.html">
+                <img src="/images/carrito.png" alt="Carrito">
+            </a>
         </div>
+    </header>
 
-        <div class="contact-card">
-            <h1>CORREO </h1>
-            <p>
-                <li>
-                    <strong >Email</strong>
-                    <a href="mailto:info@thequeensfloreria.com">info@thequeensfloreria.com</a>
-                </li>
-            </p>
-        </div>
+    <!-- HERO CONTACTO -->
+    <section class="contacto-hero">
+        <div class="contacto-hero-content">
+            <div class="contacto-hero-texto">
+                <p class="contacto-label">Contáctanos</p>
+                <h1>Estamos para ayudarte</h1>
+                <p class="contacto-desc">
+                    En The Queens queremos que cada detalle floral sea especial.
+                    Si tienes dudas, deseas hacer un pedido o necesitas más información,
+                    aquí encontrarás la manera de comunicarte con nosotras.
+                </p>
+            </div>
 
-        <div class="contact-card">
-            <h1>DIRECCION</h1>
-            <p>
-                <li>><strong>Ubicación</strong>
-                <a href="https://www.google.com/maps/dir/?api=1&destination=Av.+20+de+Noviembre,+Almaguer,+88780+Reynosa,+Tamps." target="_blank">Av. 20 de Noviembre, Almaguer, 88780 Reynosa, Tamps.</a>
-                </li>
-            </p>
+            <div class="contacto-hero-img">
+                <img src="/images/conta2.jpeg" alt="Espacio floral The Queens">
+            </div>
         </div>
+    </section>
+
+    <!-- INFO PRINCIPAL -->
+    <section class="contacto-main">
+        <div class="contacto-wrapper">
+
+            <div class="contacto-cards">
+
+    <div class="contact-card elegant">
+        <div class="icon-box">
+            <img src="/images/llamada-telefonica.png" alt="Teléfono">
+        </div>
+        <h3>Teléfono</h3>
+        <p>Comunícate directamente con nosotras para cualquier pedido.</p>
+        <a href="tel:+527712958351">(+52) 771 295 8351</a>
     </div>
 
-    <!-- MAPA -->
-    <div class="map-box">
-        <div id="map"></div>
+    <div class="contact-card elegant">
+        <div class="icon-box">
+            <img src="/images/correo.png" alt="Correo">
+        </div>
+        <h3>Correo</h3>
+        <p>Envíanos un mensaje y te responderemos lo antes posible.</p>
+        <a href="mailto:info@thequeensfloreria.com">info@thequeensfloreria.com</a>
+    </div>
+
+    <div class="contact-card elegant">
+        <div class="icon-box">
+            <img src="/images/ubicacion.png" alt="Ubicación">
+        </div>
+        <h3>Ubicación</h3>
+        <p>Visítanos o abre la ruta directa hacia nuestra florería.</p>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=Av.+20+de+Noviembre,+Reynosa" target="_blank">
+            Ver ubicación
+        </a>
     </div>
 
 </div>
 
-    </div>
-</section>
+            <!-- BLOQUE INFERIOR -->
+            <div class="contacto-bottom">
+                <div class="contacto-info-box">
+                    <h2>Información de contacto</h2>
+                    <p>
+                        Puedes comunicarte con The Queens por teléfono, correo electrónico
+                        o visitarnos en nuestra ubicación. Estaremos encantadas de ayudarte
+                        con tus pedidos y detalles florales.
+                    </p>
 
-<!-- JavaScript de Leaflet -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+                    <div class="contacto-mini-list">
+                        <div class="mini-item">
+                            <strong>Horario</strong>
+                            <span>Lunes a Dom · 8:00 AM - 8:00 PM</span>
+                        </div>
 
-<script>
-    // Esperar a que el DOM esté completamente cargado
-    document.addEventListener('DOMContentLoaded', function() {
-        // Inicializar el mapa con coordenadas de Av. 20 de Noviembre, Reynosa
-        var map = L.map('map').setView([26.023969, -98.239094], 20);
+                        <div class="mini-item">
+                            <strong>Atención</strong>
+                            <span>Pedidos personalizados y consultas generales</span>
+                        </div>
 
-        // Añadir capa de tiles (mapa base)
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap contributors'
-        }).addTo(map);
+                        <div class="mini-item">
+                            <strong>Ubicación</strong>
+                            <span>Reynosa, Tamaulipas</span>
+                        </div>
+                    </div>
+                </div>
 
-        // Añadir un marcador en la ubicación exacta
-        L.marker([26.023969, -98.239094]).addTo(map)
-            .bindPopup('<b>THE QUEENS</b><br>Av. 20 de Noviembre, Almaguer<br>88780 Reynosa, Tamps.')
-            .openPopup();
-    });
-</script>
+                <div class="contacto-map-social">
+                    <div class="map-card">
+                        <h2>Nuestra ubicación</h2>
+                        <p>Encuéntranos fácilmente en el mapa.</p>
+                        <div class="map-box">
+                            <div id="map"></div>
+                        </div>
+                    </div>
+
+                    <div class="social-card">
+                        <h2>Redes sociales</h2>
+                        <p>Síguenos para conocer arreglos, novedades y más.</p>
+
+                        <div class="social-links">
+                            <a href="https://www.facebook.com/share/1H3yNReTgw/?mibextid=wwXIfr" aria-label="Facebook">f</a>
+    
+                            <a href="https://wa.me/528991234567?text=Hola%20quiero%20hacer%20un%20pedido" aria-label="WhatsApp">w</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- JavaScript de Leaflet -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var map = L.map('map').setView([26.023969, -98.239094], 18);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+
+            L.marker([26.023969, -98.239094]).addTo(map)
+                .bindPopup('<b>THE QUEENS</b><br>Av. 20 de Noviembre, Almaguer<br>88780 Reynosa, Tamps.')
+                .openPopup();
+        });
+    </script>
 
 </body>
+</html>
 
