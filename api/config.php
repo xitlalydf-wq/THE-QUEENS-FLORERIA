@@ -34,11 +34,11 @@ foreach ($possibleEnvPaths as $envPath) {
     break;
 }
 
-$DB_HOST = getenv('DB_HOST') ?: 'sql101.infinityfree.com';
+$DB_HOST = getenv('DB_HOST') ?: 'sql312.infinityfree.com';
 $DB_PORT = getenv('DB_PORT') ?: '3306';
-$DB_NAME = getenv('DB_DATABASE') ?: 'if0_41426587_db_the_queens_floreria';
-$DB_USER = getenv('DB_USER') ?: 'if0_41426587';
-$DB_PASS = getenv('DB_PASSWORD') ?: 'Y1C6KKV7LJU';
+$DB_NAME = getenv('DB_DATABASE') ?: 'if0_41434539_db_the_queens_floreria';
+$DB_USER = getenv('DB_USER') ?: 'if0_41434539';
+$DB_PASS = getenv('DB_PASSWORD') ?: 'yNsMw4cdulM';
 
 // Debug de conectividad TCP a MySQL (puedes quitar este bloque en producción).
 $connectionCheck = @fsockopen($DB_HOST, $DB_PORT, $errno, $errstr, 5);

@@ -95,7 +95,7 @@
         const backendBase = window.location.origin.includes('5500')
           ? 'http://localhost:3000'
           : '';
-        const response = await fetch(backendBase + '/api/login', {
+        const response = await fetch(backendBase + '/api/login.php', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ correo, contrasena })
@@ -105,6 +105,11 @@
         if (!response.ok) {
           console.error('ERROR BODY:', text);
           throw new Error(`Error ${response.status}: ${text}`);
+        }
+
+        if (text.trim().startsWith('<')) {
+          console.error('No JSON (HTML recibido):', text);
+          throw new Error('Respuesta inválida: el servidor devolvió HTML. Posible mecanismo anti-bot o redirección. Recarga e inténtalo de nuevo.');
         }
 
         let data;

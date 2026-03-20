@@ -23,14 +23,11 @@ if (!$user) {
 }
 
 if (!$user) {
-    http_response_code(401);
-    jsonResponse(['error' => 'Correo o contraseña incorrectos']);
+    jsonResponse(['error' => 'Correo o contraseña incorrectos'], 401);
 }
 
-$hash = $user['Contrasena'] ?? '';
-if (!password_verify($contrasena, $hash)) {
-    http_response_code(401);
-    jsonResponse(['error' => 'Correo o contraseña incorrectos']);
+if (empty($user['Contrasena']) || !password_verify($contrasena, $user['Contrasena'])) {
+    jsonResponse(['error' => 'Correo o contraseña incorrectos'], 401);
 }
 
 // Generar token simple (no válido para seguridad real)
