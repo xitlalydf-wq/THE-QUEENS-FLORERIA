@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: radial-gradient(circle at top, #fffdfd 0%, #f8f2f1 35%, #f6f1f0 70%, #f3eceb 100%);
+  font-family: 'Poppins', sans-serif;
+  color: #4b3b3f;
+  line-height: 1.5;
+  overflow-x: hidden;
+}

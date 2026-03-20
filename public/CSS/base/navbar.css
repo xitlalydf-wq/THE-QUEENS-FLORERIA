@@ -1,0 +1,122 @@
+/* =========================
+   NAVBAR BASE
+========================= */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 60px;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(183, 110, 121, 0.08);
+}
+
+.brand {
+  font-family: 'Cormorant Garamond', serif;
+  letter-spacing: 4px;
+  font-size: 20px;
+  color: #b76e79;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.menu {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.menu a {
+  position: relative;
+  text-decoration: none;
+  font-size: 14px;
+  letter-spacing: 2px;
+  color: #4b3b3f;
+  transition: 0.3s ease;
+}
+
+.menu a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 0;
+  height: 1.5px;
+  background: #b76e79;
+  transition: width 0.3s ease;
+}
+
+.menu a:hover,
+.menu a.active {
+  color: #b76e79;
+}
+
+.menu a:hover::after,
+.menu a.active::after {
+  width: 100%;
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.icons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.icons a:hover {
+  transform: translateY(-2px) scale(1.06);
+  opacity: 0.75;
+}
+
+.icons img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  display: block;
+}
+
+/* RESPONSIVE NAV */
+@media (max-width: 992px) {
+  .topbar {
+    padding: 20px 30px;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .menu {
+    gap: 20px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .topbar {
+    padding: 16px 18px;
+  }
+
+  .brand {
+    font-size: 16px;
+    letter-spacing: 3px;
+  }
+
+  .menu {
+    gap: 14px;
+  }
+
+  .menu a {
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+}
