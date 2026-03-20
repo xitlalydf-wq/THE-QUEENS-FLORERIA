@@ -34,14 +34,32 @@ foreach ($possibleEnvPaths as $envPath) {
     break;
 }
 
-$DB_HOST = getenv('DB_HOST') ?: 'localhost';
-$DB_NAME = getenv('DB_DATABASE') ?: 'db_the_queens_floreria';
-$DB_USER = getenv('DB_USER') ?: 'root';
-$DB_PASS = getenv('DB_PASSWORD') ?: '';
+$DB_HOST = getenv('DB_HOST') ?: 'sql101.infinityfree.com';
+$DB_PORT = getenv('DB_PORT') ?: '3306';
+$DB_NAME = getenv('DB_DATABASE') ?: 'if0_41426587_db_the_queens_floreria';
+$DB_USER = getenv('DB_USER') ?: 'if0_41426587';
+$DB_PASS = getenv('DB_PASSWORD') ?: 'Y1C6KKV7LJU';
+
+// Debug de conectividad TCP a MySQL (puedes quitar este bloque en producción).
+$connectionCheck = @fsockopen($DB_HOST, $DB_PORT, $errno, $errstr, 5);
+if (!$connectionCheck) {
+    http_response_code(500);
+    echo json_encode([
+        'error' => 'No se pudo conectar al servidor MySQL (TCP)',
+        'detail' => "$errno: $errstr",
+        'DB_HOST' => $DB_HOST,
+        'DB_PORT' => $DB_PORT,
+        'DB_DATABASE' => $DB_NAME,
+        'DB_USER' => $DB_USER,
+    ]);
+    exit;
+} else {
+    fclose($connectionCheck);
+}
 
 try {
     $pdo = new PDO(
-        "mysql:host=$DB_HOST;dbname=$DB_NAME;charset=utf8mb4",
+        "mysql:host=$DB_HOST;port=$DB_PORT;dbname=$DB_NAME;charset=utf8mb4",
         $DB_USER,
         $DB_PASS,
         [

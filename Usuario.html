@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil de Usuario</title>
-    <link rel="stylesheet" href="/public/CSS/inicio.css">
+    <link rel="stylesheet" href="/public/css/inicio.css">
 
     <!-- Tipografías -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -163,7 +163,7 @@
         const token = localStorage.getItem('userToken');
         if (!token) {
             // No hay sesión, redirigir al login
-            window.location.replace('/Index.html');
+            window.location.replace('/index.html');
             return;
         }
     })();

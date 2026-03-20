@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
-  <link rel="stylesheet" href="public/CSS/login.css">
+  <link rel="stylesheet" href="public/css/login.css">
 </head>
 
 <body>
@@ -12,120 +13,127 @@
   <div id="tulips-layer" aria-hidden="true"></div>
 
   <script>
-(() => {
-  const layer = document.getElementById("tulips-layer");
+    (() => {
+      const layer = document.getElementById("tulips-layer");
 
-  const TULIP_COUNT = 22;
+      const TULIP_COUNT = 22;
 
-  const colors = [
-    { c1: "#ff4d8d", c2: "#ffb3d9" },
-    { c1: "#ff5a3c", c2: "#ffd1c7" },
-    { c1: "#b04cff", c2: "#e2c6ff" },
-    { c1: "#ff2f6f", c2: "#ff9fc2" },
-    { c1: "#ffb400", c2: "#ffe3a6" }
-  ];
+      const colors = [
+        { c1: "#ff4d8d", c2: "#ffb3d9" },
+        { c1: "#ff5a3c", c2: "#ffd1c7" },
+        { c1: "#b04cff", c2: "#e2c6ff" },
+        { c1: "#ff2f6f", c2: "#ff9fc2" },
+        { c1: "#ffb400", c2: "#ffe3a6" }
+      ];
 
-  const rand = (min, max) => Math.random() * (max - min) + min;
+      const rand = (min, max) => Math.random() * (max - min) + min;
 
-  function createTulip(){
-    const t = document.createElement("span");
-    t.className = "tulip";
+      function createTulip() {
+        const t = document.createElement("span");
+        t.className = "tulip";
 
-    t.style.left = `${rand(0, 100)}vw`;
-    t.style.setProperty("--dur", `${rand(7, 15)}s`);
-    t.style.setProperty("--del", `${rand(0, 6)}s`);
-    t.style.setProperty("--drift", `${rand(-80, 80)}px`);
-    t.style.setProperty("--rot", `${rand(-30, 30)}deg`);
-    t.style.setProperty("--sc", `${rand(0.7, 1.3)}`);
-    t.style.setProperty("--op", `${rand(0.45, 0.95)}`);
+        t.style.left = `${rand(0, 100)}vw`;
+        t.style.setProperty("--dur", `${rand(7, 15)}s`);
+        t.style.setProperty("--del", `${rand(0, 6)}s`);
+        t.style.setProperty("--drift", `${rand(-80, 80)}px`);
+        t.style.setProperty("--rot", `${rand(-30, 30)}deg`);
+        t.style.setProperty("--sc", `${rand(0.7, 1.3)}`);
+        t.style.setProperty("--op", `${rand(0.45, 0.95)}`);
 
-    const pick = colors[Math.floor(Math.random() * colors.length)];
-    t.style.setProperty("--c1", pick.c1);
-    t.style.setProperty("--c2", pick.c2);
-    t.style.setProperty("--stem", Math.random() > 0.5 ? "#2f9e57" : "#3aa35c");
+        const pick = colors[Math.floor(Math.random() * colors.length)];
+        t.style.setProperty("--c1", pick.c1);
+        t.style.setProperty("--c2", pick.c2);
+        t.style.setProperty("--stem", Math.random() > 0.5 ? "#2f9e57" : "#3aa35c");
 
-    layer.appendChild(t);
-  }
+        layer.appendChild(t);
+      }
 
-  for(let i=0; i<TULIP_COUNT; i++) createTulip();
-})();
-</script>
-
-<div class="card">
-  <h2>Iniciar Sesión</h2>
-
-  <form id="loginForm">
-    <div class="inputBox">
-      <input type="email" id="correo" placeholder="Correo" required autocomplete="email">
-    </div>
-
-    <div class="inputBox">
-      <input type="password" id="contrasena" placeholder="Contraseña" required autocomplete="current-password">
-    </div>
-
-    <div class="inputBox">
-      <button type="submit" class="btn btn-primary">Iniciar sesión</button>
-    </div>
-
-  <div id="mensaje-error" style="color: red; text-align: center; margin-top: 10px; display: none;">
-
-  </div>
-
-    <div class="small">
-      ¿No tienes cuenta? <a href="signup.html">Crear cuenta</a>
-    </div>
-  </form> 
-  </div>
-
-<script>
-    document.getElementById('loginForm').addEventListener('submit', async function(e) {
-  e.preventDefault();
-
-  const correo = document.getElementById('correo').value.trim();       // asegúrate que el id sea "correo"
-  const contrasena = document.getElementById('contrasena').value;
-  const errorDiv = document.getElementById('mensaje-error');
-
-  errorDiv.style.display = 'none';
-  errorDiv.textContent = '';
-
-  try {
-    // use absolute backend address; if the page is opened via Live Server (port 5500)
-    // the origin will be different, so force localhost:3000.
-    const backendBase = window.location.origin.includes('5500')
-        ? 'http://localhost:3000'
-        : '';
-    const response = await fetch(backendBase + '/api/login', {   // ← URL completa al backend
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ correo, contrasena })
-    });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`Error ${response.status}: ${errorText}`);
-    }
-
-    const data = await response.json();
-
-    localStorage.setItem('userToken', data.token || 'simple-token');
-    localStorage.setItem('userRole', data.role);
-    localStorage.setItem('userName', data.nombre);
-    localStorage.setItem('userEmail', correo);
-
-    if (data.role === 'admin') {
-      window.location.href = 'admin/admin-dashboard.html';
-    } else {
-      window.location.href = 'inicio.html';  // ajusta según tu página principal
-    }
-  } catch (err) {
-    errorDiv.textContent = err.message || 'Error al conectar con el servidor';
-    errorDiv.style.display = 'block';
-    console.error(err);
-  }
-});
+      for (let i = 0; i < TULIP_COUNT; i++) createTulip();
+    })();
   </script>
 
-  
-<!--Probando 123-->
+  <div class="card">
+    <h2>Iniciar Sesión</h2>
+
+    <form id="loginForm">
+      <div class="inputBox">
+        <input type="email" id="correo" placeholder="Correo" required autocomplete="email">
+      </div>
+
+      <div class="inputBox">
+        <input type="password" id="contrasena" placeholder="Contraseña" required autocomplete="current-password">
+      </div>
+
+      <div class="inputBox">
+        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+      </div>
+
+      <div id="mensaje-error" style="color: red; text-align: center; margin-top: 10px; display: none;">
+
+      </div>
+
+      <div class="small">
+        ¿No tienes cuenta? <a href="signup.html">Crear cuenta</a>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const correo = document.getElementById('correo').value.trim();       // asegúrate que el id sea "correo"
+      const contrasena = document.getElementById('contrasena').value;
+      const errorDiv = document.getElementById('mensaje-error');
+
+      errorDiv.style.display = 'none';
+      errorDiv.textContent = '';
+
+      try {
+        // use absolute backend address; if the page is opened via Live Server (port 5500)
+        // the origin will be different, so force localhost:3000.
+        const backendBase = window.location.origin.includes('5500')
+          ? 'http://localhost:3000'
+          : '';
+        const response = await fetch(backendBase + '/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ correo, contrasena })
+        });
+
+        const text = await response.text();
+        if (!response.ok) {
+          console.error('ERROR BODY:', text);
+          throw new Error(`Error ${response.status}: ${text}`);
+        }
+
+        let data;
+        try {
+          data = JSON.parse(text);
+        } catch (e) {
+          console.error('No JSON:', text);
+          throw new Error('Respuesta inválida: no es JSON');
+        }
+        localStorage.setItem('userToken', data.token || 'simple-token');
+        localStorage.setItem('userRole', data.role);
+        localStorage.setItem('userName', data.nombre);
+        localStorage.setItem('userEmail', correo);
+
+        if (data.role === 'admin') {
+          window.location.href = 'admin/admin-dashboard.html';
+        } else {
+          window.location.href = 'inicio.html';  // ajusta según tu página principal
+        }
+      } catch (err) {
+        errorDiv.textContent = err.message || 'Error al conectar con el servidor';
+        errorDiv.style.display = 'block';
+        console.error(err);
+      }
+    });
+  </script>
+
+
+  <!--Probando 123-->
 </body>
+
 </html>

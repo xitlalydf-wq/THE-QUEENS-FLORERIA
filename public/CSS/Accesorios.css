@@ -172,7 +172,7 @@ body {
     cursor: pointer;
     box-shadow: 0 8px 18px rgba(191, 154, 162, 0.15);
     transition: all 0.25s ease;
-    z-Index: 5;
+    z-index: 5;
 }
 
 .btn-fav:hover {
